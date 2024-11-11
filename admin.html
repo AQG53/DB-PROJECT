@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Student Management System</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+    <!-- Sidebar Toggle Button (Top Left) -->
+    <button id="toggleSidebar" class="toggle-btn">☰</button>
+
+    <!-- Admin Login Form (Visible when not logged in) -->
+    <div id="loginForm" class="login-container">
+        <h2>Admin Login</h2>
+        <label for="username">Username:</label>
+        <input type="text" id="username" placeholder="Enter username">
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" placeholder="Enter password">
+        <br>
+        <button id="submitLogin">Log In</button>
+    </div>
+
+    <!-- Admin Dashboard (Hidden Initially) -->
+    <div id="adminDashboard" class="admin-container" style="display: none;">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Admin Dashboard</h2>
+            <div class="menu-item" onclick="navigateTo('student-management')">Manage Students</div>
+            <div class="menu-item" onclick="navigateTo('faculty-management')">Manage Faculty</div>
+            <div class="menu-item" onclick="navigateTo('course-management')">Manage Courses</div>
+            <div class="menu-item" onclick="navigateTo('fee-management')">Manage Fees</div>
+            <div class="menu-item" onclick="navigateTo('GPA-management')">Manage GPA</div>
+            <div class="menu-item" onclick="navigateTo('attendance-management')">Manage Attendance</div>
+            <div class="menu-item" onclick="navigateTo('notification-management')">Manage Notifications</div>
+            <div class="menu-item logout-button" onclick="logout()">Logout</div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h1>Welcome to the Admin Dashboard</h1>
+            <p>Choose an option from the sidebar to manage the system.</p>
+            
+            <!-- Admin Picture in the Center -->
+            <div class="admin-image-container">
+                <img src="admin_login.png" alt="Admin Picture" class="admin-image">
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,214 @@
+/* General Reset and Layout */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body and Background */
+body {
+    font-family: 'Playfair Display', serif;
+    color: white;
+    background-image: url('background.jpg'); /* Background image */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background-color: #234b86; /* Dark blue fallback */
+}
+
+/* Sidebar Toggle Button */
+.toggle-btn, .open-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 30px;
+    background-color: #04204b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    z-index: 100;
+    border-radius: 4px;
+}
+
+.toggle-btn:hover, .open-btn:hover {
+    background-color: #005bb5;
+}
+/* Sidebar Toggle Button */
+#toggleSidebar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 30px;
+    background-color: transparent;
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 100; /* Keeps the button above everything else */
+    display: none; /* Initially hidden */
+}
+
+/* Admin Login Styling */
+.login-container {
+    background-color: rgba(88, 230, 255, 0.8);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-family: 'Playfair Display', serif;
+    color: #04204b; /* Dark blue */
+}
+
+label {
+    text-align: left;
+    font-family: 'Playfair Display', serif;
+    color: #043569; /* Dark blue color */
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #04204b;
+    color: white;
+    border: none;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-container button:hover {
+    background-color: #005bb5;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #04204b;
+    color: white;
+    padding: 20px;
+    position: fixed;
+    height: 100vh;
+    top: 0;
+    left: -250px; /* Initially hidden off-screen */
+    transition: left 0.3s ease;
+    z-index: 99;
+}
+
+.sidebar.show {
+    left: 0;
+}
+
+.sidebar h2 {
+    font-size: 24px;
+    color: #f8d847;
+    margin-bottom: 30px;
+}
+
+.sidebar .menu-item {
+    padding: 15px;
+    margin: 10px 0;
+    background-color: #003b80;
+    color: white;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.sidebar .menu-item:hover {
+    background-color: #005bb5;
+}
+
+/* Main Content Styling */
+.main-content {
+    margin-left: 270px; /* Space for the sidebar */
+    padding: 20px;
+    flex-grow: 1;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #002d72;
+    padding: 15px 20px;
+    color: white;
+}
+
+header .logout-button {
+    padding: 10px 20px;
+    background-color: #eec612; /* Yellow button */
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+header .logout-button:hover {
+    background-color: #005bb5;
+}
+
+/* Admin Dashboard Styling */
+.admin-dashboard {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.admin-option {
+    background-color: #eec612; /* Yellow background for options */
+    color: #002d72; /* Dark blue text */
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.admin-option:hover {
+    background-color: #005bb5;
+    color: white;
+}
+
+/* Admin Image in Center */
+.admin-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px; /* Adjust height based on your needs */
+}
+
+.admin-image {
+    width: 150px;
+    height: auto;
+    border-radius: 50%;
+    border: 3px solid #eec612;
+}
