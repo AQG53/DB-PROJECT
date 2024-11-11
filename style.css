@@ -1,0 +1,69 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('Fast.jpg') no-repeat center center fixed; 
+    background-size: cover;
+}
+
+.container {
+    text-align: center;
+    position: relative;
+    top: 35%; /* Further adjusted up from 40% to 35% */
+    transform: translateY(-50%);
+    opacity: 0;
+    animation: fadeIn 1.5s ease forwards; /* Animation for the entire container */
+    animation-delay: 0.5s;
+}
+
+header img.logo {
+    width: 150px;
+    height: auto;
+    margin-bottom: 5px; /* Reduced margin for tighter integration with the title */
+}
+
+.system-title { /* New style for the title */
+    color: #2925ff; /* Sky blue color */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* A modern, clean font */
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 20px; /* Space before the login buttons */
+}
+
+.login-section {
+    margin: 10px;
+}
+
+.login-button {
+    background-color: #f4f4f4;
+    color: #0056b3;
+    border: 2px solid #0056b3;
+    padding: 12px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    opacity: 0;
+    animation: fadeInButtons 2s ease forwards;
+    animation-delay: 1s;
+}
+
+.login-button:hover, .login-button:focus {
+    background-color: #e1e1e1;
+    color: #002d72;
+    border-color: #002d72;
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.15);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-60%); }
+    to { opacity: 1; transform: translateY(-50%); }
+}
+
+@keyframes fadeInButtons {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
