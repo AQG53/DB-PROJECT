@@ -9,7 +9,7 @@
 body {
     font-family: 'Playfair Display', serif;
     color: white;
-    background-image: url('background.jpg'); /* Background image */
+    background-image: url('background.jpg');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -17,12 +17,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Full viewport height */
-    background-color: #234b86; /* Dark blue fallback */
+    height: 100vh;
+    background-color: #234b86;
 }
 
 /* Sidebar Toggle Button */
-.toggle-btn, .open-btn {
+.toggle-btn {
     position: absolute;
     top: 20px;
     left: 20px;
@@ -34,23 +34,11 @@ body {
     cursor: pointer;
     z-index: 100;
     border-radius: 4px;
+    display: none; /* Initially hidden */
 }
 
-.toggle-btn:hover, .open-btn:hover {
+.toggle-btn:hover {
     background-color: #005bb5;
-}
-/* Sidebar Toggle Button */
-#toggleSidebar {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    font-size: 30px;
-    background-color: transparent;
-    color: white;
-    border: none;
-    cursor: pointer;
-    z-index: 100; /* Keeps the button above everything else */
-    display: none; /* Initially hidden */
 }
 
 /* Admin Login Styling */
@@ -68,13 +56,13 @@ h2 {
     font-size: 24px;
     margin-bottom: 20px;
     font-family: 'Playfair Display', serif;
-    color: #04204b; /* Dark blue */
+    color: #04204b;
 }
 
 label {
     text-align: left;
     font-family: 'Playfair Display', serif;
-    color: #043569; /* Dark blue color */
+    color: #043569;
     display: block;
     margin-bottom: 5px;
     font-size: 16px;
@@ -107,6 +95,15 @@ label {
     background-color: #005bb5;
 }
 
+/* Custom Error Message */
+.error-message {
+    color: red;
+    margin-top: 10px;
+    font-size: 14px;
+    display: none;
+}
+
+/* Sidebar */
 /* Sidebar */
 .sidebar {
     width: 250px;
@@ -115,8 +112,8 @@ label {
     padding: 20px;
     position: fixed;
     height: 100vh;
-    top: 0;
-    left: -250px; /* Initially hidden off-screen */
+    top: 50px; /* Increased top margin to avoid overlap with the toggle button */
+    left: -250px;
     transition: left 0.3s ease;
     z-index: 99;
 }
@@ -129,6 +126,7 @@ label {
     font-size: 24px;
     color: #f8d847;
     margin-bottom: 30px;
+    margin-top: 20px; /* Added margin to push the text down */
 }
 
 .sidebar .menu-item {
@@ -146,7 +144,7 @@ label {
     background-color: #005bb5;
 }
 
-/* Main Content Styling */
+/* Main Content */
 .main-content {
     margin-left: 270px; /* Space for the sidebar */
     padding: 20px;
@@ -164,7 +162,7 @@ header {
 
 header .logout-button {
     padding: 10px 20px;
-    background-color: #eec612; /* Yellow button */
+    background-color: #eec612;
     color: white;
     border: none;
     cursor: pointer;
@@ -184,8 +182,8 @@ header .logout-button:hover {
 }
 
 .admin-option {
-    background-color: #eec612; /* Yellow background for options */
-    color: #002d72; /* Dark blue text */
+    background-color: #eec612;
+    color: #002d72;
     padding: 20px;
     border-radius: 8px;
     text-align: center;
@@ -198,17 +196,51 @@ header .logout-button:hover {
     color: white;
 }
 
-/* Admin Image in Center */
+/* Admin Image Container */
 .admin-image-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 300px; /* Adjust height based on your needs */
+    display: block; /* Changed from flex to block */
+    text-align: left; /* Ensure text is aligned to the left */
+    height: 350px; /* Height stays the same */
+    padding-left: 40px; /* Increased padding to move text further left */
 }
 
+/* Admin Image */
 .admin-image {
-    width: 150px;
+    width: 250px; /* Adjust the size */
     height: auto;
     border-radius: 50%;
     border: 3px solid #eec612;
+}
+
+.admin-image-container p {
+    text-align: left; /* Keep text aligned to the left */
+    font-size: 18px;
+    margin-top: 20px; /* Increased margin-top to push the text further down */
+    padding-left: 250px; /* Added padding to increase space between the image and the text */
+}
+
+/* Letter-by-Letter Animation */
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+.animated-text {
+    margin-right: 200px; /* Slightly increased margin-left to push the text left */
+    text-align: left;
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: #04204b;
+    width: 0;
+    overflow: hidden;
+    border-right: 2px solid;
+    white-space: nowrap;
+    letter-spacing: 2px;
+    animation: typing 3s steps(30, end) forwards;
+}
+
+/* If there's any parent container with flex */
+.parent-container {
+    display: block; /* Ensure it is not flex */
+    text-align: left; /* Align the text and content left */
 }
