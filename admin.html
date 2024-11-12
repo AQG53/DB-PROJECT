@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Student Management System</title>
     <link rel="stylesheet" href="admin.css">
 </head>
-
 <body>
 
     <!-- Sidebar Toggle Button (Top Left) -->
@@ -23,6 +21,7 @@
         <input type="password" id="password" placeholder="Enter password">
         <br>
         <button id="submitLogin">Log In</button>
+        <div id="errorMessage" class="error-message">Invalid username or password!</div>
     </div>
 
     <!-- Admin Dashboard (Hidden Initially) -->
@@ -42,8 +41,7 @@
 
         <!-- Main Content -->
         <div class="main-content">
-            <h1>Welcome to the Admin Dashboard</h1>
-            <p>Choose an option from the sidebar to manage the system.</p>
+            <h1 id="welcomeText" class="animated-text" style="visibility: hidden;">Welcome to Admin Portal</h1>
             
             <!-- Admin Picture in the Center -->
             <div class="admin-image-container">
@@ -54,5 +52,4 @@
 
     <script src="admin.js"></script>
 </body>
-
 </html>
