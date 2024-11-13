@@ -18,3 +18,10 @@ document.getElementById('closePopup').addEventListener('click', function() {
     const marksPopup = document.getElementById('marksPopup');
     marksPopup.style.display = 'none';
 });
+// Existing code for handling the popup (if any) goes here
+
+// Function to redirect to the student portal
+function goToStudentPortal() {
+    // Replace 'student_portal.html' with the actual URL or path of the student portal page
+    window.location.href = 'student.html';
+};

@@ -26,3 +26,8 @@ document.getElementById('registerCourses').addEventListener('click', () => {
         messageDiv.textContent = ''; // Clear any success message
     }
 });
+function goToStudentPortal() {
+    // Replace 'student_portal.html' with the actual URL or path of the student portal page
+    window.location.href = 'student.html';
+};
+

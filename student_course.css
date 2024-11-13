@@ -100,3 +100,37 @@ td input[type="checkbox"] {
     margin-top: 20px;
     display: none; /* Initially hidden */
 }
+button {
+    background-color: #34c3fc;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #d32f2f;
+}
+
+/* Styles for the Back to Student Portal button */
+.back-button-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10; /* Ensures it stays on top */
+}
+
+#backToPortal {
+    background-color: #d81b1b;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#backToPortal:hover {
+    background-color: #bb3030;
+}
