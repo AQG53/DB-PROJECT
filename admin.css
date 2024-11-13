@@ -206,8 +206,8 @@ header .logout-button:hover {
 
 /* Admin Image */
 .admin-image {
-    width: 250px; /* Adjust the size */
-    height: auto;
+    width: 350px; /* Adjust the size */
+    height: 450;
     border-radius: 50%;
     border: 3px solid #eec612;
 }
