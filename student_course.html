@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Registration</title>
+    <link rel="stylesheet" href="student_course.css"> <!-- Linking the external CSS file -->
+</head>
+<body>
+    <div class="registration-container">
+        <h2>Course Registration</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Course Name</th>
+                    <th>Course Code</th>
+                    <th>Credit Hours</th>
+                    <th>Select</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Statistics</td>
+                    <td>CS107</td>
+                    <td>3</td>
+                    <td><input type="checkbox" name="course" value="CS107"></td>
+                </tr>
+                <tr>
+                    <td>Numerical Computing</td>
+                    <td>MT106</td>
+                    <td>3</td>
+                    <td><input type="checkbox" name="course" value="MT106"></td>
+                </tr>
+                <tr>
+                    <td>Introduction to Programming</td>
+                    <td>CS101</td>
+                    <td>3</td>
+                    <td><input type="checkbox" name="course" value="CS101"></td>
+                </tr>
+                <tr>
+                    <td>Calculus II</td>
+                    <td>MATH202</td>
+                    <td>4</td>
+                    <td><input type="checkbox" name="course" value="MATH202"></td>
+                </tr>
+                <tr>
+                    <td>Physics III</td>
+                    <td>PHYS301</td>
+                    <td>3</td>
+                    <td><input type="checkbox" name="course" value="PHYS301"></td>
+                </tr>
+                <!-- Add more courses as needed -->
+            </tbody>
+        </table>
+
+          <!-- Error Message for unselected courses -->
+          <div id="errorMessage" class="error-message" style="display: none;">Select at least one course!</div>
+
+
+        <div class="register-button-container">
+            <button id="registerCourses">Register Selected Courses</button>
+        </div>
+
+        <!-- Message placeholder -->
+        <div id="registrationMessage"></div>
+    </div>
+
+    <script src="student_course.js"></script>
+</body>
+</html>

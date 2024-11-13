@@ -1,0 +1,102 @@
+/* Basic styling for the table and layout */
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('background.jpg'); /* Ensure the image path is correct */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.registration-container {
+    background-color:  #e3ff7c; /*Transparent light yellow  */
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 800px;
+    margin: 20px;
+    text-align: center;
+}
+
+/* Title Styling */
+h2 {
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+th {
+    background-color: #2196f3;
+    color: white;
+}
+
+td {
+    background-color: #fafafa;
+}
+
+/* Checkbox Styling */
+td input[type="checkbox"] {
+    margin-right: 15px;
+}
+
+/* Button Styling */
+.register-button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+#registerCourses {
+    background-color: #2196f3;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#registerCourses:hover {
+    background-color: #1976d2;
+}
+
+/* Success Message Styling */
+#registrationMessage {
+    margin-top: 20px;
+    color: green;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+}
+
+/* Error Message Styling */
+#errorMessage {
+    font-size: 16px;
+    color: rgb(190, 10, 10);
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+    display: none; /* Initially hidden */
+}
