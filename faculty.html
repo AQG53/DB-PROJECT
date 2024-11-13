@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>faculty Dashboard - faculty Management System</title>
+    <link rel="stylesheet" href="faculty.css">
+</head>
+<body>
+
+    <!-- Sidebar Toggle Button (Top Left) -->
+    <button id="toggleSidebar" class="toggle-btn">☰</button>
+
+    <!-- faculty Login Form (Visible when not logged in) -->
+    <div id="loginForm" class="login-container">
+        <h2>faculty Login</h2>
+        <label for="username">Faculty ID:</label>
+        <input type="text" id="username" placeholder="Enter username">
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" placeholder="Enter password">
+        <br>
+        <button id="submitLogin">Log In</button>
+        <div id="errorMessage" class="error-message">Invalid roll number or password!</div>
+    </div>
+
+    <!--  faculty Dashboard (Hidden Initially) -->
+    <div id="facultyDashboard" class="faculty" style="display: none;">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Faculty Dashboard</h2>
+            <div class="menu-item" onclick="navigateTo('course-management')">Course Information </div>
+            <div class="menu-item" onclick="navigateTo('marks-management')">Enter Marks</div>
+            <div class="menu-item" onclick="navigateTo('attendance-management')">Update Attendance</div>
+            <div class="menu-item" onclick="navigateTo('grades-management')">Upload Grade</div>
+            <div class="menu-item" onclick="navigateTo('notification-management')">Notify Assignment</div>
+            <div class="menu-item logout-button" onclick="logout()">Logout</div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h1 id="welcomeText" class="animated-text" style="visibility: hidden;">Welcome to the Faculty Portal</h1>
+            
+            <!-- faculty Picture in the Center -->
+            <div class="faculty-image-container">
+                <img src="faculty_login.png" alt="faculty Picture" class="faculty-image">
+            </div>
+        </div>
+    </div>
+
+    <script src="faculty.js"></script>
+</body>
+</html>
