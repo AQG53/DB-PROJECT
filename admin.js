@@ -9,7 +9,7 @@ loginButton.addEventListener('click', function() {
     const password = document.getElementById('password').value;
 
     // Simple login validation
-    if (username === 'admin' && password === 'password123') {
+    if (username === 'admin' && password === 'admin') {
         // Hide login form, show dashboard, and toggle button
         document.getElementById('loginForm').style.display = 'none';
         document.getElementById('adminDashboard').style.display = 'block';
@@ -52,4 +52,5 @@ function logout() {
     document.getElementById('adminDashboard').style.display = 'none';
     document.getElementById('loginForm').style.display = 'block';
     document.getElementById('toggleSidebar').style.display = 'none';
+    window.location.href = 'mainpage.html';
 }
