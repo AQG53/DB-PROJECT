@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Marks</title>
+    <link rel="stylesheet" href="student_marks.css"> <!-- Linking the external CSS file -->
+</head>
+<body>
+    <div class="marks-container">
+        <h2>Marks</h2>
+
+        <!-- Example Course Boxes -->
+        <div class="course-boxes">
+            <div class="course-box" data-course="Introduction to Programming">Introduction to Programming</div>
+            <div class="course-box" data-course="Calculus II">Calculus II</div>
+            <div class="course-box" data-course="Physics III">Physics III</div>
+            <div class="course-box" data-course="Statistics">Statistics</div>
+            <div class="course-box" data-course="Numerical Computing">Numerical Computing</div>
+            <!-- Add more course boxes as needed -->
+        </div>
+
+        <!-- Marks Popup Window -->
+        <div id="marksPopup" class="marks-popup">
+            <div class="popup-content">
+                <h3 id="courseName"></h3>
+                <table id="marksTable">
+                    <thead>
+                        <tr>
+                            <th>Assessment</th>
+                            <th>Obtained Marks</th>
+                            <th>Total Marks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Midterm 1</td>
+                            <td>8</td>
+                            <td>15</td>
+                        </tr>
+                        <tr>
+                            <td>Midterm 2</td>
+                            <td>9</td>
+                            <td>15</td>
+                        </tr>
+                        <tr>
+                            <td>Assignments</td>
+                            <td>8</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>Quizzes</td>
+                            <td>3</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>Final</td>
+                            <td>90</td>
+                            <td>100</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button id="closePopup">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="student_marks.js"></script>
+</body>
+</html>
