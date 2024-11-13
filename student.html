@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - Student Management System</title>
+    <link rel="stylesheet" href="student.css">
+</head>
+<body>
+
+    <!-- Sidebar Toggle Button (Top Left) -->
+    <button id="toggleSidebar" class="toggle-btn">☰</button>
+
+    <!-- student Login Form (Visible when not logged in) -->
+    <div id="loginForm" class="login-container">
+        <h2>Student Login</h2>
+        <label for="username">Student ID:</label>
+        <input type="text" id="username" placeholder="Enter username">
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" placeholder="Enter password">
+        <br>
+        <button id="submitLogin">Log In</button>
+        <div id="errorMessage" class="error-message">Invalid roll number or password!</div>
+    </div>
+
+    <!-- student Dashboard (Hidden Initially) -->
+    <div id="studentDashboard" class="student-container" style="display: none;">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Student Dashboard</h2>
+            <div class="menu-item" onclick="navigateTo('course-management')">Course Registration</div>
+            <div class="menu-item" onclick="navigateTo('marks-management')">Marks</div>
+            <div class="menu-item" onclick="navigateTo('attendance-management')">Attendance</div>
+            <div class="menu-item" onclick="navigateTo('transcript-management')">Transcript</div>
+            <div class="menu-item" onclick="navigateTo('grade change request')">Grade Change Request</div>
+            <div class="menu-item" onclick="navigateTo('fee-management')">Fees</div>
+            <div class="menu-item" onclick="navigateTo('notification-management')">Notifications</div>
+            <div class="menu-item logout-button" onclick="logout()">Logout</div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h1 id="welcomeText" class="animated-text" style="visibility: hidden;">Welcome to the Student Portal</h1>
+            
+            <!-- student Picture in the Center -->
+            <div class="student-image-container">
+                <img src="student_login.png" alt="student Picture" class="student-image">
+            </div>
+        </div>
+    </div>
+
+    <script src="student.js"></script>
+</body>
+</html>
