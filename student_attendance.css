@@ -1,0 +1,134 @@
+/* Basic styling similar to student_marks.css */
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.attendance-container {
+    background-color: #e3ff7c;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 70%;
+    text-align: center;
+}
+
+.course-boxes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.course-box {
+    background-color: #2196f3;
+    color: white;
+    padding: 15px 30px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    width: 200px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.course-box:hover {
+    transform: scale(1.1);
+}
+
+/* Popup Window Styles */
+.attendance-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background-color: #fafafa;
+    padding: 20px;
+    border-radius: 8px;
+    width: 60%;
+    text-align: center;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    max-height: 80vh; /* Set max height for popup content */
+    overflow-y: auto; /* Enable vertical scroll for the popup */
+}
+
+/* Attendance Table with Scrollable Body */
+#attendanceTable {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+#attendanceTable thead, #attendanceTable tbody tr {
+    display: table; /* Align headers with rows */
+    width: 100%;
+    table-layout: fixed;
+}
+
+#attendanceTable tbody {
+    display: block; /* Allows scrollability */
+    max-height: 300px; /* Set fixed height for scrolling */
+    overflow-y: auto;
+}
+
+#attendanceTable th, #attendanceTable td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+#attendanceTable th {
+    background-color: #7cdaff;
+    color: white;
+}
+
+button {
+    background-color: #34c3fc;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #d32f2f;
+}
+
+/* Back to Student Portal button */
+.back-button-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+#backToPortal {
+    background-color: #d81b1b;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#backToPortal:hover {
+    background-color: #bb3030;
+}

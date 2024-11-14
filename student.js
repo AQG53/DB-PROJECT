@@ -73,7 +73,11 @@ function navigateTo(section) {
     }
     else if (section === 'marks-management') {
         window.location.href = 'student_marks.html'; // Redirect to course registration page
-    } else {
+    }
+    else if (section === 'attendance-management') {
+        window.location.href = 'student_attendance.html'; // Redirect to course registration page
+    }
+     else {
         alert('Navigating to ' + section); // Keep other navigations as alerts for now
     }
 }

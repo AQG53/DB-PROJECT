@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Attendance</title>
+    <link rel="stylesheet" href="student_attendance.css">
+</head>
+<body>
+    <div class="attendance-container">
+        <h2>Attendance</h2>
+
+        <!-- Course Boxes -->
+        <div class="course-boxes">
+            <div class="course-box" data-course="Introduction to Programming">Introduction to Programming</div>
+            <div class="course-box" data-course="Calculus II">Calculus II</div>
+            <div class="course-box" data-course="Physics III">Physics III</div>
+            <div class="course-box" data-course="Statistics">Statistics</div>
+            <div class="course-box" data-course="Numerical Computing">Numerical Computing</div>
+            <div class="course-box" data-course="Database Lab">Database Lab</div>
+        </div>
+
+        <!-- Attendance Popup Window -->
+        <div id="attendancePopup" class="attendance-popup">
+            <div class="popup-content">
+                <h3 id="courseName"></h3>
+                <table id="attendanceTable">
+                    <thead>
+                        <tr>
+                            <th>Lecture</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 40 rows will be generated here by JavaScript -->
+                    </tbody>
+                </table>
+                <button id="closePopup">Close</button>
+            </div>
+        </div>
+    </div>
+    <div class="back-button-container">
+        <button id="backToPortal" onclick="goToStudentPortal()">Back to Student Portal</button>
+    </div>
+    <script src="student_attendance.js"></script>
+</body>
+</html>
