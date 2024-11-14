@@ -1,0 +1,88 @@
+/* Basic styling for the transcript page */
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+}
+
+/* Container for the entire transcript page */
+.transcript-container {
+    width: 80%;
+    max-width: 900px;
+    background-color: #fff;
+    padding: 20px;
+    margin-top: 60px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Heading for the page */
+h1 {
+    color: #333;
+}
+
+/* Scrollable table container */
+.table-wrapper {
+    max-height: 500px;  /* Set the max height of the table */
+    overflow-y: auto;  /* Enable vertical scroll when content exceeds the height */
+    margin-top: 20px;
+    border: 1px solid #ddd;  /* Optional: adds a border around the scrollable area */
+    border-radius: 8px;  /* Optional: rounds the corners */
+}
+
+/* Styling for the transcript table */
+#transcriptTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Styling for table headers and data cells */
+#transcriptTable th, #transcriptTable td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+/* Header row styling */
+#transcriptTable thead {
+    background-color: #2196f3;
+    color: white;
+}
+
+/* Styling for semester header rows */
+.semester-header {
+    background-color: #e3ff7c;
+    color: #333;
+    font-weight: bold;
+    text-align: left;
+    padding-left: 10px;
+}
+
+/* Back to Student Portal button */
+.back-button-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+#backToPortal {
+    background-color: #d81b1b;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#backToPortal:hover {
+    background-color: #bb3030;
+}

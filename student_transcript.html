@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Transcript</title>
+    <link rel="stylesheet" href="student_transcript.css">
+</head>
+<body>
+   
+
+    <div class="transcript-container">
+        <h1>Student Transcript</h1>
+        <div class="table-wrapper">
+            <table id="transcriptTable">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Course Name</th>
+                        <th>Section</th>
+                        <th>Credit Hours</th>
+                        <th>Grade</th>
+                        <th>Points</th>
+                        <th>Type</th>
+                        <th>Remarks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Semester 1 Courses -->
+                    <tr class="semester-header"><td colspan="8">Semester 1</td></tr>
+                    <tr>
+                        <td>CS101</td>
+                        <td>Introduction to Computer Science</td>
+                        <td>A</td>
+                        <td>3</td>
+                        <td>A</td>
+                        <td>4.0</td>
+                        <td>Core</td>
+                        <td>Passed</td>
+                    </tr>
+                    <tr>
+                        <td>MA101</td>
+                        <td>Calculus I</td>
+                        <td>A</td>
+                        <td>3</td>
+                        <td>B+</td>
+                        <td>3.3</td>
+                        <td>Core</td>
+                        <td>Passed</td>
+                    </tr>
+                    <tr>
+                        <td>CS106</td>
+                        <td>Data Structures</td>
+                        <td>A</td>
+                        <td>3</td>
+                        <td>B</td>
+                        <td>3.0</td>
+                        <td>Core</td>
+                        <td>Passed</td>
+                    </tr>
+                    <tr>
+                        <td>PH101</td>
+                        <td>Physics</td>
+                        <td>B</td>
+                        <td>4</td>
+                        <td>A-</td>
+                        <td>3.7</td>
+                        <td>Core</td>
+                        <td>Passed</td>
+                    </tr>
+                    <tr>
+                        <td>CS102</td>
+                        <td>Algorithms</td>
+                        <td>A</td>
+                        <td>3</td>
+                        <td>B</td>
+                        <td>3.0</td>
+                        <td>Core</td>
+                        <td>Passed</td>
+                    </tr>
+                    <tr>
+                        <td>PH105</td>
+                        <td>Automata</td>
+                        <td>B</td>
+                        <td>4</td>
+                        <td>A-</td>
+                        <td>3.7</td>
+                        <td>Core</td>
+                        <td>Passed</td>
+                    </tr>
+                    <!-- Repeat blocks for other semesters as needed -->
+
+                    <tr class="semester-header"><td colspan="8">Semester 2</td></tr>
+                    <tr>
+                        <td>CS101</td>
+                        <td>Introduction to Computer Science</td>
+                        <td>A</td>
+                        <td>3</td>
+                        <td>A</td>
+                        <td>4.0</td>
+                        <td>Core</td>
+                        <td>Passed</td>
+                    </tr>
+                    <tr>
+                        <td>MA101</td>
+                        <td>Calculus I</td>
+                        <td>A</td>
+                        <td>3</td>
+                        <td>B+</td>
+                        <td>3.3</td>
+                        <td>Core</td>
+                        <td>Passed</td>
+                    </tr>
+                    <tr>
+                        <td>CS106</td>
+                        <td>Data Structures</td>
+                        <td>A</td>
+                        <td>3</td>
+                        <td>B</td>
+                        <td>3.0</td>
+                        <td>Core</td>
+                        <td>Passed</td>
+                    </tr>
+                    <tr>
+                        <td>PH101</td>
+                        <td>Physics</td>
+                        <td>B</td>
+                        <td>4</td>
+                        <td>A-</td>
+                        <td>3.7</td>
+                        <td>Core</td>
+                        <td>Passed</td>
+                    </tr>
+                    <tr>
+                        <td>CS102</td>
+                        <td>Algorithms</td>
+                        <td>A</td>
+                        <td>3</td>
+                        <td>B</td>
+                        <td>3.0</td>
+                        <td>Core</td>
+                        <td>Passed</td>
+                    </tr>
+                    <tr>
+                        <td>PH105</td>
+                        <td>Automata</td>
+                        <td>B</td>
+                        <td>4</td>
+                        <td>A-</td>
+                        <td>3.7</td>
+                        <td>Core</td>
+                        <td>Passed</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="back-button-container">
+        <button id="backToPortal" onclick="goToStudentPortal()">Back to Student Portal</button>
+    </div>
+
+    <script src="student_transcript.js"></script>
+</body>
+</html>
