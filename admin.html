@@ -14,14 +14,26 @@
     <!-- Admin Login Form (Visible when not logged in) -->
     <div id="loginForm" class="login-container">
         <h2>Admin Login</h2>
-        <label for="username">Username:</label>
-        <input type="text" id="username" placeholder="Enter username">
+        <label for="email">Email:</label>
+        <input type="text" id="email" placeholder="Enter email">
         <br>
         <label for="password">Password:</label>
         <input type="password" id="password" placeholder="Enter password">
         <br>
         <button id="submitLogin">Log In</button>
         <div id="errorMessage" class="error-message">Invalid username or password!</div>
+        
+        <!-- Forgot Password Link -->
+        <p><a href="#" id="forgotPasswordLink">Forgot Password?</a></p>
+    </div>
+
+    <!-- Password Recovery Form -->
+    <div id="passwordRecoveryForm" class="login-container" style="display: none;">
+        <h2>Password Recovery</h2>
+        <label for="recoveryEmail">Enter your email:</label>
+        <input type="text" id="recoveryEmail" placeholder="Enter your email">
+        <button id="submitRecovery">Send Password Reset Email</button>
+        <div id="recoveryMessage" class="info-message"></div>
     </div>
 
     <!-- Admin Dashboard (Hidden Initially) -->
@@ -50,6 +62,8 @@
         </div>
     </div>
 
+    <!-- Include Supabase library before admin.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script src="admin.js"></script>
 </body>
-</html> 
+</html>

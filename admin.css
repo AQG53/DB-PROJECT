@@ -116,9 +116,11 @@ label {
     left: -250px;
     transition: left 0.3s ease;
     z-index: 99;
+    display: none;
 }
 
 .sidebar.show {
+    display: block;
     left: 0;
 }
 
