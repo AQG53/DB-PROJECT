@@ -10,6 +10,7 @@ loginButton.addEventListener('click', function() {
 
     // Simple login validation (for demonstration purposes)
     if (username === 'faculty' && password === 'fac123') {
+        sessionStorage.setItem('isLoggedIn', 'true');
         // Hide login form, show student dashboard, and toggle button
         document.getElementById('loginForm').style.display = 'none';
         document.getElementById('facultyDashboard').style.display = 'block';
@@ -27,6 +28,16 @@ loginButton.addEventListener('click', function() {
         errorMessage.style.display = 'block';
     }
 });
+
+window.addEventListener('load', () => {
+    const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+    if (isLoggedIn === 'true') {
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('studentDashboard').style.display = 'block';
+        document.getElementById('toggleSidebar').style.display = 'block';
+    }
+});
+
 
 // Handle the Enter key press inside the form (Submit with Enter)
 form.addEventListener('keydown', function(event) {
@@ -49,6 +60,7 @@ function navigateTo(section) {
 
 // Logout function
 function logout() {
+    sessionStorage.removeItem('isLoggedIn'); // Clear login state
     document.getElementById('facultyDashboard').style.display = 'none';
     document.getElementById('loginForm').style.display = 'block';
     document.getElementById('toggleSidebar').style.display = 'none';

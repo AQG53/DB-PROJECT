@@ -10,6 +10,8 @@ loginButton.addEventListener('click', function() {
 
     // Simple login validation (for demonstration purposes)
     if (username === 'student' && password === 'student123') {
+        sessionStorage.setItem('isLoggedIn', 'true');
+
         // Hide login form, show student dashboard, and toggle button
         document.getElementById('loginForm').style.display = 'none';
         document.getElementById('studentDashboard').style.display = 'block';
@@ -25,6 +27,15 @@ loginButton.addEventListener('click', function() {
     } else {
         // Show custom error message
         errorMessage.style.display = 'block';
+    }
+});
+ 
+window.addEventListener('load', () => {
+    const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+    if (isLoggedIn === 'true') {
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('studentDashboard').style.display = 'block';
+        document.getElementById('toggleSidebar').style.display = 'block';
     }
 });
 
@@ -49,6 +60,7 @@ function navigateTo(section) {
 
 // Logout function
 function logout() {
+    sessionStorage.removeItem('isLoggedIn'); // Clear login state
     document.getElementById('studentDashboard').style.display = 'none';
     document.getElementById('loginForm').style.display = 'block';
     document.getElementById('toggleSidebar').style.display = 'none';
