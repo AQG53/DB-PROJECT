@@ -77,6 +77,9 @@ function navigateTo(section) {
     else if (section === 'attendance-management') {
         window.location.href = 'student_attendance.html'; // Redirect to course registration page
     }
+    else if (section === 'transcript-management') {
+        window.location.href = 'student_transcript.html'; // Redirect to course registration page
+    }
      else {
         alert('Navigating to ' + section); // Keep other navigations as alerts for now
     }
