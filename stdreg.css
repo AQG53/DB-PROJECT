@@ -1,4 +1,4 @@
-/* styles.css */
+
 
 body {
     background: url("background.jpg") no-repeat center center fixed;
@@ -19,7 +19,7 @@ body {
   .logo img {
     display: block;
     margin: 0 auto;
-    max-width: 150px;
+    max-width: 350px;
   }
   
   h1 {
