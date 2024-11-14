@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Student Registration</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="form-container">
+    <!-- Logo Section -->
+    <div class="logo">
+      <img src="FASTNU-logo.png" alt="University Logo">
+    </div>
+
+    <h1>Register a New Student</h1>
+
+    <form id="studentForm">
+      <div class="form-box">
+        <h2>Personal Information</h2>
+
+        <div class="form-group">
+          <label for="firstName">First Name <span class="asterisk">*</span></label>
+          <input type="text" id="firstName" name="firstName" required>
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Last Name <span class="asterisk">*</span></label>
+          <input type="text" id="lastName" name="lastName" required>
+        </div>
+
+        <div class="form-group">
+          <label for="dob">Date of Birth <span class="asterisk">*</span></label>
+          <input type="date" id="dob" name="dob" required>
+        </div>
+
+        <div class="form-group">
+          <label for="gender">Gender <span class="asterisk">*</span></label>
+          <select id="gender" name="gender" required>
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="bloodGroup">Blood Group</label>
+          <select id="blood-group" name="blood-group">
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="cnic">CNIC <span class="asterisk">*</span></label>
+          <input type="text" id="cnic" name="cnic" placeholder="12345-6789012-3" pattern="^\d{5}-\d{7}-\d$" required>
+        </div>
+
+        <h2>Contact Information</h2>
+
+        <div class="form-group">
+          <label for="phone">Phone Number <span class="asterisk">*</span></label>
+          <div class="phone-input">
+            <select id="countryCode" name="countryCode" required>
+              <option value="+1">USA (+1)</option>
+              <option value="+44">UK (+44)</option>
+              <option value="+92">Pakistan (+92)</option>
+              <option value="+61">Australia (+61)</option>
+                <option value="+1">Canada (+1)</option>
+            </select>
+            <!-- Phone number pattern set for exactly 10 digits -->
+            <input type="tel" id="phone" name="phone" placeholder="1234567890" pattern="\d{10}" title="Please enter a 10-digit phone number" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email <span class="asterisk">*</span></label>
+          <!-- Basic email pattern to ensure correct format -->
+          <input type="email" id="email" name="email" placeholder="e.g. abc@xyz.com" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address" required>
+        </div>
+        <div class="form-group">
+          <label for="address">Address <span class="asterisk">*</span></label>
+          <textarea id="address" name="address" required></textarea>
+        </div>
+
+        <h2>Academic Information</h2>
+
+        <div class="form-group">
+          <label for="campus">Campus <span class="asterisk">*</span></label>
+          <select id="campus" name="campus" required>
+            <option value="Karachi">Karachi</option>
+            <option value="Lahore">Lahore</option>
+            <option value="Islamabad">Islamabad</option>
+            <option value="Peshawar">Peshawar</option>
+            <option value="Chiniot-Faisalabad">Chiniot-Faisalabad</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="degree">Degree Type <span class="asterisk">*</span></label>
+          <select id="degree" name="degree" required onchange="populateDepartments()">
+            <option value="">Select Degree</option>
+            <option value="Bachelors">Bachelors</option>
+            <option value="Masters">Masters</option>
+            <option value="PhD">PhD</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="department">Department <span class="asterisk">*</span></label>
+          <select id="department" name="department" required>
+            <option value="">Select Department</option>
+          </select>
+        </div>
+
+        <script>
+          // Define department options based on degree type
+          const degreeDepartments = {
+            "Bachelors": [
+              "Bachelor of Business Administration",
+              "BS (Accounting & Finance)",
+              "BS (Artificial Intelligence)",
+              "BS (Business Analytics)",
+              "BS (Civil Engineering)",
+              "BS (Computer Science)",
+              "BS (Cyber Security)",
+              "BS (Data Science)",
+              "BS (Electrical Engineering)",
+              "BS (Internet of Things)",
+              "BS (Robotics)",
+              "BS (Software Engineering)"
+            ],
+            "Masters": [
+              "Master of Business Administration",
+              "MS (Accounting & Finance)",
+              "MS (Applied Linguistics)",
+              "MS (Artificial Intelligence)",
+              "MS (Business Analytics)",
+              "MS (Civil Engineering)",
+              "MS (Computer Networks and Security)",
+              "MS (Computer Science)",
+              "MS (Data Science)",
+              "MS (Electrical Engineering)",
+              "MS (Management Sciences)",
+              "MS (English Language Teaching)",
+              "MS (Management Sciences)",
+              "MS (Mathematics)",
+              "MS (Software Engineering)",
+              "MS (Software Project Management)"
+            ],
+            "PhD": [
+              "PhD (Civil Engineering)",
+              "PhD (Computer Science)",
+              "PhD (Electrical Engineering)",
+              "PhD (Management Sciences)",
+              "PhD (Mathematics)",
+              "PhD (Software Engineering)"
+            ]
+          };
+          // Function to populate department dropdown based on selected degree
+          function populateDepartments() {
+            const degreeSelect = document.getElementById("degree");
+            const departmentSelect = document.getElementById("department");
+            // Clear existing options
+            departmentSelect.innerHTML = '<option value="">Select Department</option>';
+            // Get selected degree type
+            const selectedDegree = degreeSelect.value;
+            // Populate department dropdown if a valid degree is selected
+            if (degreeDepartments[selectedDegree]) {
+              degreeDepartments[selectedDegree].forEach(department => {
+                const option = document.createElement("option");
+                option.value = department;
+                option.textContent = department;
+                departmentSelect.appendChild(option);
+              });
+            }
+          }
+        </script>
+
+</body>
+
+</html>
+
+<div class="form-group">
+  <label for="batchYear">Batch Year <span class="asterisk">*</span></label>
+  <input type="number" id="batchYear" name="batchYear" placeholder="e.g. 2024" required>
+</div>
+
+<div class="form-group">
+  <label for="enrollmentDate">Enrollment Date <span class="asterisk">*</span></label>
+  <input type="date" id="enrollmentDate" name="enrollmentDate" required>
+</div>
+
+<div class="form-group">
+  <label for="status">Status <span class="asterisk">*</span></label>
+  <select id="status" name="status" required>
+    <option value="">Select Status</option>
+    <option value="Graduated">Graduated</option>
+    <option value="Ungraduated">Ungraduated</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="section">Section <span class="asterisk">*</span></label>
+  <select id="section" name="section" required>
+    <option value="">Select Section</option>
+    <option value="A">A</option>
+    <option value="B">B</option>
+    <option value="C">C</option>
+    <option value="D">D</option>
+    <option value="E">E</option>
+    <option value="F">F</option>
+    <option value="G">G</option>
+    <option value="H">H</option>
+    <option value="I">I</option>
+    <option value="J">J</option>
+    <option value="K">K</option>
+  </select>
+</div>
+
+<div class="form-section">
+  <h2>Nationality and Location</h2>
+
+  <div class="form-group">
+    <label for="nationality">Nationality <span class="asterisk">*</span></label>
+    <select id="nationality" name="nationality" required>
+      <option value="">Select Nationality</option>
+      <option value="Pakistani">Pakistani</option>
+      <option value="Indian">Canadian</option>
+      <option value="Indian">Australian</option>
+      <option value="American">American</option>
+      <option value="British">British</option>
+      <option value="Indian">Other</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="country">Country <span class="asterisk">*</span></label>
+    <select id="country" name="country" required onchange="populateCities()">
+      <option value="">Select Country</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="city">City <span class="asterisk">*</span></label>
+    <select id="city" name="city" required>
+      <option value="">Select City</option>
+    </select>
+  </div>
+
+  <script>
+    // Array of main countries and cities in Pakistan
+    const countryCityData = {
+      "Pakistan": ["Islamabad", "Karachi", "Lahore", "Peshawar", "Quetta", "Faisalabad", "Rawalpindi", "Multan"],
+      "USA": ["New York", "Los Angeles", "Chicago", "Houston", "Phoenix"],
+      "Canada": ["Toronto", "Vancouver", "Montreal", "Calgary", "Ottawa"],
+      "UK": ["London", "Birmingham", "Manchester", "Liverpool", "Edinburgh"],
+      "Australia": ["Sydney", "Melbourne", "Brisbane", "Perth", "Adelaide"]
+    };
+    // Populate country dropdown
+    const countrySelect = document.getElementById("country");
+    for (let country in countryCityData) {
+      const option = document.createElement("option");
+      option.value = country;
+      option.textContent = country;
+      countrySelect.appendChild(option);
+    }
+    // Function to populate city dropdown based on selected country
+    function populateCities() {
+      const citySelect = document.getElementById("city");
+      const selectedCountry = countrySelect.value;
+      // Clear existing options
+      citySelect.innerHTML = '<option value="">Select City</option>';
+      // Add cities for the selected country
+      if (countryCityData[selectedCountry]) {
+        countryCityData[selectedCountry].forEach(city => {
+          const option = document.createElement("option");
+          option.value = city;
+          option.textContent = city;
+          citySelect.appendChild(option);
+        });
+      }
+    }
+  </script>
+
+  </body>
+
+  </html>
+
+  <button type="submit">Register Student</button>
+  </form>
+
+  <footer>
+    <p>FAST NUCES | Contact: (123) 4567-890 | Email: fast@nu.edu.pk</p>
+  </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+
+</html>
