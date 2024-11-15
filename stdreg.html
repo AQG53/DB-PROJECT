@@ -17,7 +17,7 @@
 
     <h1>Register a New Student</h1>
 
-    <form id="studentForm">
+    <form id="studentRegistrationForm">
       <div class="form-box">
         <h2>Personal Information</h2>
 
@@ -63,6 +63,16 @@
           <label for="cnic">CNIC <span class="asterisk">*</span></label>
           <input type="text" id="cnic" name="cnic" placeholder="12345-6789012-3" pattern="^\d{5}-\d{7}-\d$" required>
         </div>
+
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required>
+          <input type="checkbox" id="viewPassword" onclick="togglePasswordVisibility()">
+          <label for="viewPassword" class="view-password-label">Show Password</label>
+          <button type="button" id="generatePassword" onclick="generateRandomPassword()">Generate Random Password</button>
+          
+      </div>
+      
 
         <h2>Contact Information</h2>
 
@@ -304,7 +314,13 @@
     <p>FAST NUCES | Contact: (123) 4567-890 | Email: fast@nu.edu.pk</p>
   </footer>
 </div>
+<div id="notification" class="notification">
+  <span id="notificationMessage">Student has been registered successfully!</span>
+  <div class="progress-bar"></div>
+  <button class="close-btn" onclick="closeNotification()">×</button>
+</div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 <script src="stdreg.js"></script>
 </body>
 
