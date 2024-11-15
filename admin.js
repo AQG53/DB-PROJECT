@@ -14,6 +14,13 @@
     const submitRecoveryButton = document.getElementById('submitRecovery'); // Submit recovery button
     const recoveryMessage = document.getElementById('recoveryMessage'); // Recovery message element
 
+    form.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') { // Check if the pressed key is Enter
+            event.preventDefault(); // Prevent default form submission behavior
+            loginButton.click(); // Trigger the login button click action
+        }
+    });
+    
     const sidebar = document.querySelector('.sidebar'); // Sidebar element
     const toggleSidebarButton = document.getElementById('toggleSidebar'); // Sidebar toggle button
 
@@ -27,7 +34,7 @@
     // Handle password recovery submission
     submitRecoveryButton.addEventListener('click', async function() {
         const email = recoveryEmailInput.value;
-        
+ 
         // Use Supabase to send password reset email
         const { error } = await supabase.auth.resetPasswordForEmail(email);
 
