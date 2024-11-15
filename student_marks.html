@@ -46,11 +46,16 @@
                         </tr>
                         <tr>
                             <td>Assignments</td>
-                            <td>8</td>
-                            <td>10</td>
+                            <td>5</td>
+                            <td>5</td>
                         </tr>
                         <tr>
                             <td>Quizzes</td>
+                            <td>3</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>Project</td>
                             <td>3</td>
                             <td>10</td>
                         </tr>
@@ -66,9 +71,16 @@
         </div>
          <!-- Back to Student Portal Button -->
     </div>
+
+     <!-- Button to Download PDF -->
+     <div class="download-button-container">
+        <button id="downloadPdf">Download Report</button>
+    </div>
+
     <div class="back-button-container">
         <button id="backToPortal" onclick="goToStudentPortal()">Back to Student Portal</button>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="student_marks.js"></script>
 </body>
 </html>
