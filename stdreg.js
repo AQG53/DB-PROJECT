@@ -2,6 +2,8 @@
 const SUPABASE_URL = 'https://ynwjgmkbbyepuausjcdw.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlud2pnbWtiYnllcHVhdXNqY2R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE1MDcwMjcsImV4cCI6MjA0NzA4MzAyN30.RBCkr5OCoY7vqxOc_ZFSRf4DNdTPPx8rvAlRUDpesrY';
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const sendEmail = require('./sendEmail'); // Import email-sending function
+require('dotenv').config();
 
 function togglePasswordVisibility() {
     const passwordInput = document.getElementById('password');
@@ -138,6 +140,8 @@ document.getElementById('studentRegistrationForm').addEventListener('submit', as
           alert('Error: ' + error.message);
           return;
       }
+
+      await sendEmail(email, rollNumber, password);
 
       console.log('Student registered successfully:', data);
       showNotification(`Student registered successfully! Roll Number: ${rollNumber}`);
