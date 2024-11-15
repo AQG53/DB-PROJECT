@@ -1,4 +1,4 @@
-/* Basic styling for container and form */
+/* Basic styling for body and container */
 body {
     font-family: Arial, sans-serif;
     display: flex;
@@ -15,8 +15,8 @@ body {
 }
 
 .container {
-    background-color: #e3ff7c;
-    padding: 20px;
+    background-color: #ccff66;
+    padding: 30px 40px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
@@ -31,17 +31,19 @@ h2 {
 
 .reset-form label {
     display: block;
-    margin: 10px 0 5px;
+    margin: 15px 0 5px;
     font-weight: bold;
     color: #555;
+    text-align: left;
 }
 
 .reset-form input {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    box-sizing: border-box; /* Ensures padding and borders are included in the element's width */
 }
 
 .submit-btn {
@@ -49,10 +51,11 @@ h2 {
     color: #fff;
     border: none;
     border-radius: 4px;
-    padding: 10px 15px;
+    padding: 12px;
     font-size: 16px;
     cursor: pointer;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .submit-btn:hover {
