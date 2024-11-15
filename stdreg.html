@@ -67,11 +67,13 @@
         <div class="form-group">
           <label for="password">Password:</label>
           <input type="password" id="password" name="password" required>
-          <input type="checkbox" id="viewPassword" onclick="togglePasswordVisibility()">
-          <label for="viewPassword" class="view-password-label">Show Password</label>
+          <span class="toggle-password">
+            <img src="view.png" id="togglePasswordIcon" onclick="togglePasswordVisibility()" alt="Toggle Password">
+        </span>
           <button type="button" id="generatePassword" onclick="generateRandomPassword()">Generate Random Password</button>
           
       </div>
+      
       
 
         <h2>Contact Information</h2>
