@@ -1,116 +1,122 @@
-
-
 body {
-    background: url("background.jpg") no-repeat center center fixed;
-    background-size: cover;
-    font-family: Arial, sans-serif;
-    color: #004d40;
-  }
-  
-  .form-container {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  }
-  
-  .logo img {
-    display: block;
-    margin: 0 auto;
-    max-width: 350px;
-  }
-  
-  h1 {
-    text-align: center;
-    color: #00796b;
-  }
-  
-  h2 {
-    color: #004d40;
-    border-bottom: 2px solid #00796b;
-    padding-bottom: 5px;
-    margin-bottom: 10px;
-  }
-  
-  .form-box {
-    padding: 20px;
-    background: #e0f7fa;
-    border-radius: 10px;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  label {
-    font-weight: bold;
-    color: #00796b;
-  }
-  
-  input,
-  select,
-  textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #b2dfdb;
-    border-radius: 5px;
-    background: #f1f8e9;
-  }
-  
-  .phone-input {
-    display: flex;
-    gap: 10px;
-  }
-  
-  button {
-    width: 100%;
-    padding: 12px;
-    background-color: #00796b;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #004d40;
-  }
-  
-  footer {
-    text-align: center;
-    margin-top: 20px;
-    color: #00796b;
-  }
-   /* Back to Student Portal button */
-   .back-button-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
+  background: url("background.jpg") no-repeat center center fixed;
+  background-size: cover;
+  font-family: Arial, sans-serif;
+  color: #004d40;
 }
 
-#backToPortal {
-    background-color: #00796b; /* Teal theme color */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
-    transition: background-color 0.3s, transform 0.2s; /* Smooth hover effects */
+.form-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
-#backToPortal:hover {
-    background-color: #004d40; /* Darker teal on hover */
-    transform: translateY(-2px); /* Slight lift effect */
+.logo img {
+  display: block;
+  margin: 0 auto;
+  max-width: 350px;
 }
 
-#backToPortal:active {
-    background-color: #00695c; /* Slightly lighter teal for active state */
-    transform: translateY(0); /* Reset lift on click */
+h1 {
+  text-align: center;
+  color: #00796b;
+}
+
+h2 {
+  color: #004d40;
+  border-bottom: 2px solid #00796b;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.form-box {
+  padding: 20px;
+  background: #e0f7fa;
+  border-radius: 10px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  position: relative;
+}
+
+label {
+  font-weight: bold;
+  color: #00796b;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  max-width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #b2dfdb;
+  border-radius: 5px;
+  background: #f1f8e9;
+  box-sizing: border-box;
+}
+
+#password {
+  width: 100%; /* Full width for input box */
+  padding-right: 35px; /* Leave space for the eye icon */
+  box-sizing: border-box;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 45%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-password img {
+  width: 20px;
+  height: 20px;
+  opacity: 0.7;
+}
+
+.toggle-password img:hover {
+  opacity: 1;
+}
+
+#generatePassword {
+  padding: 5px 10px; /* Smaller padding */
+  font-size: 14px;
+  background-color: #00796b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  display: inline-block;
+  width: 100%; /* Make button same width as other inputs */
+}
+
+#generatePassword:hover {
+  background-color: #004d40;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #00796b;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #004d40;
 }
 
 .notification {
@@ -152,45 +158,30 @@ body {
   to { width: 0; }
 }
 
-.close-btn {
-  position: absolute;
-  top: 5px;
-  right: 8px;
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 20px;
-  cursor: pointer;
+/* Styles for the back button */
+.back-button-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
 }
 
-.close-btn:hover {
-  color: #ccc;
-}
-
-#generatePassword {
-  padding: 4px 10px; /* Smaller padding */
-  font-size: 14px;   /* Smaller font size */
-  background-color: #00796b;
+#backToPortal {
+  background-color: #00796b; /* Teal theme color */
   color: white;
+  padding: 10px 20px;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   cursor: pointer;
-  margin-top: 10px;  /* Add some spacing above the button */
-  display: inline-block;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
+  transition: background-color 0.3s, transform 0.2s; /* Smooth hover effects */
 }
 
-#generatePassword:hover {
-  background-color: #004d40;
+#backToPortal:hover {
+  background-color: #004d40; /* Darker teal on hover */
+  transform: translateY(-2px); /* Slight lift effect */
 }
 
-#viewPassword {
-  margin-left: 10px;
-  vertical-align: middle; /* Aligns the checkbox with the input field */
-}
-
-.view-password-label {
-  font-size: 14px;
-  color: #333;
-  margin-left: 5px;
-  cursor: pointer;
+#backToPortal:active {
+  background-color: #00695c; /* Slightly lighter teal for active state */
+  transform: translateY(0); /* Reset lift on click */
 }

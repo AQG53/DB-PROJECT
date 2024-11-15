@@ -3,6 +3,19 @@ const SUPABASE_URL = 'https://ynwjgmkbbyepuausjcdw.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlud2pnbWtiYnllcHVhdXNqY2R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE1MDcwMjcsImV4cCI6MjA0NzA4MzAyN30.RBCkr5OCoY7vqxOc_ZFSRf4DNdTPPx8rvAlRUDpesrY';
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+function togglePasswordVisibility() {
+    const passwordInput = document.getElementById('password');
+    const toggleIcon = document.getElementById('togglePasswordIcon');
+
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text'; // Show password
+        toggleIcon.src = 'view.png'; // Change icon to "hide" icon
+    } else {
+        passwordInput.type = 'password'; // Hide password
+        toggleIcon.src = 'hide.png'; // Change icon to "view" icon
+    }
+}
+
 function generateRandomPassword() {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let password = '';
@@ -11,7 +24,6 @@ function generateRandomPassword() {
       password += chars[randomIndex];
   }
   document.getElementById('password').value = password; // Set the generated password
-  alert('Random password generated: ' + password); // Optional: Notify the user
 }
 
 async function getNextRollNumber(batchInitial) {
