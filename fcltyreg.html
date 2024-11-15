@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Faculty Registration</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="form-container">
+    <!-- Logo Section -->
+    <div class="logo">
+      <img src="FASTNU-logo.png" alt="University Logo">
+    </div>
+
+    <h1>Register a New Faculty Member</h1>
+
+    <form id="facultyForm">
+      <div class="form-box">
+        <h2>Faculty Information</h2>
+
+        <div class="form-group">
+          <label for="facultyName">Faculty Name <span class="asterisk">*</span></label>
+          <input type="text" id="facultyName" name="facultyName" required placeholder="e.g. Dr. Sania Atif">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email <span class="asterisk">*</span></label>
+          <input type="email" id="email" name="email" required placeholder="e.g. sania.atif@nu.edu" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address">
+        </div>
+
+        <div class="form-group">
+          <label for="department">Department <span class="asterisk">*</span></label>
+          <select id="department" name="department" required>
+            <option value="">Select Department</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Electrical Engineering">Electrical Engineering</option>
+            <option value="Business Administration">Business Administration</option>
+            <option value="Civil Engineering">Civil Engineering</option>
+            <option value="Mathematics">Mathematics</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number <span class="asterisk">*</span></label>
+          <div class="phone-input">
+            <select id="countryCode" name="countryCode" required>
+              <option value="+1">USA (+1)</option>
+              <option value="+44">UK (+44)</option>
+              <option value="+92">Pakistan (+92)</option>
+              <option value="+61">Australia (+61)</option>
+              <option value="+1">Canada (+1)</option>
+            </select>
+            <input type="tel" id="phone" name="phone" placeholder="1234567890" pattern="\d{10}" title="Please enter a 10-digit phone number" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="designation">Designation <span class="asterisk">*</span></label>
+          <select id="designation" name="designation" required>
+            <option value="">Select Designation</option>
+            <option value="Professor">Professor</option>
+            <option value="Associate Professor">Associate Professor</option>
+            <option value="Assistant Professor">Assistant Professor</option>
+            <option value="Lecturer">Lecturer</option>
+            <option value="Researcher">Researcher</option>
+          </select>
+        </div>
+
+        <button type="submit">Register Faculty</button>
+      </div>
+    </form>
+
+    <footer>
+      <p>FAST NUCES | Contact: (123) 4567-890 | Email: fast@nu.edu.pk</p>
+    </footer>
+  </div>
+
+  <script src="fcltyreg.js"></script>
+</body>
+
+</html>
