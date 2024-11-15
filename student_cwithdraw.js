@@ -1,8 +1,8 @@
-document.getElementById('registerCourses').addEventListener('click', () => {
+document.getElementById('withdrawCourses').addEventListener('click', () => {
     const selectedCourses = [];
     const checkboxes = document.querySelectorAll('input[name="course"]:checked');
     const errorMessageDiv = document.getElementById('errorMessage'); // Get the error message div
-    const messageDiv = document.getElementById('registrationMessage');
+    const messageDiv = document.getElementById('withdrawalMessage');
 
     // Clear any previous error message
     errorMessageDiv.style.display = 'none';
@@ -13,16 +13,16 @@ document.getElementById('registerCourses').addEventListener('click', () => {
 
     if (selectedCourses.length > 0) {
         // Update the success message
-        messageDiv.textContent = "Registration successful!";
+        messageDiv.textContent = "Withdrawal successful!";
         messageDiv.style.color = 'green';
+
     } else {
         // Show error message if no courses are selected
         errorMessageDiv.style.display = 'block';
         messageDiv.textContent = ''; // Clear any success message
     }
 });
-function goToStudentPortal() {
-    // Replace 'student_portal.html' with the actual URL or path of the student portal page
-    window.location.href = 'student.html';
-};
 
+function goToStudentPortal() {
+    window.location.href = 'student.html'; // Replace with the actual path of the student portal
+}
