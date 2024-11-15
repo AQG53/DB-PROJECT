@@ -8,4 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
       form.reset();
     });
   });
-  
+   // Function to navigate back to the Admin Dashboard 
+function goToAdminDashboard() {
+  window.location.href = 'admin.html';
+}
