@@ -68,7 +68,7 @@
           <label for="password">Password:</label>
           <input type="password" id="password" name="password" required>
           <span class="toggle-password">
-            <img src="view.png" id="togglePasswordIcon" onclick="togglePasswordVisibility()" alt="Toggle Password">
+            <img src="hide.png" id="togglePasswordIcon" onclick="togglePasswordVisibility()" alt="Toggle Password">
         </span>
           <button type="button" id="generatePassword" onclick="generateRandomPassword()">Generate Random Password</button>
           
@@ -319,7 +319,6 @@
 <div id="notification" class="notification">
   <span id="notificationMessage">Student has been registered successfully!</span>
   <div class="progress-bar"></div>
-  <button class="close-btn" onclick="closeNotification()">×</button>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
