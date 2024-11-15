@@ -1,5 +1,5 @@
-const nodemailer = require('nodemailer');
 require('dotenv').config(); // Load environment variables
+const nodemailer = require('nodemailer');
 
 // Configure Nodemailer with Gmail SMTP
 const transporter = nodemailer.createTransport({
@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
 // Function to send email
 async function sendEmail(to, username, password) {
     const mailOptions = {
-        from: process.env.GMAIL_USER, // Sender address
+        from: process.env.GMAIL_USER, // Sender email address
         to, // Recipient email
         subject: 'Welcome to the Student Portal',
         text: `Dear Student,\n\nYour account has been successfully created.\n\nYour login details:\nUsername: ${username}\nPassword: ${password}\n\nBest Regards,\nYour School Team`,
@@ -28,6 +28,7 @@ async function sendEmail(to, username, password) {
         console.log('Email sent successfully:', info.response);
     } catch (error) {
         console.error('Error sending email:', error.message);
+        throw error;
     }
 }
 
