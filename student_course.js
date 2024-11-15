@@ -1,28 +1,44 @@
 document.getElementById('registerCourses').addEventListener('click', () => {
     const selectedCourses = [];
     const checkboxes = document.querySelectorAll('input[name="course"]:checked');
-    const errorMessageDiv = document.getElementById('errorMessage'); // Get the error message div
+    const errorMessageDiv = document.getElementById('errorMessage');
     const messageDiv = document.getElementById('registrationMessage');
 
-    // Clear any previous error message
+    // Clear any previous error or success messages
     errorMessageDiv.style.display = 'none';
+    messageDiv.textContent = '';
+
+    let totalCreditHours = 0;
+    const courseCredits = {
+        'CS107': 3, // Statistics
+        'MT106': 3, // Numerical Computing
+        'CS101': 3, // Introduction to Programming
+        'MATH202': 4, // Calculus II
+        'PHYS301': 13  // Physics III
+    };
 
     checkboxes.forEach((checkbox) => {
-        selectedCourses.push(checkbox.value);
+        const courseCode = checkbox.value;
+        selectedCourses.push(courseCode);
+        totalCreditHours += courseCredits[courseCode]; // Sum up the credit hours
     });
 
-    if (selectedCourses.length > 0) {
-        // Update the success message
-        messageDiv.textContent = "Registration successful!";
-        messageDiv.style.color = 'green';
-    } else {
-        // Show error message if no courses are selected
+    // Check if any courses are selected
+    if (selectedCourses.length === 0) {
+        errorMessageDiv.textContent = 'Select at least one course!';
         errorMessageDiv.style.display = 'block';
-        messageDiv.textContent = ''; // Clear any success message
+    }
+    // Check if total credit hours exceed 17
+    else if (totalCreditHours > 17) {
+        errorMessageDiv.textContent = 'Total credit hours exceed the limit of 17!';
+        errorMessageDiv.style.display = 'block';
+    } else {
+        // Display success message if the conditions are met
+        messageDiv.textContent = 'Registration successful!';
+        messageDiv.style.color = 'green';
     }
 });
-function goToStudentPortal() {
-    // Replace 'student_portal.html' with the actual URL or path of the student portal page
-    window.location.href = 'student.html';
-};
 
+function goToStudentPortal() {
+    window.location.href = 'student.html';
+}

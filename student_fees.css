@@ -1,9 +1,8 @@
-/* Basic styling for the table and layout */
 body {
     font-family: Arial, sans-serif;
-    background-image: url('background.jpg'); /* Ensure the image path is correct */
+    background-image: url('background.jpg'); /* Adjust image path */
     background-size: cover;
-    background-position: center center;
+    background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     display: flex;
@@ -13,8 +12,8 @@ body {
     margin: 0;
 }
 
-.withdraw-container {
-    background-color:#e3ff7c; /* Transparent light red for withdrawal */
+.fees-container {
+    background-color: #e3ff7c;
     padding: 25px;
     border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -24,7 +23,6 @@ body {
     text-align: center;
 }
 
-/* Title Styling */
 h2 {
     color: #333;
     font-size: 28px;
@@ -32,7 +30,6 @@ h2 {
     font-weight: 600;
 }
 
-/* Table Styling */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -55,53 +52,19 @@ td {
     background-color: #fafafa;
 }
 
-/* Checkbox Styling */
-td input[type="checkbox"] {
-    margin-right: 15px;
-}
-
-/* Button Styling */
-.withdraw-button-container {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 20px;
-}
-
-#withdrawCourses {
-    background-color: #2196f3;
+.download-btn {
+    background-color:#3a6677;
     color: white;
-    padding: 12px 25px;
+    padding: 8px 15px;
     border: none;
     border-radius: 5px;
-    font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
-#withdrawCourses:hover {
+.download-btn:hover {
     background-color: #1976d2;
 }
 
-/* Success Message Styling */
-#withdrawalMessage {
-    margin-top: 20px;
-    color: green;
-    font-weight: bold;
-    font-size: 18px;
-    text-align: center;
-}
-
-/* Error Message Styling */
-#errorMessage {
-    font-size: 16px;
-    color: rgb(190, 10, 10);
-    font-weight: bold;
-    text-align: center;
-    margin-top: 20px;
-    display: none; /* Initially hidden */
-}
-
-/* Back Button Styling */
 .back-button-container {
     position: fixed;
     bottom: 20px;
@@ -110,7 +73,7 @@ td input[type="checkbox"] {
 }
 
 #backToPortal {
-    background-color: #004d40; 
+    background-color: #004d40;
     color: white;
     padding: 10px 20px;
     border: none;
