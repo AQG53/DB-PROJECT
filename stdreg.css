@@ -85,4 +85,30 @@ body {
     margin-top: 20px;
     color: #00796b;
   }
-  
+   /* Back to Student Portal button */
+   .back-button-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+#backToPortal {
+    background-color: #00796b; /* Teal theme color */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth hover effects */
+}
+
+#backToPortal:hover {
+    background-color: #004d40; /* Darker teal on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+#backToPortal:active {
+    background-color: #00695c; /* Slightly lighter teal for active state */
+    transform: translateY(0); /* Reset lift on click */
+}
