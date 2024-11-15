@@ -32,11 +32,24 @@ loginButton.addEventListener('click', function() {
 window.addEventListener('load', () => {
     const isLoggedIn = sessionStorage.getItem('isLoggedIn');
     if (isLoggedIn === 'true') {
+        // Ensure the dashboard and sidebar are shown after a refresh
         document.getElementById('loginForm').style.display = 'none';
-        document.getElementById('studentDashboard').style.display = 'block';
+        document.getElementById('facultyDashboard').style.display = 'block';
         document.getElementById('toggleSidebar').style.display = 'block';
+
+        // You might want to ensure that the sidebar is shown based on its state
+        const sidebar = document.querySelector('.sidebar');
+        if (sidebar.classList.contains('show')) {
+            sidebar.style.left = '0'; // Ensure sidebar stays visible
+        }
+    } else {
+        // If not logged in, show the login form and hide the dashboard
+        document.getElementById('facultyDashboard').style.display = 'none';
+        document.getElementById('loginForm').style.display = 'block';
+        document.getElementById('toggleSidebar').style.display = 'none';
     }
 });
+
 
 
 // Handle the Enter key press inside the form (Submit with Enter)
@@ -54,9 +67,15 @@ document.getElementById('toggleSidebar').addEventListener('click', function() {
 });
 
 // Placeholder function for navigation
-function navigateTo(section) {
-    alert('Navigating to ' + section);
-}
+    function navigateTo(section) {
+        if (section === 'course-management'){ // Corrected this line
+            window.location.href = 'faculty_course.html'; 
+        }
+        else {
+            alert('Navigating to ' + section);
+        }
+    }
+   
 
 // Logout function
 function logout() {

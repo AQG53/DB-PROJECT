@@ -1,0 +1,131 @@
+/* Basic styling for the table and layout */
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('background.jpg'); /* Adjust image path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Aligning from the top */
+    height: 100vh;
+    margin: 0;
+    flex-direction: column; /* Stack elements vertically */
+    padding: 20px;
+}
+
+/* Registration container */
+.registration-container {
+    background-color: #e3ff7c; /* Transparent light yellow */
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    margin-top: 200px;
+    margin-bottom: 20px; /* Adds some spacing below the first container */
+    margin-left: 230px;
+}
+
+/* Table Styling */
+table {
+    margin-top: 50px;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+/* Table Header and Cell Styling */
+th, td {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+th {
+    background-color: #2196f3;
+    color: white;
+}
+
+td {
+    background-color: #fafafa;
+}
+
+/* Course Information Table */
+.course-info-container {
+    display: none; /* Initially hidden */
+    margin-top: 40px; /* Space between the old and new table */ /* Adds some spacing below the first container */
+    margin-left: 230px;
+    margin-bottom: 50px;
+    text-align: center
+}
+
+/* Ensure the new course info table is styled properly */
+#courseInfoTable {
+    display: none; /* Initially hidden */
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px; /* Adds space between the new table and the previous content */
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+/* Button Styling */
+#submitSelection {
+    background-color: #2196f3;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 30px;
+
+    transition: background-color 0.3s ease;
+}
+
+#submitSelection:hover {
+    background-color: #1976d2;
+}
+
+/* Success Message Styling */
+#selectionMessage {
+    margin-top: 20px;
+    color: green;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+}
+
+/* Error Message Styling */
+#errorMessage {
+    font-size: 16px;
+    color: rgb(190, 10, 10);
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Back Button Styling */
+.back-button-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10;
+}
+
+#backToPortal {
+    background-color: #004d40;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#backToPortal:hover {
+    background-color: #00695c;
+}
