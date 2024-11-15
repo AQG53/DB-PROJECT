@@ -13,8 +13,8 @@ body {
     margin: 0;
 }
 
-.withdraw-container {
-    background-color:#e3ff7c; /* Transparent light red for withdrawal */
+.grade-change-container {
+    background-color:  #e3ff7c; /* Transparent light yellow  */
     padding: 25px;
     border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -55,19 +55,24 @@ td {
     background-color: #fafafa;
 }
 
-/* Checkbox Styling */
-td input[type="checkbox"] {
+/* Input Field Styling */
+td input[type="text"] {
     margin-right: 15px;
+    padding: 5px;
+    font-size: 14px;
+    width: 90%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 /* Button Styling */
-.withdraw-button-container {
+.request-button-container {
     display: flex;
     justify-content: flex-end;
     margin-top: 20px;
 }
 
-#withdrawCourses {
+#sendRequest {
     background-color: #2196f3;
     color: white;
     padding: 12px 25px;
@@ -78,12 +83,12 @@ td input[type="checkbox"] {
     transition: background-color 0.3s ease;
 }
 
-#withdrawCourses:hover {
+#sendRequest:hover {
     background-color: #1976d2;
 }
 
 /* Success Message Styling */
-#withdrawalMessage {
+#requestMessage {
     margin-top: 20px;
     color: green;
     font-weight: bold;
@@ -101,12 +106,27 @@ td input[type="checkbox"] {
     display: none; /* Initially hidden */
 }
 
-/* Back Button Styling */
+/* Button Styling */
+button {
+    background-color: #34c3fc;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #d32f2f;
+}
+
+/* Styles for the Back to Student Portal button */
 .back-button-container {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    z-index: 10;
+    z-index: 10; /* Ensures it stays on top */
 }
 
 #backToPortal {

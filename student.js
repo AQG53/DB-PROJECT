@@ -83,6 +83,12 @@ function navigateTo(section) {
     else if (section === 'coursewithdraw-management') {
         window.location.href = 'student_cwithdraw.html'; // Redirect to course registration page
     }
+    else if (section === 'fee-management') {
+        window.location.href = 'student_fees.html'; // Redirect to course registration page
+    }
+    else if (section === 'grade change request') {
+        window.location.href = 'student_gcr.html'; // Redirect to course registration page
+    }
      else {
         alert('Navigating to ' + section); // Keep other navigations as alerts for now
     }

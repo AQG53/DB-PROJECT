@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Change Request</title>
+    <link rel="stylesheet" href="student_gcr.css"> <!-- Linking the external CSS file -->
+</head>
+<body>
+    <div class="grade-change-container">
+        <h2>Grade Change Request</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Course Name</th>
+                    <th>Course Code</th>
+                    <th>Original Grade</th>
+                    <th>Requested Grade</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Statistics</td>
+                    <td>CS107</td>
+                    <td><input type="text" name="originalGradeCS107"></td>
+                    <td><input type="text" name="requestedGradeCS107"></td>
+                    <td><input type="text" name="reasonCS107"></td>
+                    <td><span>Pending</span></td>
+                </tr>
+                <tr>
+                    <td>Numerical Computing</td>
+                    <td>MT106</td>
+                    <td><input type="text" name="originalGradeMT106"></td>
+                    <td><input type="text" name="requestedGradeMT106"></td>
+                    <td><input type="text" name="reasonMT106"></td>
+                    <td><span>Pending</span></td>
+                </tr>
+                <tr>
+                    <td>Introduction to Programming</td>
+                    <td>CS101</td>
+                    <td><input type="text" name="originalGradeCS101"></td>
+                    <td><input type="text" name="requestedGradeCS101"></td>
+                    <td><input type="text" name="reasonCS101"></td>
+                    <td><span>Pending</span></td>
+                </tr>
+                <tr>
+                    <td>Calculus II</td>
+                    <td>MATH202</td>
+                    <td><input type="text" name="originalGradeMATH202"></td>
+                    <td><input type="text" name="requestedGradeMATH202"></td>
+                    <td><input type="text" name="reasonMATH202"></td>
+                    <td><span>Pending</span></td>
+                </tr>
+                <tr>
+                    <td>Physics III</td>
+                    <td>PHYS301</td>
+                    <td><input type="text" name="originalGradePHYS301"></td>
+                    <td><input type="text" name="requestedGradePHYS301"></td>
+                    <td><input type="text" name="reasonPHYS301"></td>
+                    <td><span>Pending</span></td>
+                </tr>
+                <tr>
+                    <td>Database</td>
+                    <td>CS506</td>
+                    <td><input type="text" name="originalGradePHYS301"></td>
+                    <td><input type="text" name="requestedGradePHYS301"></td>
+                    <td><input type="text" name="reasonPHYS301"></td>
+                    <td><span>Pending</span></td>
+                </tr>
+                <!-- Add more rows as needed -->
+            </tbody>
+        </table>
+
+        <!-- Error Message for unfilled fields -->
+        <div id="errorMessage" class="error-message" style="display: none;">Fill in all fields for at least one course!</div>
+
+        <div class="request-button-container">
+            <button id="sendRequest">Send Request</button>
+        </div>
+
+        <!-- Message placeholder -->
+        <div id="requestMessage"></div>
+    </div>
+    <div class="back-button-container">
+        <button id="backToPortal" onclick="goToStudentPortal()">Back to Student Portal</button>
+    </div>
+
+    <script src="student_gcr.js"></script>
+</body>
+</html>

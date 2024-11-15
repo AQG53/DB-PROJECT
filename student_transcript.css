@@ -75,7 +75,7 @@ h1 {
 }
 
 #backToPortal {
-    background-color: #d81b1b;
+    background-color: #004d40; 
     color: white;
     padding: 10px 20px;
     border: none;
@@ -84,5 +84,5 @@ h1 {
 }
 
 #backToPortal:hover {
-    background-color: #bb3030;
+    background-color: #00695c;
 }
