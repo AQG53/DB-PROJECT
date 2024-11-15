@@ -127,4 +127,34 @@
     }
 
     window.logout = logout; // Attach logout function globally
+    function navigateTo(page) {
+        switch (page) {
+          case 'student-management':
+            window.location.href = 'stdreg.html';
+            break;
+          case 'faculty-management':
+            // Add navigation link for faculty management
+            window.location.href = 'facultyreg.html'; // Example page for faculty registration
+            break;
+          case 'course-management':
+            // Add navigation link for course management
+            window.location.href = 'coursereg.html'; // Example page for course registration
+            break;
+          case 'fee-management':
+            alert("Fee management is not implemented yet.");
+            break;
+          case 'GPA-management':
+            alert("GPA management is not implemented yet.");
+            break;
+          case 'attendance-management':
+            alert("Attendance management is not implemented yet.");
+            break;
+          case 'notification-management':
+            alert("Notification management is not implemented yet.");
+            break;
+          default:
+            alert("Page not found.");
+        }
+      }
+      window.navigateTo = navigateTo; 
 })();
