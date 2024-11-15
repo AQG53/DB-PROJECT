@@ -141,11 +141,11 @@
             break;
           case 'faculty-management':
             // Add navigation link for faculty management
-            window.location.href = 'facultyreg.html'; // Example page for faculty registration
+            window.location.href = 'fcltyreg.html'; 
             break;
           case 'course-management':
             // Add navigation link for course management
-            window.location.href = 'coursereg.html'; // Example page for course registration
+            window.location.href = 'coursereg.html';
             break;
           case 'fee-management':
             alert("Fee management is not implemented yet.");
