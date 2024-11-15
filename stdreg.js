@@ -3,6 +3,17 @@ const SUPABASE_URL = 'https://ynwjgmkbbyepuausjcdw.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlud2pnbWtiYnllcHVhdXNqY2R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE1MDcwMjcsImV4cCI6MjA0NzA4MzAyN30.RBCkr5OCoY7vqxOc_ZFSRf4DNdTPPx8rvAlRUDpesrY';
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+function generateRandomPassword() {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let password = '';
+  for (let i = 0; i < 8; i++) {
+      const randomIndex = Math.floor(Math.random() * chars.length);
+      password += chars[randomIndex];
+  }
+  document.getElementById('password').value = password; // Set the generated password
+  alert('Random password generated: ' + password); // Optional: Notify the user
+}
+
 async function getNextRollNumber(batchInitial) {
   const currentYear = new Date().getFullYear().toString().slice(-2); // Last two digits of the year
   // Fetch the most recent roll number
@@ -76,6 +87,7 @@ document.getElementById('studentRegistrationForm').addEventListener('submit', as
   const nationality = document.getElementById('nationality').value;
   const country = document.getElementById('country').value;
   const city = document.getElementById('city').value;
+  const password = document.getElementById('password').value;
 
   const batchInitial = campus[0].toUpperCase();
   const rollNumber = await getNextRollNumber(batchInitial);
@@ -104,6 +116,7 @@ document.getElementById('studentRegistrationForm').addEventListener('submit', as
       nationality,
       country,
       city,
+      password,
   };
 
   try {

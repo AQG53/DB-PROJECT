@@ -166,3 +166,31 @@ body {
 .close-btn:hover {
   color: #ccc;
 }
+
+#generatePassword {
+  padding: 4px 10px; /* Smaller padding */
+  font-size: 14px;   /* Smaller font size */
+  background-color: #00796b;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 10px;  /* Add some spacing above the button */
+  display: inline-block;
+}
+
+#generatePassword:hover {
+  background-color: #004d40;
+}
+
+#viewPassword {
+  margin-left: 10px;
+  vertical-align: middle; /* Aligns the checkbox with the input field */
+}
+
+.view-password-label {
+  font-size: 14px;
+  color: #333;
+  margin-left: 5px;
+  cursor: pointer;
+}

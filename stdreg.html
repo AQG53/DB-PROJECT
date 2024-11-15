@@ -64,9 +64,15 @@
           <input type="text" id="cnic" name="cnic" placeholder="12345-6789012-3" pattern="^\d{5}-\d{7}-\d$" required>
         </div>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <button type="button" id="generatePassword" onclick="generateRandomPassword()">Generate Random Password</button>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required>
+          <input type="checkbox" id="viewPassword" onclick="togglePasswordVisibility()">
+          <label for="viewPassword" class="view-password-label">Show Password</label>
+          <button type="button" id="generatePassword" onclick="generateRandomPassword()">Generate Random Password</button>
+          
+      </div>
+      
 
         <h2>Contact Information</h2>
 
