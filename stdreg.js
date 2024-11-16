@@ -138,6 +138,17 @@ document.getElementById('studentRegistrationForm').addEventListener('submit', as
           alert('Error: ' + error.message);
           return;
       }
+      
+      // Send email via backend
+      await fetch('http://localhost:3000/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            email,
+            username: rollNumber,
+            password,
+        }),
+    });
 
       console.log('Student registered successfully:', data);
       showNotification(`Student registered successfully! Roll Number: ${rollNumber}`);

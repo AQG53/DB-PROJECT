@@ -1,4 +1,4 @@
-/* Basic styling for the table and layout */
+/* Basic styling for the layout */
 body {
     font-family: Arial, sans-serif;
     background-image: url('background.jpg'); /* Ensure the image path is correct */
@@ -13,18 +13,16 @@ body {
     margin: 0;
 }
 
-.grade-change-container {
-    background-color:  #e3ff7c; /* Transparent light yellow  */
+.request-container {
+    background-color: #e3ff7c;
     padding: 25px;
     border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     width: 80%;
-    max-width: 800px;
-    margin: 20px;
+    max-width: 600px;
     text-align: center;
 }
 
-/* Title Styling */
 h2 {
     color: #333;
     font-size: 28px;
@@ -32,43 +30,26 @@ h2 {
     font-weight: 600;
 }
 
-/* Table Styling */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-}
-
-th, td {
-    padding: 15px;
-    text-align: left;
-    border: 1px solid #ddd;
+/* Styling for the form elements */
+label {
     font-size: 16px;
+    margin-top: 10px;
+    display: block;
+    text-align: left;
+    margin-left: 60px;
 }
 
-th {
-    background-color: #2196f3;
-    color: white;
-}
-
-td {
-    background-color: #fafafa;
-}
-
-/* Input Field Styling */
-td input[type="text"] {
-    margin-right: 15px;
-    padding: 5px;
+select, input[type="text"] {
+    padding: 10px;
     font-size: 14px;
-    width: 90%;
+    width: 80%;
+    margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
 /* Button Styling */
 .request-button-container {
-    display: flex;
-    justify-content: flex-end;
     margin-top: 20px;
 }
 
@@ -87,6 +68,15 @@ td input[type="text"] {
     background-color: #1976d2;
 }
 
+#errorMessage {
+    font-size: 16px;
+    color: rgb(190, 10, 10);
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+    display: none;
+}
+
 /* Success Message Styling */
 #requestMessage {
     margin-top: 20px;
@@ -96,41 +86,16 @@ td input[type="text"] {
     text-align: center;
 }
 
-/* Error Message Styling */
-#errorMessage {
-    font-size: 16px;
-    color: rgb(190, 10, 10);
-    font-weight: bold;
-    text-align: center;
-    margin-top: 20px;
-    display: none; /* Initially hidden */
-}
-
-/* Button Styling */
-button {
-    background-color: #34c3fc;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
-}
-
-button:hover {
-    background-color: #d32f2f;
-}
-
-/* Styles for the Back to Student Portal button */
+/* Back Button Styling */
 .back-button-container {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    z-index: 10; /* Ensures it stays on top */
+    z-index: 10;
 }
 
 #backToPortal {
-    background-color: #004d40; 
+    background-color: #004d40;
     color: white;
     padding: 10px 20px;
     border: none;

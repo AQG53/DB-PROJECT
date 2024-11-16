@@ -37,7 +37,6 @@
  
         // Use Supabase to send password reset email
         const { error } = await supabase.auth.resetPasswordForEmail(email);
-
         if (error) {
             recoveryMessage.textContent = 'Error sending reset email: ' + error.message;
             recoveryMessage.style.color = 'red';

@@ -6,38 +6,17 @@ document.getElementById('sendRequest').addEventListener('click', () => {
     errorMessageDiv.style.display = 'none';
     messageDiv.textContent = '';
 
-    const courses = [
-        'CS107', 'MT106', 'CS101', 'MATH202', 'PHYS301'
-    ];
+    const course = document.getElementById('courseDropdown').value;
+    const originalGrade = document.getElementById('originalGrade').value;
+    const requestedGrade = document.getElementById('requestedGrade').value;
+    const reason = document.getElementById('reason').value;
 
-    let atLeastOneRequestFilled = false;
-    let allFieldsFilled = true;
-
-    // Check if at least one request is completely filled
-    courses.forEach((course) => {
-        const originalGrade = document.querySelector(`input[name="originalGrade${course}"]`).value;
-        const requestedGrade = document.querySelector(`input[name="requestedGrade${course}"]`).value;
-        const reason = document.querySelector(`input[name="reason${course}"]`).value;
-
-        if (originalGrade && requestedGrade && reason) {
-            atLeastOneRequestFilled = true; // Mark as filled if all fields are filled for a course
-        }
-
-        // Check if all fields are filled for each course
-        if (!originalGrade || !requestedGrade || !reason) {
-            allFieldsFilled = false;
-        }
-    });
-
-    if (!atLeastOneRequestFilled) {
-        errorMessageDiv.textContent = 'Fill in all fields for at least one course!';
+    // Check if all fields are filled
+    if (!course || !originalGrade || !requestedGrade || !reason) {
         errorMessageDiv.style.display = 'block';
-    } else if (allFieldsFilled) {
-        // If all fields are filled, display error that it's too late to submit requests for changes
-        messageDiv.textContent = 'All fields are filled. Request sent successfully!';
-        messageDiv.style.color = 'green';
+        errorMessageDiv.textContent = 'Please fill in all fields!';
     } else {
-        // If at least one field is filled entirely, display a message saying the request was sent.
+        // Display success message
         messageDiv.textContent = 'Request sent!';
         messageDiv.style.color = 'green';
     }
