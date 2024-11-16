@@ -13,7 +13,14 @@
     const recoveryEmailInput = document.getElementById('recoveryEmail'); // Recovery email input
     const submitRecoveryButton = document.getElementById('submitRecovery'); // Submit recovery button
     const recoveryMessage = document.getElementById('recoveryMessage'); // Recovery message element
+    const passwordInput = document.getElementById('password'); // Password input element
 
+    const usernameInput = document.getElementById('email'); // Username input (email)
+
+    // Focus password input when username input changes
+    usernameInput.addEventListener('input', function () {
+        passwordInput.focus();
+    });
     form.addEventListener('keydown', function(event) {
         if (event.key === 'Enter') { // Check if the pressed key is Enter
             event.preventDefault(); // Prevent default form submission behavior
@@ -45,7 +52,7 @@
             recoveryMessage.style.color = 'green';
         }
     });
-
+    
     // Login function with Supabase authentication
     loginButton.addEventListener('click', async function() {
         const email = document.getElementById('email').value;
@@ -115,6 +122,13 @@
             toggleSidebarButton.style.display = 'block';
         }
     });
+    // Start letter-by-letter animation after login
+    setTimeout(() => {
+        const welcomeText = document.getElementById('welcomeText');
+        welcomeText.style.visibility = 'visible'; // Show welcome text
+        welcomeText.classList.add('typing-finished'); // Stop typing cursor
+    }, 500);
+
 
     // Logout function with Supabase sign-out
     async function logout() {
@@ -136,15 +150,15 @@
     function navigateTo(page) {
         switch (page) {
           case 'student-management':
-            window.location.href = 'stdreg.html';
+            window.location.href = 'admin_student.html';
             break;
           case 'faculty-management':
             // Add navigation link for faculty management
-            window.location.href = 'fcltyreg.html'; 
+            window.location.href = 'admin_faculty.html'; 
             break;
           case 'course-management':
             // Add navigation link for course management
-            window.location.href = 'coursereg.html';
+            window.location.href = 'admin_course.html';
             break;
           case 'fee-management':
             alert("Fee management is not implemented yet.");

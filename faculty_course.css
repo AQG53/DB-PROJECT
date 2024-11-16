@@ -1,43 +1,47 @@
 /* Basic styling for the table and layout */
 body {
-    font-family: Arial, sans-serif;
-    background-image: url('background.jpg'); /* Adjust image path */
+    background: url('background.jpg') no-repeat center center fixed;
     background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    color: #004d40; /* Dark teal for text */
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Aligning from the top */
-    height: 100vh;
-    margin: 0;
-    flex-direction: column; /* Stack elements vertically */
+    align-items: flex-start;
+    flex-direction: column;
     padding: 20px;
+}
+
+/* Logo container */
+.logo {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.logo img {
+    max-width: 300px; /* Size of the FAST University logo */
 }
 
 /* Registration container */
 .registration-container {
-    background-color: #e3ff7c; /* Transparent light yellow */
+    background: rgba(255, 255, 255, 0.85); /* Light transparent white */
     padding: 25px;
     border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 800px;
     text-align: center;
-    margin-top: 200px;
-    margin-bottom: 20px; /* Adds some spacing below the first container */
+    margin-top: 40px;
+    margin-bottom: 20px;
     margin-left: 230px;
 }
 
 /* Table Styling */
 table {
-    margin-top: 50px;
     width: 100%;
     border-collapse: collapse;
     margin-top: 15px;
 }
 
-/* Table Header and Cell Styling */
 th, td {
     padding: 15px;
     text-align: left;
@@ -46,36 +50,41 @@ th, td {
 }
 
 th {
-    background-color: #2196f3;
+    background-color: #00796b; /* Teal for headers */
     color: white;
 }
 
 td {
-    background-color: #fafafa;
+    background-color: #e0f2f1; /* Light teal for cells */
 }
 
 /* Course Information Table */
 .course-info-container {
     display: none; /* Initially hidden */
-    margin-top: 40px; /* Space between the old and new table */ /* Adds some spacing below the first container */
+    background: rgba(255, 255, 255, 0.85); /* Light transparent white */
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
     margin-left: 230px;
-    margin-bottom: 50px;
-    text-align: center
 }
 
 /* Ensure the new course info table is styled properly */
 #courseInfoTable {
-    display: none; /* Initially hidden */
     width: 100%;
     border-collapse: collapse;
-    margin-top: 15px; /* Adds space between the new table and the previous content */
+    margin-top: 15px;
     margin-bottom: 50px;
     text-align: center;
 }
 
 /* Button Styling */
 #submitSelection {
-    background-color: #2196f3;
+    background-color: #00796b; /* Teal button */
     color: white;
     padding: 12px 25px;
     border: none;
@@ -83,12 +92,12 @@ td {
     font-size: 16px;
     cursor: pointer;
     margin-top: 30px;
-
+    margin-left: 30px;
     transition: background-color 0.3s ease;
 }
 
 #submitSelection:hover {
-    background-color: #1976d2;
+    background-color: #004d40; /* Darker teal on hover */
 }
 
 /* Success Message Styling */
@@ -114,18 +123,25 @@ td {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    z-index: 10;
 }
 
 #backToPortal {
-    background-color: #004d40;
+    background-color: #00796b;
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 #backToPortal:hover {
+    background-color: #004d40;
+    transform: translateY(-2px);
+}
+
+#backToPortal:active {
     background-color: #00695c;
+    transform: translateY(0);
 }
