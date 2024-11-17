@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Attendance Entry</title>
+    <link rel="stylesheet" href="faculty_attendance.css">
+</head>
+<body>
+    <div class="logo">
+        <img src="FASTNU-logo.png" alt="University Logo">
+    </div>
+    <div class="attendance-entry-container">
+        <h2>Enter Attendance for Students</h2>
+
+        <!-- Attendance Date Input -->
+        <div class="form-group">
+            <label for="attendanceDate">Attendance Date</label>
+            <input type="date" id="attendanceDate">
+        </div>
+
+        <!-- Select Course Dropdown -->
+        <div class="form-group">
+            <label for="courseSelect">Course</label>
+            <select id="courseSelect">
+                <option value="" disabled selected>Select a Course</option>
+            </select>
+        </div>
+
+        <!-- Select Section Dropdown -->
+        <div class="form-group">
+            <label for="sectionSelect">Section</label>
+            <select id="sectionSelect" disabled>
+                <option value="" disabled selected>Select a Section</option>
+            </select>
+        </div>
+
+        <!-- Student Attendance Table -->
+        <table id="attendanceTable" style="display: none;">
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Student ID</th>
+                    <th>Attendance (P/A)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dynamic Rows will be added here -->
+            </tbody>
+        </table>
+
+        <!-- Save Button -->
+        <div class="save-button-container">
+            <button id="saveAttendance" style="display: none;">Save</button>
+        </div>
+
+        <!-- Success Message -->
+        <div id="successMessage" class="success-message" style="display: none;">
+            Attendance Updated Successfully!
+        </div>
+    </div>
+
+    <div class="back-button-container">
+        <button id="backToPortal" onclick="goToFacultyPortal()">Back to Faculty Portal</button>
+    </div>
+
+    <script src="faculty_attendance.js"></script>
+</body>
+</html>

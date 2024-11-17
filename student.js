@@ -2,7 +2,13 @@
 const loginButton = document.getElementById('submitLogin'); // Login button
 const form = document.getElementById('loginForm'); // Login form
 const errorMessage = document.getElementById('errorMessage'); // Error message element
+const usernameInput = document.getElementById('username'); // Username input field
+const passwordInput = document.getElementById('password'); // Password input field
 
+// Focus on password input as soon as username input changes
+usernameInput.addEventListener('input', function () {
+    passwordInput.focus(); // Automatically focus on the password field
+});
 // Login function with custom error message
 loginButton.addEventListener('click', function() {
     const username = document.getElementById('username').value;
@@ -66,6 +72,14 @@ function logout() {
     document.getElementById('toggleSidebar').style.display = 'none';
     window.location.href = 'mainpage.html';
 }
+
+ // Start letter-by-letter animation after login
+ setTimeout(() => {
+    const welcomeText = document.getElementById('welcomeText');
+    welcomeText.style.visibility = 'visible'; // Show welcome text
+    welcomeText.classList.add('typing-finished'); // Stop typing cursor
+}, 500);
+
 // Placeholder function for navigation
 function navigateTo(section) {
     if (section === 'course-management') {

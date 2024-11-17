@@ -2,7 +2,13 @@
 const loginButton = document.getElementById('submitLogin'); // Login button
 const form = document.getElementById('loginForm'); // Login form
 const errorMessage = document.getElementById('errorMessage'); // Error message element
+const usernameInput = document.getElementById('username'); // Username input field
+const passwordInput = document.getElementById('password'); // Password input field
 
+// Focus on password input as soon as username input changes
+usernameInput.addEventListener('input', function () {
+    passwordInput.focus(); // Automatically focus on the password field
+});
 // Login function with custom error message
 loginButton.addEventListener('click', function() {
     const username = document.getElementById('username').value;
@@ -11,7 +17,7 @@ loginButton.addEventListener('click', function() {
     // Simple login validation (for demonstration purposes)
     if (username === 'faculty' && password === 'fac123') {
         sessionStorage.setItem('isLoggedIn', 'true');
-        // Hide login form, show student dashboard, and toggle button
+        // Hide login form, show faculty dashboard, and toggle button
         document.getElementById('loginForm').style.display = 'none';
         document.getElementById('facultyDashboard').style.display = 'block';
         document.getElementById('toggleSidebar').style.display = 'block';
@@ -21,7 +27,8 @@ loginButton.addEventListener('click', function() {
         setTimeout(() => {
             const welcomeText = document.getElementById('welcomeText');
             welcomeText.style.visibility = 'visible'; // Show welcome text
-        }, 500);
+            welcomeText.classList.add('typing-finished'); // Remove the typing cursor
+        }, 500); // Delay of 500ms before showing the welcome message
 
     } else {
         // Show custom error message
@@ -37,26 +44,17 @@ window.addEventListener('load', () => {
         document.getElementById('facultyDashboard').style.display = 'block';
         document.getElementById('toggleSidebar').style.display = 'block';
 
-        // You might want to ensure that the sidebar is shown based on its state
-        const sidebar = document.querySelector('.sidebar');
-        if (sidebar.classList.contains('show')) {
-            sidebar.style.left = '0'; // Ensure sidebar stays visible
-        }
+        // Start letter-by-letter animation after page load
+        const welcomeText = document.getElementById('welcomeText');
+        setTimeout(() => {
+            welcomeText.style.visibility = 'visible'; // Show welcome text
+            welcomeText.classList.add('typing-finished'); // Finish the typing animation
+        }, 500); // Delay of 500ms after login state is validated
     } else {
         // If not logged in, show the login form and hide the dashboard
         document.getElementById('facultyDashboard').style.display = 'none';
         document.getElementById('loginForm').style.display = 'block';
         document.getElementById('toggleSidebar').style.display = 'none';
-    }
-});
-
-
-
-// Handle the Enter key press inside the form (Submit with Enter)
-form.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') { // Check if the pressed key is Enter
-        event.preventDefault(); // Prevent default form submission behavior
-        loginButton.click(); // Trigger the login button click action
     }
 });
 
@@ -67,16 +65,28 @@ document.getElementById('toggleSidebar').addEventListener('click', function() {
 });
 
 // Placeholder function for navigation
-    function navigateTo(section) {
-        if (section === 'course-management'){ // Corrected this line
-            window.location.href = 'faculty_course.html'; 
-        }
-        else {
-            alert('Navigating to ' + section);
-        }
+function navigateTo(section) {
+    if (section === 'course-management') {
+        window.location.href = 'faculty_course.html';
+    } else if (section === 'marks-management') {
+        window.location.href = 'faculty_marks.html';
     }
-   
-
+    else if (section === 'grades-management') {
+        window.location.href = 'faculty_grades.html';
+    }
+    else if (section === 'attendance-management') {
+        window.location.href = 'faculty_attendance.html';
+    }
+     else {
+        alert('Navigating to ' + section);
+    }
+}
+form.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') { // Check if the pressed key is Enter
+        event.preventDefault(); // Prevent default form submission behavior
+        loginButton.click(); // Trigger the login button click action
+    }
+});
 // Logout function
 function logout() {
     sessionStorage.removeItem('isLoggedIn'); // Clear login state

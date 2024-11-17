@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Grades Entry</title>
+    <link rel="stylesheet" href="faculty_grades.css">
+</head>
+<body>
+    <div class="logo">
+        <img src="FASTNU-logo.png" alt="University Logo">
+    </div>
+    <div class="grades-entry-container">
+        <h2>Enter Grades for Students</h2>
+
+        <!-- Select Course Dropdown -->
+        <div class="form-group">
+            <label for="courseSelect">Course</label>
+            <select id="courseSelect">
+                <option value="" disabled selected>Select a Course</option>
+            </select>
+        </div>
+
+        <!-- Select Section Dropdown -->
+        <div class="form-group">
+            <label for="sectionSelect">Section</label>
+            <select id="sectionSelect" disabled>
+                <option value="" disabled selected>Select a Section</option>
+            </select>
+        </div>
+
+        <!-- Student Grades Table -->
+        <table id="gradesTable" style="display: none;">
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Student ID</th>
+                    <th>Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dynamic Rows will be added here -->
+            </tbody>
+        </table>
+
+        <!-- Save Button -->
+        <div class="save-button-container">
+            <button id="saveGrades" style="display: none;">Save</button>
+        </div>
+
+        <!-- Success Message -->
+        <div id="successMessage" class="success-message" style="display: none;">
+            Student Grades Updated Successfully!
+        </div>
+    </div>
+
+    <div class="back-button-container">
+        <button id="backToPortal" onclick="goToFacultyPortal()">Back to Faculty Portal</button>
+    </div>
+
+    <script src="faculty_grades.js"></script>
+</body>
+</html>

@@ -233,10 +233,15 @@ header .logout-button:hover {
     color: #04204b;
     width: 0;
     overflow: hidden;
-    border-right: 2px solid;
+    border-right: 2px solid;  /* This is the typing cursor */
     white-space: nowrap;
     letter-spacing: 2px;
     animation: typing 3s steps(30, end) forwards;
+}
+
+/* Hide the cursor after typing */
+.animated-text.typing-finished {
+    border-right: none; /* Remove the typing cursor */
 }
 
 /* If there's any parent container with flex */
