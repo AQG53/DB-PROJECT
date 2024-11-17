@@ -17,10 +17,7 @@
 
     const usernameInput = document.getElementById('email'); // Username input (email)
 
-    // Focus password input when username input changes
-    usernameInput.addEventListener('input', function () {
-        passwordInput.focus();
-    });
+
     form.addEventListener('keydown', function(event) {
         if (event.key === 'Enter') { // Check if the pressed key is Enter
             event.preventDefault(); // Prevent default form submission behavior
