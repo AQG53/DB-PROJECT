@@ -1,107 +1,126 @@
+/* General Styles */
 body {
-    background: url('background.jpg') no-repeat center center fixed;
+    background: url("background.jpg") no-repeat center center fixed;
     background-size: cover;
     font-family: Arial, sans-serif;
-    color: #004d40;
+    color: #003366;
+    margin: 0;
+    padding: 0;
+}
+
+/* Logo Section */
+.logo-container {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.logo-container img {
+    max-width: 320px;
+    height: auto;
+}
+
+/* Main Heading */
+.main-heading {
+    text-align: center;
+    color: #003366;
+    font-size: 28px;
+    margin: 30px auto 10px;
+    max-width: 900px;
+    padding-left: 20px;
+}
+
+/* Form Container */
+.form-container {
+    max-width: 700px;
+    margin: 20px auto;
     padding: 20px;
-}
-
-.logo {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.logo img {
-    max-width: 300px;
-}
-
-.grades-entry-container {
-    background: rgba(255, 255, 255, 0.85);
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 800px;
-    text-align: center;
-    margin-top: 40px;
-    margin-left: 230px;
+    background-color: #f0f8ff; /* Light blue background */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
-    color: #00796b;
+    text-align: left;
+    color: #00509e;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #007acc;
+    padding-bottom: 5px;
 }
 
-.form-group {
-    margin-bottom: 15px;
-}
-
+/* Input and Select Styles */
 label {
     font-weight: bold;
-    color: #00796b;
+    color: #00509e;
+    display: block;
+    margin-top: 15px;
 }
 
 select {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
-    border: 1px solid #b2dfdb;
+    border: 1px solid #b3d7f4;
     border-radius: 5px;
-    background: #e0f2f1;
+    background: #f6fbff;
+    box-sizing: border-box;
 }
 
+select:focus {
+    outline: none;
+    border-color: #007acc;
+    box-shadow: 0 0 5px #007acc;
+}
+
+/* Table Styling */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 15px;
-    display: none;
+    margin-top: 20px;
+    background-color: #ffffff;
 }
 
-th, td {
-    padding: 15px;
+th,
+td {
+    padding: 10px;
     text-align: left;
-    border: 1px solid #ddd;
-    font-size: 16px;
+    border-bottom: 1px solid #b3d7f4;
 }
 
 th {
-    background-color: #00796b;
-    color: white;
+    background-color: #007acc;
+    color: #ffffff;
 }
 
 td {
-    background-color: #e0f2f1;
+    color: #003366;
 }
 
-.save-button-container {
-    margin-top: 20px;
-}
-
-#saveGrades {
-    background-color: #00796b;
-    color: white;
-    padding: 12px 25px;
+/* Button Styles */
+button {
+    padding: 12px;
+    background-color: #007acc;
+    color: #ffffff;
     border: none;
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-    display: none;
-}
-
-#saveGrades:hover {
-    background-color: #004d40;
-}
-
-.success-message {
+    transition: background-color 0.3s, transform 0.2s;
+    width: 100%;
     margin-top: 20px;
-    color: green;
-    font-weight: bold;
-    font-size: 18px;
 }
 
+button:hover {
+    background-color: #00509e;
+}
+
+button:active {
+    background-color: #003366;
+    transform: translateY(1px);
+}
+
+/* Back to Portal Button */
 .back-button-container {
     position: fixed;
     bottom: 20px;
@@ -109,8 +128,8 @@ td {
 }
 
 #backToPortal {
-    background-color: #00796b;
-    color: white;
+    background-color: #00509e;
+    color: #ffffff;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -120,6 +139,27 @@ td {
 }
 
 #backToPortal:hover {
-    background-color: #004d40;
+    background-color: #003366;
     transform: translateY(-2px);
+}
+
+#backToPortal:active {
+    background-color: #006bbf;
+    transform: translateY(0);
+}
+
+/* Notification Styling */
+.notification {
+    display: none;
+    padding: 15px;
+    background-color: #007acc;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.notification.show {
+    display: block;
 }

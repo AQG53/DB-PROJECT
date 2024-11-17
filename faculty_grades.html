@@ -7,27 +7,29 @@
     <link rel="stylesheet" href="faculty_grades.css">
 </head>
 <body>
-    <div class="logo">
+    <!-- Logo Section -->
+    <div class="logo-container">
         <img src="FASTNU-logo.png" alt="University Logo">
     </div>
-    <div class="grades-entry-container">
+
+    <!-- Main Heading -->
+    <h1 class="main-heading">Manage Grades</h1>
+
+    <!-- Grades Entry Form -->
+    <div class="form-container">
         <h2>Enter Grades for Students</h2>
 
         <!-- Select Course Dropdown -->
-        <div class="form-group">
-            <label for="courseSelect">Course</label>
-            <select id="courseSelect">
-                <option value="" disabled selected>Select a Course</option>
-            </select>
-        </div>
+        <label for="courseSelect">Course</label>
+        <select id="courseSelect">
+            <option value="" disabled selected>Select a Course</option>
+        </select>
 
         <!-- Select Section Dropdown -->
-        <div class="form-group">
-            <label for="sectionSelect">Section</label>
-            <select id="sectionSelect" disabled>
-                <option value="" disabled selected>Select a Section</option>
-            </select>
-        </div>
+        <label for="sectionSelect">Section</label>
+        <select id="sectionSelect" disabled>
+            <option value="" disabled selected>Select a Section</option>
+        </select>
 
         <!-- Student Grades Table -->
         <table id="gradesTable" style="display: none;">
@@ -44,16 +46,15 @@
         </table>
 
         <!-- Save Button -->
-        <div class="save-button-container">
-            <button id="saveGrades" style="display: none;">Save</button>
-        </div>
+        <button id="saveGrades" style="display: none;">Save</button>
 
         <!-- Success Message -->
-        <div id="successMessage" class="success-message" style="display: none;">
+        <div id="successMessage" class="notification success-message">
             Student Grades Updated Successfully!
         </div>
     </div>
 
+    <!-- Back to Portal Button -->
     <div class="back-button-container">
         <button id="backToPortal" onclick="goToFacultyPortal()">Back to Faculty Portal</button>
     </div>

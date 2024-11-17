@@ -5,60 +5,221 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faculty Marks Entry</title>
     <link rel="stylesheet" href="faculty_marks.css">
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff; /* Light blue background */
+            color: #003366;
+        }
+
+        /* Logo Styles */
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo-container img {
+            max-width: 320px;
+            height: auto;
+        }
+
+        /* Heading Style */
+        h1 {
+            text-align: center;
+            color: #003366;
+            margin-top: 20px;
+            font-size: 2rem;
+        }
+
+        /* Form Container Styles */
+        .form-container {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .form-box {
+            padding: 20px;
+            margin-bottom: 30px;
+            background: #eaf4fc;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #00509e;
+            border-bottom: 2px solid #007acc;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #00509e;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #b3d7f4;
+            border-radius: 5px;
+            background: #f6fbff;
+            box-sizing: border-box;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #007acc;
+            box-shadow: 0 0 5px #007acc;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007acc;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #00509e;
+        }
+
+        button:active {
+            background-color: #003366;
+            transform: translateY(1px);
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #b3d7f4;
+        }
+
+        th {
+            background-color: #007acc;
+            color: #fff;
+        }
+
+        td select {
+            padding: 5px;
+            border-radius: 3px;
+            border: 1px solid #b3d7f4;
+        }
+
+        /* Success Message */
+        .success-message {
+            text-align: center;
+            color: green;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Back Button */
+        .back-button-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        #backToPortal {
+            background-color: #00509e;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        #backToPortal:hover {
+            background-color: #003366;
+            transform: translateY(-2px);
+        }
+
+        #backToPortal:active {
+            background-color: #006bbf;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-    <div class="logo">
+
+    <!-- Logo Section -->
+    <div class="logo-container">
         <img src="FASTNU-logo.png" alt="University Logo">
     </div>
-    <div class="marks-entry-container">
-        <h2>Enter Marks for Students</h2>
+    <h1>Manage Marks</h1>
+    <!-- Marks Entry Form -->
+    <div class="form-container">
+        <div class="form-box">
+            <h2>Enter Marks for Students</h2>
 
-        <!-- Select Course Dropdown -->
-        <div class="form-group">
-            <label for="courseSelect">Course</label>
-            <select id="courseSelect">
-                <option value="" disabled selected>Select a Course</option>
-            </select>
-        </div>
+            <!-- Select Course Dropdown -->
+            <div class="form-group">
+                <label for="courseSelect">Course</label>
+                <select id="courseSelect">
+                    <option value="" disabled selected>Select a Course</option>
+                </select>
+            </div>
 
-        <!-- Select Section Dropdown -->
-        <div class="form-group">
-            <label for="sectionSelect">Section</label>
-            <select id="sectionSelect" disabled>
-                <option value="" disabled selected>Select a Section</option>
-            </select>
-        </div>
+            <!-- Select Section Dropdown -->
+            <div class="form-group">
+                <label for="sectionSelect">Section</label>
+                <select id="sectionSelect" disabled>
+                    <option value="" disabled selected>Select a Section</option>
+                </select>
+            </div>
 
-        <!-- Student Marks Table -->
-        <table id="marksTable" style="display: none;">
-            <thead>
-                <tr>
-                    <th>Student Name</th>
-                    <th>Student ID</th>
-                    <th>Quiz</th>
-                    <th>Assignment</th>
-                    <th>Mid1</th>
-                    <th>Mid2</th>
-                    <th>Project</th>
-                    <th>Final</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Dynamic Rows will be added here -->
-            </tbody>
-        </table>
+            <!-- Student Marks Table -->
+            <table id="marksTable" style="display: none;">
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Student ID</th>
+                        <th>Quiz</th>
+                        <th>Assignment</th>
+                        <th>Mid1</th>
+                        <th>Mid2</th>
+                        <th>Project</th>
+                        <th>Final</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dynamic Rows will be added here -->
+                </tbody>
+            </table>
 
-        <!-- Save Button -->
-        <div class="save-button-container">
+            <!-- Save Button -->
             <button id="saveMarks" style="display: none;">Save</button>
-        </div>
 
-        <!-- Success Message -->
-        <div id="successMessage" class="success-message" style="display: none;">
-            Student Marks Updated Successfully!
+            <!-- Success Message -->
+            <div id="successMessage" class="success-message" style="display: none;">
+                Student Marks Updated Successfully!
+            </div>
         </div>
     </div>
 
+    <!-- Back Button -->
     <div class="back-button-container">
         <button id="backToPortal" onclick="goToFacultyPortal()">Back to Faculty Portal</button>
     </div>
