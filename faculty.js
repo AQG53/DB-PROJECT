@@ -70,7 +70,14 @@ function navigateTo(section) {
         window.location.href = 'faculty_course.html';
     } else if (section === 'marks-management') {
         window.location.href = 'faculty_marks.html';
-    } else {
+    }
+    else if (section === 'grades-management') {
+        window.location.href = 'faculty_grades.html';
+    }
+    else if (section === 'attendance-management') {
+        window.location.href = 'faculty_attendance.html';
+    }
+     else {
         alert('Navigating to ' + section);
     }
 }
