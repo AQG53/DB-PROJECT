@@ -1,7 +1,10 @@
+const SUPABASE_URL = 'https://ynwjgmkbbyepuausjcdw.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlud2pnbWtiYnllcHVhdXNqY2R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE1MDcwMjcsImV4cCI6MjA0NzA4MzAyN30.RBCkr5OCoY7vqxOc_ZFSRf4DNdTPPx8rvAlRUDpesrY';
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const courseData = {
     // Course data for BS Computer Science
-    "BS Computer Science": {
+    "Computer Science": {
       1: [
         { name: "Introduction to Information and Communication Technology", code: "CL1000", creditHours: "0+1", prerequisites: "None" },
         { name: "Programming Fundamentals", code: "CS1002", creditHours: "3+1", prerequisites: "None" },
@@ -64,7 +67,7 @@ const courseData = {
       ],
     },
     // Course data for Software Engineering
-    "BS Software Engineering": {
+    "Software Engineering": {
       1: [
         { name: "Introduction to Information and Communication Technology", code: "CL1000", creditHours: "0+1", prerequisites: "None" },
         { name: "Programming Fundamentals", code: "CS1002", creditHours: "3+1", prerequisites: "None" },
@@ -127,7 +130,7 @@ const courseData = {
       ],
     },
     // Course data for Electrical Engineering
-    "BS Electrical Engineering": {
+    "Electrical Engineering": {
       1: [
         { name: "Applications of ICT", code: "CS1009", creditHours: "2+1", prerequisites: "None" },
         { name: "Applied Calculus", code: "MT1001", creditHours: "3+0", prerequisites: "None" },
@@ -189,7 +192,7 @@ const courseData = {
       ],
     },
     // Course data for Business Analytics
-    "BS Business Analytics": {
+    "Business Analytics": {
       1: [
         { name: "IT in Business", code: "CS1001", creditHours: "2+1", prerequisites: "None" },
         { name: "Fundamentals of Accounting", code: "AF1001", creditHours: "3+0", prerequisites: "None" },
@@ -250,7 +253,7 @@ const courseData = {
       ],
     },
     // Course data for Artificial Intelligence
-    "BS Artificial Intelligence": {
+    "Artificial Intelligence": {
       1: [
         { name: "Introduction to Information and Communication Technology", code: "CL1001", creditHours: "0+1", prerequisites: "None" },
         { name: "Programming Fundamentals", code: "CS1002", creditHours: "3+1", prerequisites: "None" },
@@ -312,6 +315,30 @@ const courseData = {
       ],
     },
   };
+
+  function showNotification(message) {
+    const notification = document.getElementById('notification');
+    const notificationMessage = document.getElementById('notificationMessage');
+  
+    // Set message and show the notification
+    notificationMessage.textContent = message;
+    notification.classList.add('show');
+  
+    // Hide notification after 5 seconds
+    setTimeout(() => {
+        closeNotification();
+    }, 5000);
+  }
+  
+  // Function to close notification
+  function closeNotification() {
+    const notification = document.getElementById('notification');
+    notification.classList.remove('show'); // Hide notification smoothly
+  }
+
+  function extractNumber(input) {
+  return parseInt(input.split(" ")[1], 10); // Splits the text and extracts the second part as a number
+}
   
   const departmentSelect = document.getElementById('departmentSelect');
   const semesterSelect = document.getElementById('semesterSelect');
@@ -346,7 +373,8 @@ const courseData = {
       }
     }
   }
-  
+
+  let selectedCourseDetails = {};
   // Display course details when a course is selected
   courseSelect.addEventListener('change', function () {
     const department = departmentSelect.value;
@@ -361,9 +389,54 @@ const courseData = {
         courseCode.textContent = selectedCourse.code;
         creditHours.textContent = selectedCourse.creditHours;
         prerequisites.textContent = selectedCourse.prerequisites;
+        selectedCourseDetails = selectedCourse;
       }
     }
   });
+
+  document.getElementById('courseRegistrationForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const department_name = document.getElementById('departmentSelect').value;
+    const semester = document.getElementById('semesterSelect').value;
+    const { code, name, creditHours, prerequisites } = selectedCourseDetails;
+    console.log(department_name, semester, code, name, creditHours, prerequisites);
+    try {
+      const { data: departmentData, error: departmentError } = await supabase
+        .from('departments')
+        .select('id, name')
+        .eq('name', department_name)
+        .single();
+  
+      const department_id = departmentData.id;
+      
+      // Proceed to insert the faculty member with the valid department ID
+      const { data, error } = await supabase.from('courses').insert([
+        {
+          course_code: code,
+          name: name,
+          semester,
+          department_id: department_id,
+          prerequisites,
+          credit_hours: creditHours,
+        }
+      ]);
+  
+      if (error) {
+        console.error('Supabase insertion error:', error.message);
+        alert('Error: ' + error.message);
+        return;
+      }
+
+  
+      console.log('Course registered successfully:', data);
+      showNotification(`Course registered successfully!`);
+      document.getElementById('courseRegistrationForm').reset();
+    } catch (err) {
+      console.error("Unexpected error:", err);
+      alert("An unexpected error occurred.");
+    }
+  });
+
   // Function to navigate back to the Admin Dashboard 
 function goToAdminDashboard() {
     window.location.href = 'admin.html';

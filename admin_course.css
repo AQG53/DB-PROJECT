@@ -1,5 +1,6 @@
 /* General Styles */
 body {
+<<<<<<< Updated upstream
   background: url("background.jpg") no-repeat center center fixed;
   background-size: cover;
   font-family: Arial, sans-serif;
@@ -179,3 +180,155 @@ td select {
   opacity: 1;
   transform: translateY(0);
 }
+=======
+    background: url("background.jpg") no-repeat center center fixed;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    color: #004d40;
+  }
+  
+  .form-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .logo img {
+    display: block;
+    margin: 0 auto;
+    max-width: 150px;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #00796b;
+  }
+  
+  h2 {
+    color: #004d40;
+    border-bottom: 2px solid #00796b;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .form-box {
+    padding: 20px;
+    background: rgba(0, 121, 107, 0.15); /* Updated to a semi-transparent teal shade */
+    border-radius: 10px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    font-weight: bold;
+    color: #00796b;
+  }
+  
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #b2dfdb;
+    border-radius: 5px;
+    background: #e0f2f1; /* Updated to a light teal color */
+  }
+  
+  .phone-input {
+    display: flex;
+    gap: 10px;
+  }
+  
+  button {
+    width: 100%;
+    padding: 12px;
+    background-color: #00796b;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #004d40;
+  }
+  
+  footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #00796b;
+  }
+  /* Back to admin Portal button */
+  .back-button-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+  }
+  
+  #backToPortal {
+      background-color: #00796b; /* Teal theme color */
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
+      transition: background-color 0.3s, transform 0.2s; /* Smooth hover effects */
+  }
+  
+  #backToPortal:hover {
+      background-color: #004d40; /* Darker teal on hover */
+      transform: translateY(-2px); /* Slight lift effect */
+  }
+  
+  #backToPortal:active {
+      background-color: #00695c; /* Slightly lighter teal for active state */
+      transform: translateY(0); /* Reset lift on click */
+  }
+  
+  .notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    padding: 15px;
+    background-color: #4CAF50;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: none; /* Hidden by default */
+    opacity: 0; /* Start with 0 opacity for transition */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition */
+    transform: translateY(-20px); /* Start slightly above */
+    z-index: 1000;
+  }
+  
+  .notification.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0); /* Slide down smoothly */
+  }
+  
+  .notification .progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background-color: #fff;
+    width: 100%;
+    animation: progress 5s linear forwards; /* 5-second progress animation */
+  }
+  
+  @keyframes progress {
+    from { width: 100%; }
+    to { width: 0; }
+  }
+>>>>>>> Stashed changes

@@ -65,18 +65,11 @@ document.getElementById('facultyRegistrationForm').addEventListener('submit', as
   const username = `${firstName.toLowerCase()}.${lastName.toLowerCase()}`;
 
   try {
-    // Check if the department exists
     const { data: departmentData, error: departmentError } = await supabase
       .from('departments')
       .select('id, name')
       .eq('name', department_name)
       .single();
-
-    if (departmentError || !departmentData) {
-      console.error('Invalid department:', departmentError?.message || 'Department not found');
-      alert('Error: This department is not available. Kindly update departments!');
-      return;
-    }
 
     const department_id = departmentData.id;
 
