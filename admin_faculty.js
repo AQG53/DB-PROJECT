@@ -52,7 +52,7 @@ document.getElementById('facultyRegistrationForm').addEventListener('submit', as
   const firstName = document.getElementById('firstName').value.trim();
   const lastName = document.getElementById('lastName').value.trim();
   const email = document.getElementById('email').value.trim();
-  const department = document.getElementById('department').value;
+  const department_name = document.getElementById('department').value;
   const specialization = document.getElementById('specialization').value;
   const qualification = document.getElementById('qualification').value;
   const employmentType = document.getElementById('employmentType').value;
@@ -65,13 +65,30 @@ document.getElementById('facultyRegistrationForm').addEventListener('submit', as
   const username = `${firstName.toLowerCase()}.${lastName.toLowerCase()}`;
 
   try {
+    // Check if the department exists
+    const { data: departmentData, error: departmentError } = await supabase
+      .from('departments')
+      .select('id, name')
+      .eq('name', department_name)
+      .single();
+
+    if (departmentError || !departmentData) {
+      console.error('Invalid department:', departmentError?.message || 'Department not found');
+      alert('Error: This department is not available. Kindly update departments!');
+      return;
+    }
+
+    const department_id = departmentData.id;
+
+    // Proceed to insert the faculty member with the valid department ID
     const { data, error } = await supabase.from('faculty').insert([
       {
         title,
         first_name: firstName,
         last_name: lastName,
         email,
-        department,
+        department_id, // Use valid department ID
+        department_name, // Optional: Save name for reference
         specialization,
         qualification,
         employment_type: employmentType,
@@ -85,30 +102,30 @@ document.getElementById('facultyRegistrationForm').addEventListener('submit', as
     ]);
 
     if (error) {
-        console.error('Supabase insertion error:', error.message);
-        alert('Error: ' + error.message);
-        return;
+      console.error('Supabase insertion error:', error.message);
+      alert('Error: ' + error.message);
+      return;
     }
-    
+
     // Send email via backend
     await fetch('http://localhost:3000/send-email-faculty', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-          email,
-          username,
-          password,
+        email,
+        username,
+        password,
       }),
-  });
+    });
 
     console.log('Faculty registered successfully:', data);
     showNotification(`Faculty registered successfully!`);
     document.getElementById('facultyRegistrationForm').reset();
-} catch (err) {
+  } catch (err) {
     console.error("Unexpected error:", err);
     alert("An unexpected error occurred.");
-}
-})
+  }
+});
 
  // Function to navigate back to the Admin Dashboard 
  function goToAdminDashboard() {
