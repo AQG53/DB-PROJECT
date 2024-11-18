@@ -114,8 +114,7 @@ document.getElementById('studentRegistrationForm').addEventListener('submit', as
       gender,
       blood_group: bloodGroup,
       cnic,
-      country_code: countryCode,
-      phone,
+      phone: '${countryCode}${phone}',
       email,
       address,
       campus,
@@ -140,7 +139,7 @@ document.getElementById('studentRegistrationForm').addEventListener('submit', as
       }
       
       // Send email via backend
-      await fetch('http://localhost:3000/send-email', {
+      await fetch('http://localhost:3000/send-email-student', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

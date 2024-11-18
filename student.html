@@ -14,8 +14,9 @@
     <!-- student Login Form (Visible when not logged in) -->
     <div id="loginForm" class="login-container">
         <h2>Student Login</h2>
-        <label for="username">Student ID:</label>
-        <input type="text" id="username" placeholder="Enter username">
+        <label for="rollnumber">Roll Number:</label>
+        <input type="text" id="rollnumber" placeholder="XXT-XXXX" maxlength="8" oninput="formatRollNumber(this)" required>
+        <small style="display: block; margin-bottom: 10px;">Format: XXA-XXXX (e.g., 12B-3456)</small>
         <br>
         <label for="password">Password:</label>
         <input type="password" id="password" placeholder="Enter password">
@@ -50,7 +51,7 @@
             </div>
         </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script src="student.js"></script>
 </body>
 </html>

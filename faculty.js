@@ -1,3 +1,7 @@
+const SUPABASE_URL = 'https://ynwjgmkbbyepuausjcdw.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlud2pnbWtiYnllcHVhdXNqY2R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE1MDcwMjcsImV4cCI6MjA0NzA4MzAyN30.RBCkr5OCoY7vqxOc_ZFSRf4DNdTPPx8rvAlRUDpesrY';
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
 // Select the necessary elements
 const loginButton = document.getElementById('submitLogin'); // Login button
 const form = document.getElementById('loginForm'); // Login form
@@ -5,33 +9,41 @@ const errorMessage = document.getElementById('errorMessage'); // Error message e
 const usernameInput = document.getElementById('username'); // Username input field
 const passwordInput = document.getElementById('password'); // Password input field
 
-// Focus on password input as soon as username input changes
-usernameInput.addEventListener('input', function () {
-    passwordInput.focus(); // Automatically focus on the password field
-});
 // Login function with custom error message
-loginButton.addEventListener('click', function() {
+loginButton.addEventListener('click', async function() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
+    console.log(username, password);
+    try {
+        const { data, error } = await supabase
+            .from('faculty') // Replace 'students' with the name of your table
+            .select('*')
+            .eq('username', username)
+            .eq('password', password)
+            .single();
 
-    // Simple login validation (for demonstration purposes)
-    if (username === 'faculty' && password === 'fac123') {
-        sessionStorage.setItem('isLoggedIn', 'true');
-        // Hide login form, show faculty dashboard, and toggle button
-        document.getElementById('loginForm').style.display = 'none';
-        document.getElementById('facultyDashboard').style.display = 'block';
-        document.getElementById('toggleSidebar').style.display = 'block';
-        errorMessage.style.display = 'none'; // Hide error message
+        if (error || !data) {
+            // Show custom error message if credentials do not match
+            errorMessage.style.display = 'block';
+        } else {
+            // Successful login
+            sessionStorage.setItem('isLoggedIn', 'true');
+            sessionStorage.setItem('facultyId', data.id); // Optionally store student ID
 
-        // Start letter-by-letter animation after login
-        setTimeout(() => {
-            const welcomeText = document.getElementById('welcomeText');
-            welcomeText.style.visibility = 'visible'; // Show welcome text
-            welcomeText.classList.add('typing-finished'); // Remove the typing cursor
-        }, 500); // Delay of 500ms before showing the welcome message
+            // Hide login form, show student dashboard, and toggle button
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('facultyDashboard').style.display = 'block';
+            document.getElementById('toggleSidebar').style.display = 'block';
+            errorMessage.style.display = 'none';
 
-    } else {
-        // Show custom error message
+            // Show welcome text
+            setTimeout(() => {
+                const welcomeText = document.getElementById('welcomeText');
+                welcomeText.style.visibility = 'visible';
+            }, 500);
+        }
+    } catch (err) {
+        console.error('Error logging in:', err);
         errorMessage.style.display = 'block';
     }
 });
