@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Fees - Admin Portal</title>
+  <link rel="stylesheet" href="admin_fees.css">
+</head>
+<body>
+    <div class="logo-container">
+        <img src="FASTNU-logo.png" alt="University Logo">
+      </div>
+  <div class="form-container">
+    <h1>Manage Fees</h1>
+    <!-- Fee Structure Management -->
+    <div class="form-box">
+      <h2>Manage Fee Structures</h2>
+      <form id="feeStructureForm">
+        <div class="form-group">
+          <label for="semester">Semester <span class="asterisk">*</span></label>
+          <select id="semester" name="semester" required>
+            <option value="">Select Semester</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="semesterFees">Semester Fees (PKR) <span class="asterisk">*</span></label>
+          <input type="number" id="semesterFees" name="semesterFees" placeholder="Enter Semester Fees" required>
+        </div>
+        <button type="button" onclick="updateFeeStructure()">Update Fee Structure</button>
+      </form>
+    </div>
+
+    <!-- Fee Payment Management -->
+    <div class="form-box">
+      <h2>Payment Records</h2>
+      <form id="paymentRecordsForm">
+        <div class="form-group">
+          <label for="rollNumber">Roll Number <span class="asterisk">*</span></label>
+          <input type="text" id="rollNumber" name="rollNumber" placeholder="Enter Roll Number" required>
+        </div>
+        <button type="button" onclick="viewPaymentRecords()">View Payment Records</button>
+      </form>
+      <div id="paymentDetails" style="display: none;">
+        <h3>Payment Details</h3>
+        <p><strong>Roll Number:</strong> <span id="paymentRollNumber"></span></p>
+        <table>
+          <thead>
+            <tr>
+              <th>Semester</th>
+              <th>Total Fees (PKR)</th>
+              <th>Amount Paid (PKR)</th>
+              <th>Amount Due (PKR)</th>
+              <th>Due Date</th>
+              <th>Payment Status</th>
+            </tr>
+          </thead>
+          <tbody id="paymentTable">
+            <!-- Payment records will be dynamically added here -->
+          </tbody>
+        </table>
+        <button type="button" onclick="generateInvoice()">Generate Invoice</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="back-button-container">
+    <button id="backToPortal" onclick="goBack()">Back to Admin Portal</button>
+  </div>
+  <script src="admin_fees.js"></script>
+</body>
+</html>

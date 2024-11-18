@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage GPA</title>
+  <link rel="stylesheet" href="admin_gpa.css">
+</head>
+<body>
+  <div class="logo-container">
+    <img src="FASTNU-logo.png" alt="University Logo">
+  </div>
+
+  <div class="form-container">
+    <h1>Manage GPA</h1>
+
+    <!-- Step 1: Enter Roll Number -->
+    <div class="form-box" id="roll-number-box">
+      <h2>Enter Student Roll Number</h2>
+      <form id="roll-form">
+        <label for="roll-number">Roll Number:</label>
+        <input type="text" id="roll-number" placeholder="22K-4286" required>
+        <button type="button" id="fetch-courses">Fetch Courses</button>
+      </form>
+    </div>
+
+    <!-- Step 2: Display Courses and GPA -->
+    <div class="form-box" id="gpa-update-box" style="display: none;">
+      <h2>Student Courses and GPA</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Course</th>
+            <th>Current GPA</th>
+            <th>Update GPA</th>
+          </tr>
+        </thead>
+        <tbody id="courses-table-body">
+          <!-- Dynamic content -->
+        </tbody>
+      </table>
+      <button id="update-cgpa">Update CGPA</button>
+      <p><strong>CGPA:</strong> <span id="cgpa-value">0.0</span></p>
+    </div>
+  </div>
+
+  <div class="notification" id="notification"></div>
+
+  <div class="back-button-container">
+    <button id="backToPortal" onclick="goToAdminDashboard()">Back to Admin</button>
+  </div>
+
+  <script src="admin_gpa.js"></script>
+</body>
+</html>

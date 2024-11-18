@@ -10,22 +10,25 @@
 
 <body>
   <div class="form-container">
-    <div class="logo">
+    <!-- Logo Section -->
+    <div class="logo-container">
       <img src="FASTNU-logo.png" alt="University Logo">
     </div>
 
-    <h1>Register a Course</h1>
-
-    <form id="courseForm">
+    <!-- Registration Form -->
+    <form id="courseForm" class="form-box">
       <!-- Select Department -->
       <div class="form-group">
+         <!-- Page Title -->
+    <h1>Register a Course</h1>
+
         <label for="departmentSelect">Select Department</label>
         <select id="departmentSelect" required>
           <option value="">Choose Department</option>
           <option value="BS Computer Science">BS Computer Science</option>
           <option value="BS Artificial Intelligence">BS Artificial Intelligence</option>
           <option value="BS Business Analytics">BS Business Analytics</option>
-          <option value="BS Cyber Security">BS Software Engineering</option>
+          <option value="BS Cyber Security">BS Cyber Security</option>
           <option value="BS Electrical Engineering">BS Electrical Engineering</option>
         </select>
       </div>
@@ -45,15 +48,17 @@
           <option value="8">Semester 8</option>
         </select>
       </div>
+
+      <!-- Semesters Offered -->
       <div class="form-group">
-          <label for="semesterOffered">Semesters Offered <span class="asterisk">*</span></label>
-          <select id="semesterOffered" name="semesterOffered" multiple required>
-            <option value="Fall">Fall</option>
-            <option value="Spring">Spring</option>
-            <option value="Summer">Summer</option>
-          </select>
-          <small>Hold Ctrl to select multiple semesters.</small>
-        </div>
+        <label for="semesterOffered">Semesters Offered</label>
+        <select id="semesterOffered" name="semesterOffered" multiple required>
+          <option value="Fall">Fall</option>
+          <option value="Spring">Spring</option>
+          <option value="Summer">Summer</option>
+        </select>
+        <small>Hold Ctrl to select multiple semesters.</small>
+      </div>
 
       <!-- Select Course -->
       <div class="form-group">
@@ -65,20 +70,26 @@
 
       <!-- Display Course Details -->
       <div id="courseDetails">
-        <p><strong>Course Code:</strong> <span id="courseCode"></span></p>
-        <p><strong>Credit Hours:</strong> <span id="creditHours"></span></p>
-        <p><strong>Prerequisites:</strong> <span id="prerequisites"></span></p>
+        <p><strong>Course Code:</strong> <span id="courseCode">N/A</span></p>
+        <p><strong>Credit Hours:</strong> <span id="creditHours">N/A</span></p>
+        <p><strong>Prerequisites:</strong> <span id="prerequisites">N/A</span></p>
       </div>
 
+      <!-- Submit Button -->
       <button type="submit">Register Course</button>
-    </form>
-    <div class="back-button-container">
-        <button id="backToPortal" onclick="goToAdminDashboard()">Back to Admin </button>
-    </div>
+         <!-- Footer -->
     <footer>
       <p>FAST NUCES | Contact: (123) 4567-890 | Email: fast@nu.edu.pk</p>
     </footer>
   </div>
+    </form>
+
+    <!-- Back to Admin Button -->
+    <div class="back-button-container">
+      <a id="backToPortal" onclick="goToAdminDashboard()">Back to Admin</a>
+    </div>
+
+
 
   <script src="admin_course.js"></script>
 </body>
