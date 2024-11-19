@@ -28,7 +28,7 @@ loginButton.addEventListener('click', async function() {
         } else {
             // Successful login
             sessionStorage.setItem('isLoggedIn', 'true');
-            sessionStorage.setItem('facultyId', data.id); // Optionally store student ID
+            localStorage.setItem('facultyId', data.id); // Optionally store student ID
 
             // Hide login form, show student dashboard, and toggle button
             document.getElementById('loginForm').style.display = 'none';

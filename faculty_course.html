@@ -15,6 +15,17 @@
     <h1 class="main-heading">Courses Selection</h1>
 
     <div class="form-container">
+        <!-- Faculty Information Box -->
+        <div class="form-box" id="facultyInfoBox">
+            <h2>Faculty Information</h2>
+            <p><strong>Faculty Name:</strong> <span id="facultyName">Loading...</span></p>
+            <p><strong>Department:</strong> <span id="facultyDepartment">Loading...</span></p>
+            <p><strong>Maximum Courses:</strong> 3</p>
+            <p><strong>Currently Registered:</strong> <span id="registeredCoursesCount">Loading...</span></p>
+        </div>
+    </div>
+
+    <div class="form-container">
         <!-- Underlined Heading in Box -->
         <div class="form-box">
             <h2 class="box-heading">Select Courses to Teach</h2>
@@ -27,33 +38,12 @@
                         <th>Select</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Data Structures</td>
-                        <td>CS102</td>
-                        <td>3</td>
-                        <td><input type="checkbox" name="course" value="CS102"></td>
-                    </tr>
-                    <tr>
-                        <td>Database Management</td>
-                        <td>CS201</td>
-                        <td>4</td>
-                        <td><input type="checkbox" name="course" value="CS201"></td>
-                    </tr>
-                    <tr>
-                        <td>Artificial Intelligence</td>
-                        <td>CS301</td>
-                        <td>3</td>
-                        <td><input type="checkbox" name="course" value="CS301"></td>
-                    </tr>
-                    <tr>
-                        <td>Computer Networks</td>
-                        <td>CS401</td>
-                        <td>4</td>
-                        <td><input type="checkbox" name="course" value="CS401"></td>
-                    </tr>
-                    
-                </tbody>
+                <tbody id="courseSelectionTable">
+                    <!-- Skeleton rows to display while loading -->
+                    <tr class="skeleton-row"><td colspan="4"></td></tr>
+                    <tr class="skeleton-row"><td colspan="4"></td></tr>
+                    <tr class="skeleton-row"><td colspan="4"></td></tr>
+                  </tbody>
                 
             </table>
             <div id="errorMessage" class="notification error-message" style="display: none;">Select at least one course!</div>
@@ -62,6 +52,7 @@
                 <button id="submitSelection">Submit Selection</button>
             </div>
         </div>
+        
     
     </div>
 
@@ -84,7 +75,11 @@
     <div class="back-button-container">
         <button id="backToPortal" onclick="goToFacultyPortal()">Back to Faculty Portal</button>
     </div>
-
+    <div id="notification" class="notification">
+        <span id="notificationMessage">Course has been assigned to you successfully!</span>
+        <div class="progress-bar"></div>
+      </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script src="faculty_course.js"></script>
 </body>
 </html>
