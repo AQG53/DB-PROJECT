@@ -50,6 +50,7 @@ const passwordInput = document.getElementById('password'); // Password input fie
 loginButton.addEventListener('click', async function() {
     const rollnumber = document.getElementById('rollnumber').value;
     const password = document.getElementById('password').value;
+    localStorage.setItem('studentId', rollnumber);
     console.log(rollnumber, password);
     try {
         const { data, error } = await supabase

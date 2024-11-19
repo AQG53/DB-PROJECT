@@ -3,76 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Registration</title>
-    <link rel="stylesheet" href="student_course.css"> <!-- Linking the external CSS file -->
+    <title>Student Course Registration</title>
+    <link rel="stylesheet" href="student_course.css">
 </head>
 <body>
-    <div class="registration-container">
-        <h2>Course Registration</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Course Name</th>
-                    <th>Course Code</th>
-                    <th>Credit Hours</th>
-                    <th>Prerequisites</th> <!-- Display prerequisites as static text -->
-                    <th>Select</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Statistics</td>
-                    <td>CS107</td>
-                    <td>3</td>
-                    <td>Math101, Stat101</td> <!-- Static prerequisites -->
-                    <td><input type="checkbox" name="course" value="CS107"></td>
-                </tr>
-                <tr>
-                    <td>Numerical Computing</td>
-                    <td>MT106</td>
-                    <td>3</td>
-                    <td>Math101, CS101</td>
-                    <td><input type="checkbox" name="course" value="MT106"></td>
-                </tr>
-                <tr>
-                    <td>Introduction to Programming</td>
-                    <td>CS101</td>
-                    <td>3</td>
-                    <td>None</td> <!-- No prerequisites -->
-                    <td><input type="checkbox" name="course" value="CS101"></td>
-                </tr>
-                <tr>
-                    <td>Calculus II</td>
-                    <td>MATH202</td>
-                    <td>4</td>
-                    <td>Math201</td>
-                    <td><input type="checkbox" name="course" value="MATH202"></td>
-                </tr>
-                <tr>
-                    <td>Physics III</td>
-                    <td>PHYS301</td>
-                    <td>13</td>
-                    <td>Phys201</td>
-                    <td><input type="checkbox" name="course" value="PHYS301"></td>
-                </tr>
-                <!-- Add more courses as needed -->
-            </tbody>
-        </table>
+    <div class="logo-container">
+        <img src="FASTNU-logo.png" alt="University Logo">
+    </div>
 
-        <!-- Error Message for unselected courses -->
-        <div id="errorMessage" class="error-message" style="display: none;">Select at least one course!</div>
+    <!-- New Heading Outside Box -->
+    <h1 class="main-heading">Courses Selection</h1>
 
-        <div class="register-button-container">
-            <button id="registerCourses">Register Selected Courses</button>
+    <div class="form-container">
+        <!-- Faculty Information Box -->
+        <div class="form-box" id="studentInfoBox">
+            <h2>Student Information</h2>
+            <p><strong>Student Name:</strong> <span id="studentName">Loading...</span></p>
+            <p><strong>Roll Number:</strong> <span id="studentRollNumber">Loading...</span></p>
+            <p><strong>Semester:</strong> <span id="studentSemester">Loading...</span></p>
+            <p><strong>Department:</strong> <span id="studentDepartment">Loading...</span></p>
+            <p><strong>Maximum Credit Hours:</strong> 17</p>
+            <p><strong>Currently Registered Credit Hours:</strong> <span id="registeredCHCount">Loading...</span></p>
         </div>
+    </div>
+    <div class="note-container">
+        <p>
+            <strong>Note:</strong> Courses highlighted in <span style="color: green; font-weight: bold;">green</span> belong to your department and cannot be dropped. 
+            You are required to select at least <strong>1 course</strong> from your department and can register for a maximum of <strong>3 courses</strong>. 
+            Please choose carefully.
+        </p>
+    </div>
 
-        <!-- Message placeholder -->
-        <div id="registrationMessage"></div>
+    <div class="form-container">
+            
+            <div class="form-box">
+            <h2 class="box-heading">Select Courses to Register</h2>
+            <table id="courseSelectionTable">
+                <thead>
+                    <tr>
+                        <th>Course Name</th>
+                        <th>Course Code</th>
+                        <th>Credit Hours</th>
+                        <th>Prerequisites</th>
+                        <th>Select</th>
+                        <th>Drop</th>
+                    </tr>
+                </thead>
+                <tbody id="courseSelectionTable">
+                    <!-- Skeleton rows to display while loading -->
+                    <tr class="skeleton-row"><td colspan="4"></td></tr>
+                    <tr class="skeleton-row"><td colspan="4"></td></tr>
+                    <tr class="skeleton-row"><td colspan="4"></td></tr>
+                  </tbody>
+                
+            </table>
+            <div id="errorMessage" class="notification error-message" style="display: none;">Select at least one course!</div>
+            <div class="register-button-container">
+                <button id="submitSelection">Submit Selection</button>
+            </div>
+        </div>
+        
+    
     </div>
     <div class="back-button-container">
         <button id="backToPortal" onclick="goToStudentPortal()">Back to Student Portal</button>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script src="student_course.js"></script>
 </body>
 </html>

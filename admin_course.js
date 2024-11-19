@@ -396,6 +396,7 @@ const courseData = {
 
   document.getElementById('courseRegistrationForm').addEventListener('submit', async (event) => {
     event.preventDefault();
+    const type = document.getElementById('typeSelect').value;
     const department_name = document.getElementById('departmentSelect').value;
     const semester = document.getElementById('semesterSelect').value;
     const { code, name, creditHours, prerequisites } = selectedCourseDetails;
@@ -414,6 +415,7 @@ const courseData = {
         {
           course_code: code,
           name: name,
+          type,
           semester,
           department_id: department_id,
           prerequisites,

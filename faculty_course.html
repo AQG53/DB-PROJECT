@@ -24,10 +24,17 @@
             <p><strong>Currently Registered:</strong> <span id="registeredCoursesCount">Loading...</span></p>
         </div>
     </div>
+    <div class="note-container">
+        <p>
+            <strong>Note:</strong> Courses highlighted in <span style="color: green; font-weight: bold;">green</span> belong to your department and cannot be dropped. 
+            You are required to select at least <strong>1 course</strong> from your department and can register for a maximum of <strong>3 courses</strong>. 
+            Please choose carefully.
+        </p>
+    </div>
 
     <div class="form-container">
-        <!-- Underlined Heading in Box -->
-        <div class="form-box">
+            
+            <div class="form-box">
             <h2 class="box-heading">Select Courses to Teach</h2>
             <table id="courseSelectionTable">
                 <thead>
@@ -36,6 +43,7 @@
                         <th>Course Code</th>
                         <th>Credit Hours</th>
                         <th>Select</th>
+                        <th>Drop</th>
                     </tr>
                 </thead>
                 <tbody id="courseSelectionTable">
@@ -47,29 +55,12 @@
                 
             </table>
             <div id="errorMessage" class="notification error-message" style="display: none;">Select at least one course!</div>
-            <div id="selectionMessage" class="notification success-message" style="display: none;">Submission Completed!</div>
             <div class="register-button-container">
                 <button id="submitSelection">Submit Selection</button>
             </div>
         </div>
         
     
-    </div>
-
-    <div class="form-box course-info-container" style="display: none;">
-        <h2>Course Information</h2>
-        <table id="courseInfoTable">
-            <thead>
-                <tr>
-                    <th>Course Name</th>
-                    <th>Course Code</th>
-                    <th>Credit Hours</th>
-                    <th>Syllabus</th>
-                    <th>Sections</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
     </div>
 
     <div class="back-button-container">

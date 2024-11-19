@@ -1,146 +1,290 @@
-/* Basic styling for the table and layout */
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    background-image: url('background.jpg'); /* Ensure the image path is correct */
+    background: url("background.jpg") no-repeat center center fixed;
     background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    font-family: Arial, sans-serif;
+    color: #003366;
+  }
+  body {
     margin: 0;
-}
-
-.registration-container {
-    background-color:  #e3ff7c; /*Transparent light yellow  */
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: 800px;
-    margin: 20px;
-    text-align: center;
-}
-
-/* Title Styling */
-h2 {
-    color: #333;
-    font-size: 28px;
-    margin-bottom: 20px;
-    font-weight: 600;
-}
-
-/* Table Styling */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-}
-
-th, td {
-    padding: 15px;
-    text-align: left;
-    border: 1px solid #ddd;
-    font-size: 16px;
-}
-
-th {
-    background-color: #2196f3;
-    color: white;
-}
-
-td {
-    background-color: #fafafa;
-}
-
-/* Checkbox Styling */
-td input[type="checkbox"] {
-    margin-right: 15px;
-}
-
-td input[type="text"] {
-    margin-right: 15px;
-    padding: 5px;
-    font-size: 14px;
-    width: 90%;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-/* Button Styling */
-.register-button-container {
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff; /* Light blue background */
+  }
+  
+  .logo-container {
     display: flex;
-    justify-content: flex-end;
-    margin-top: 20px;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    padding: 20px 0; /* Add spacing around the logo */
+  }
+  
+  .logo-container img {
+    max-width: 320px; /* Set max width of the logo */
+    height: auto; /* Maintain aspect ratio */
+  }
+  
+  .form-container {
+    max-width: 800px;
+    margin: 20px auto; /* Reduced gap */
+    padding: 10px;
 }
-
-#registerCourses {
-    background-color: #2196f3;
-    color: white;
-    padding: 12px 25px;
+  h1 {
+    text-align: center;
+    color: #003366;
+    margin-bottom: 30px;
+  }
+  
+  h2 {
+    color: #00509e;
+    border-bottom: 2px solid #007acc;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Box Container Styles */
+  .form-box {
+    padding: 15px;
+    margin-bottom: 15px; /* Add space between each box */
+    background: #eaf4fc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Form Input Styles */
+  label {
+    font-weight: bold;
+    color: #00509e;
+  }
+  
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #b3d7f4;
+    border-radius: 5px;
+    background: #f6fbff;
+    box-sizing: border-box;
+  }
+  
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+    border-color: #007acc;
+    box-shadow: 0 0 5px #007acc;
+  }
+  
+  button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007acc;
+    color: #fff;
     border: none;
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#registerCourses:hover {
-    background-color: #1976d2;
-}
-
-/* Success Message Styling */
-#registrationMessage {
-    margin-top: 20px;
-    color: green;
-    font-weight: bold;
-    font-size: 18px;
-    text-align: center;
-}
-
-/* Error Message Styling */
-#errorMessage {
-    font-size: 16px;
-    color: rgb(190, 10, 10);
-    font-weight: bold;
-    text-align: center;
-    margin-top: 20px;
-    display: none; /* Initially hidden */
-}
-
-
-button {
-    background-color: #34c3fc;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
-}
-
-button:hover {
-    background-color: #d32f2f;
-}
-
-/* Styles for the Back to Student Portal button */
-.back-button-container {
+    margin-top: 10px;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  button:hover {
+    background-color: #00509e;
+  }
+  
+  button:active {
+    background-color: #003366;
+    transform: translateY(1px);
+  }
+  
+  /* Back Button */
+  .back-button-container {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    z-index: 10; /* Ensures it stays on top */
-}
-
-#backToPortal {
-    background-color: #004d40; 
+  }
+  
+  #backToPortal {
+    background-color: #00509e;
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  #backToPortal:hover {
+    background-color: #003366;
+    transform: translateY(-2px);
+  }
+  
+  #backToPortal:active {
+    background-color: #006bbf;
+    transform: translateY(0);
+  }
+  
+  /* Table Styles */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+  }
+  
+  th,
+  td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #007acc;
+  }
+  
+  th {
+    background-color: #007acc;
+    color: #fff;
+  }
+  
+  td select {
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid #b3d7f4;
+  }
+  
+  /* Notification */
+  .notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    padding: 15px;
+    background-color: #00509e;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 8px;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateY(-20px);
+    z-index: 1000;
+  }
+  
+  .notification.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    padding: 15px;
+    background-color: #4CAF50;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: none; /* Hidden by default */
+    opacity: 0; /* Start with 0 opacity for transition */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition */
+    transform: translateY(-20px); /* Start slightly above */
+    z-index: 1000;
+  }
+  
+  .notification.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0); /* Slide down smoothly */
+  }
+  
+  .notification .progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background-color: #fff;
+    width: 100%;
+    animation: progress 3s linear forwards; /* 5-second progress animation */
+  }
+  
+  @keyframes progress {
+    from { width: 100%; }
+    to { width: 0; }
+  }
+
+  .skeleton-row {
+    background: linear-gradient(90deg, #f0f8ff 25%, #eaf4fc 50%, #f0f8ff 75%);
+    background-size: 200% 100%;
+    animation: skeleton 1.5s infinite;
+    height: 20px;
+    margin: 5px 0;
+    border-radius: 4px;
+  }
+  
+  @keyframes skeleton {
+    from {
+      background-position: 200% 0;
+    }
+    to {
+      background-position: -200% 0;
+    }
+  }
+
+  #studentInfoBox {
+    background: #eaf4fc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 10px;
+}
+#studentInfoBox h2 {
+    color: #00509e;
+    margin-bottom: 10px;
+}
+#studentInfoBox p {
+    margin: 5px 0;
+    font-size: 16px;
 }
 
-#backToPortal:hover {
-    background-color: #00695c;
+.table-container {
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+.drop-btn {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.drop-btn:hover {
+  background-color: #ff1a1a;
+}
+
+.note-container {
+  max-width: 770px;
+  margin: 20px auto; /* Reduced gap */
+  padding: 10px;
+  background-color: #eaf4fc; /* Light gray background */
+  border-left: 5px solid #007acc; /* Blue border for emphasis */
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #333; /* Dark text color for readability */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.note-container strong {
+  color: #00509e; /* Highlighted text */
+}
+

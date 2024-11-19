@@ -25,7 +25,7 @@ body {
   }
   
   .form-container {
-    max-width: 900px;
+    max-width: 800px;
     margin: 20px auto; /* Reduced gap */
     padding: 10px;
 }
@@ -139,7 +139,7 @@ body {
   td {
     padding: 10px;
     text-align: left;
-    border-bottom: 1px solid #b3d7f4;
+    border-bottom: 1px solid #007acc;
   }
   
   th {
@@ -208,7 +208,7 @@ body {
     height: 4px;
     background-color: #fff;
     width: 100%;
-    animation: progress 5s linear forwards; /* 5-second progress animation */
+    animation: progress 3s linear forwards; /* 5-second progress animation */
   }
   
   @keyframes progress {
@@ -235,7 +235,7 @@ body {
   }
 
   #facultyInfoBox {
-    background: #ffffff;
+    background: #eaf4fc;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -256,3 +256,35 @@ body {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+.drop-btn {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.drop-btn:hover {
+  background-color: #ff1a1a;
+}
+
+.note-container {
+  max-width: 770px;
+  margin: 20px auto; /* Reduced gap */
+  padding: 10px;
+  background-color: #eaf4fc; /* Light gray background */
+  border-left: 5px solid #007acc; /* Blue border for emphasis */
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #333; /* Dark text color for readability */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.note-container strong {
+  color: #00509e; /* Highlighted text */
+}
+
