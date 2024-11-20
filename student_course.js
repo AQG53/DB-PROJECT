@@ -67,7 +67,7 @@ async function calculateRegisteredCHCount(studentId) {
         const { data: coursesData, error: coursesError } = await supabase
             .from("courses")
             .select("credit_hours")
-            .in("id", courseIds);
+            .in("course_code", courseIds);
 
         if (coursesError) {
             console.error("Error fetching courses:", coursesError.message);
@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 row.style.backgroundColor="lightgreen";
             }
             if (isRegistered) {
-                row.classList.add("registered-course");
+                row.style.backgroundColor="lightpink";
             }
 
             row.innerHTML = `
@@ -178,44 +178,60 @@ document.addEventListener("DOMContentLoaded", async function () {
 });
 
 document.getElementById("submitSelection").addEventListener("click", async function () {
+    const confirmation = confirm(`Are you sure you want to register the course(s)?`);
+        if (!confirmation) {
+            return; // Exit if the user cancels
+        }
     const studentId = localStorage.getItem("studentId");
     const selectedCourses = [];
     const checkboxes = document.querySelectorAll('input[name="selectCourse"]:checked');
+
     // Collect selected courses
     checkboxes.forEach((checkbox) => {
-      const row = checkbox.closest("tr");
-      if(row.style.backgroundColor === "lightgreen" || row.style.backgroundColor === 'white'){
-        selectedCourses.push(checkbox.value);
-      }
+        selectedCourses.push(checkbox.value.trim());
     });
+
     if (!selectedCourses.length) {
-        alert("You must register for at least the core courses!");
+        alert("You must register for at least one course!");
         return;
     }
-    
-    for (const course_id of selectedCourses) {
-        console.log(course_id);
-        // Fetch faculty_id for the course
-        const { data: courseData1, error: coursesError1 } = await supabase
-            .from("courses")
-            .select('registered_by')
-            .eq('course_code', course_id)
-            .single();
 
-            if (coursesError1 || !courseData1) {
-                console.error("Error fetching courses:", coursesError1?.message);
-                alert("Error loading courses. Please try again.");
+    try {
+        for (const course_id of selectedCourses) {
+            // Fetch faculty_id for the course
+            const { data: courseData, error: courseError } = await supabase
+                .from("courses")
+                .select("registered_by")
+                .eq("course_code", course_id)
+                .single();
+
+            if (courseError || !courseData) {
+                console.error("Error fetching course data:", courseError?.message);
+                alert("Error loading course information. Please try again.");
                 return;
             }
-            
-            console.log(studentId);
-        // const { data, error } = await supabase.from('student_registration').insert({
-        //     student_id: studentId,
-        //     course_id,
-        //     faculty_id: courseData1.registered_by,
-        // });
+
+            // Insert into course_registration
+            const { error: insertError } = await supabase
+                .from("student_registration")
+                .insert({
+                    student_id: studentId,
+                    course_id,
+                    faculty_id: courseData.registered_by,
+                });
+
+            if (insertError) {
+                console.error("Error during registration:", insertError.message);
+                alert(`Failed to register for course ${course_id}. Please try again.`);
+                return;
+            }
+        }
+        showNotification("Courses registered successfully!");
+        window.location.reload(); // Reload to reflect changes
+    } catch (error) {
+        console.error("Unexpected error during registration:", error.message);
+        alert("An unexpected error occurred. Please try again.");
     }
-    alert("Registration successful!");
 });
 
 function goToStudentPortal() {
