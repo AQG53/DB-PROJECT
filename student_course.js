@@ -231,44 +231,53 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 document.getElementById("submitSelection").addEventListener("click", async function () {
     const studentId = localStorage.getItem("studentId");
-    const selectedCourses = [];
     const checkboxes = document.querySelectorAll('input[name="selectCourse"]:checked');
-    const total_CH = calculateRegisteredCHCount(studentId);
-    // Collect selected courses
-    let Selected_CH;
-    checkboxes.forEach((checkbox) => {
-        Selected_CH=calculateSelectedCHCount(checkbox.value);
-        console.log(Selected_CH);
+
+    let selectedCourses = [];
+    let selectedCH = 0;
+
+    // Calculate total credit hours for selected courses
+    for (const checkbox of checkboxes) {
+        const courseId = checkbox.value.trim();
         const row = checkbox.closest("tr");
-        if(row.style.backgroundColor==='lightgreen' || row.style.backgroundColor==='white'){
-            selectedCourses.push(checkbox.value.trim());
+
+        if (row.style.backgroundColor === 'lightgreen' || row.style.backgroundColor === 'white') {
+            selectedCourses.push(courseId);
+            const ch = await calculateSelectedCHCount(courseId); // Await the asynchronous function
+            selectedCH += ch;
         }
-    });
-    if(Selected_CH>5) {
-        showNotification("Too many courses selected!");
+    }
+
+    // Get total credit hours for already registered courses
+    const registeredCH = await calculateRegisteredCHCount(studentId);
+    console.log("Total Registered CH = ", registeredCH);
+    if (selectedCH === 0) {
+        showNotification1("You must select at least one course!");
         return;
     }
-    if (!selectedCourses.length) {
-        showNotification("You must register for at least one course!");
+
+    if (selectedCH > 5) {
+        showNotification1("You are selecting too many courses!");
+        return;
+    }`g`
+
+    if ((registeredCH + selectedCH) > 5) {
+        showNotification1("You are exceeding your total credit hour limit!");
         return;
     }
-    if((Selected_CH+total_CH)>5) {
-        showNotification("You are exceeding your total credit hour limit!");
-        return;
-    }
-    
+
     const confirmation = confirm(`Are you sure you want to register the course(s)?`);
     if (!confirmation) {
         return; // Exit if the user cancels
     }
 
     try {
-        for (const course_id of selectedCourses) {
+        for (const courseId of selectedCourses) {
             // Fetch faculty_id for the course
             const { data: courseData, error: courseError } = await supabase
                 .from("courses")
                 .select("registered_by")
-                .eq("course_code", course_id)
+                .eq("course_code", courseId)
                 .single();
 
             if (courseError || !courseData) {
@@ -277,27 +286,29 @@ document.getElementById("submitSelection").addEventListener("click", async funct
                 return;
             }
 
-            // Insert into course_registration
+            // Insert into student_registration
             const { error: insertError } = await supabase
                 .from("student_registration")
                 .insert({
                     student_id: studentId,
-                    course_id,
+                    course_id: courseId,
                     faculty_id: courseData.registered_by,
                 });
 
             if (insertError) {
                 console.error("Error during registration:", insertError.message);
-                alert(`Failed to register for course ${course_id}. Please try again.`);
+                alert(`Failed to register for course ${courseId}. Please try again.`);
                 return;
             }
         }
+
         showNotification("Courses registered successfully!");
     } catch (error) {
         console.error("Unexpected error during registration:", error.message);
         alert("An unexpected error occurred. Please try again.");
     }
 });
+
 
 document.addEventListener("click", async function (event) {
     // Check if the clicked element is a drop button
