@@ -89,6 +89,39 @@ async function calculateRegisteredCHCount(studentId) {
     }
 }
 
+async function calculateSelectedCHCount(courseId) {
+    console.log(`Selected Course ID: ${courseId}`);
+    try {
+        // Step 1: Fetch the credit hours for the selected course
+        const { data: selectedCourse, error: selectedError } = await supabase
+            .from("courses")
+            .select("credit_hours")
+            .eq("course_code", courseId)
+            .single(); // Use .single() since you expect only one course
+
+        if (selectedError) {
+            console.error("Error fetching credit hours:", selectedError.message);
+            return 0;
+        }
+
+        if (!selectedCourse) {
+            console.warn(`No course found for course_id: ${courseId}`);
+            return 0;
+        }
+
+        // Step 2: Calculate total credit hours
+        const [theory, lab] = selectedCourse.credit_hours.split("+").map(Number); // Split and convert to numbers
+        const totalCreditHours = theory + lab; // Sum both components
+        console.log(`Total Credit Hours: ${totalCreditHours}`);
+
+        return totalCreditHours;
+    } catch (error) {
+        console.error("Unexpected error while calculating credit hours:", error.message);
+        return 0;
+    }
+}
+
+
 document.addEventListener("DOMContentLoaded", async function () {
     const studentId = localStorage.getItem("studentId");
     if (!studentId) {
@@ -158,6 +191,9 @@ document.addEventListener("DOMContentLoaded", async function () {
             if (course.type==="Core") {
                 row.style.backgroundColor="lightgreen";
             }
+            else{
+                row.style.backgroundColor="white";
+            }
             if (isRegistered) {
                 row.style.backgroundColor="lightpink";
             }
@@ -176,7 +212,13 @@ document.addEventListener("DOMContentLoaded", async function () {
                         ${isRegistered ? "checked disabled" : ""} 
                 </td>
                 <td>
-                    ${isRegistered ? `<button class="drop-btn" data-course-code="${course.course_code}">Drop</button>` : ""}
+                    ${isRegistered ? `
+                            <button class="drop-btn" 
+                            data-course-code="${course.course_code}"
+                            ${course.type === "Core" ? "disabled" : ""}>
+                        Drop
+                        </button>`
+                    : ""}
                 </td>
             `;
             courseTableBody.appendChild(row);
@@ -188,22 +230,36 @@ document.addEventListener("DOMContentLoaded", async function () {
 });
 
 document.getElementById("submitSelection").addEventListener("click", async function () {
-    const confirmation = confirm(`Are you sure you want to register the course(s)?`);
-        if (!confirmation) {
-            return; // Exit if the user cancels
-        }
     const studentId = localStorage.getItem("studentId");
     const selectedCourses = [];
     const checkboxes = document.querySelectorAll('input[name="selectCourse"]:checked');
-
+    const total_CH = calculateRegisteredCHCount(studentId);
     // Collect selected courses
+    let Selected_CH;
     checkboxes.forEach((checkbox) => {
-        selectedCourses.push(checkbox.value.trim());
+        Selected_CH=calculateSelectedCHCount(checkbox.value);
+        console.log(Selected_CH);
+        const row = checkbox.closest("tr");
+        if(row.style.backgroundColor==='lightgreen' || row.style.backgroundColor==='white'){
+            selectedCourses.push(checkbox.value.trim());
+        }
     });
-
-    if (!selectedCourses.length) {
-        alert("You must register for at least one course!");
+    if(Selected_CH>5) {
+        showNotification("Too many courses selected!");
         return;
+    }
+    if (!selectedCourses.length) {
+        showNotification("You must register for at least one course!");
+        return;
+    }
+    if((Selected_CH+total_CH)>5) {
+        showNotification("You are exceeding your total credit hour limit!");
+        return;
+    }
+    
+    const confirmation = confirm(`Are you sure you want to register the course(s)?`);
+    if (!confirmation) {
+        return; // Exit if the user cancels
     }
 
     try {
@@ -237,7 +293,6 @@ document.getElementById("submitSelection").addEventListener("click", async funct
             }
         }
         showNotification("Courses registered successfully!");
-        window.location.reload(); // Reload to reflect changes
     } catch (error) {
         console.error("Unexpected error during registration:", error.message);
         alert("An unexpected error occurred. Please try again.");
@@ -248,10 +303,10 @@ document.addEventListener("click", async function (event) {
     // Check if the clicked element is a drop button
     if (event.target && event.target.classList.contains("drop-btn")) {
         const courseCode = event.target.getAttribute("data-course-code");
-        const facultyId = localStorage.getItem("facultyId");
+        const studentId = localStorage.getItem("studentId");
   
-        if (!courseCode || !facultyId) {
-            console.error("Missing course code or faculty ID.");
+        if (!courseCode || !studentId) {
+            console.error("Missing course code or student ID.");
             return;
         }
         const confirmation = confirm(`Are you sure you want to drop the course "${courseCode}"?`);
@@ -260,15 +315,15 @@ document.addEventListener("click", async function (event) {
               return; // Exit if the user cancels
           }
   
-        console.log(`Attempting to drop course: ${courseCode} for faculty ID: ${facultyId}`);
+        console.log(`Attempting to drop course: ${courseCode} for faculty ID: ${studentId}`);
   
         try {
             // Reset the registered_by field in the database
             const { error } = await supabase
-                .from("courses")
-                .update({ registered_by: null })
-                .eq("course_code", courseCode)
-                .eq("registered_by", facultyId); // Ensure only the correct faculty can drop
+                .from("student_registration")
+                .delete()
+                .eq("student_id", studentId)
+                .eq("course_id", courseCode);
   
             if (error) {
                 console.error(`Error dropping course ${courseCode}:`, error.message);
