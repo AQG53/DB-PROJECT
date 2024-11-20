@@ -288,12 +288,16 @@ body {
   color: #00509e; /* Highlighted text */
 }
 
-/* Highlight core courses in light green */
-/* .core-course {
-    background-color: lightgreen;
-} */
+.drop-btn {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
-/* Highlight registered courses in light pink */
-/* .registered-course {
-    background-color: lightpink;
-} */
+.drop-btn:hover {
+  background-color: #ff1a1a;
+}

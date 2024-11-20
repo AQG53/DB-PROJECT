@@ -273,9 +273,6 @@ document.addEventListener("click", async function (event) {
   }
 });
 
-
-  
-
 function goToFacultyPortal() {
     window.location.href = 'faculty.html';
 }

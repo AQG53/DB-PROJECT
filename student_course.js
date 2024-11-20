@@ -136,17 +136,23 @@ document.addEventListener("DOMContentLoaded", async function () {
             return;
         }
 
-        const { data: registeredCourses } = await supabase
+        const { data: registeredCourses, error: registeredError} = await supabase
             .from("student_registration")
             .select("course_id")
             .eq("student_id", studentId);
+        
+        if (registeredError) {
+            console.error("Error fetching registered courses:", registeredError.message);
+            alert("Error loading registered courses. Please try again.");
+            return;
+        }
 
         const registeredCourseIds = registeredCourses.map(course => course.course_id);
 
         // Populate course table
         courseTableBody.innerHTML = ""; // Clear any skeleton loading rows
         coursesData.forEach(course => {
-            const isRegistered = registeredCourseIds.includes(course.id);
+            const isRegistered = registeredCourseIds.includes(course.course_code);
 
             const row = document.createElement("tr");
             if (course.type==="Core") {
@@ -166,7 +172,11 @@ document.addEventListener("DOMContentLoaded", async function () {
                     <input 
                         type="checkbox" 
                         name="selectCourse" 
-                        value=" ${course.course_code}" 
+                        value=" ${course.course_code}"
+                        ${isRegistered ? "checked disabled" : ""} 
+                </td>
+                <td>
+                    ${isRegistered ? `<button class="drop-btn" data-course-code="${course.course_code}">Drop</button>` : ""}
                 </td>
             `;
             courseTableBody.appendChild(row);
@@ -233,6 +243,47 @@ document.getElementById("submitSelection").addEventListener("click", async funct
         alert("An unexpected error occurred. Please try again.");
     }
 });
+
+document.addEventListener("click", async function (event) {
+    // Check if the clicked element is a drop button
+    if (event.target && event.target.classList.contains("drop-btn")) {
+        const courseCode = event.target.getAttribute("data-course-code");
+        const facultyId = localStorage.getItem("facultyId");
+  
+        if (!courseCode || !facultyId) {
+            console.error("Missing course code or faculty ID.");
+            return;
+        }
+        const confirmation = confirm(`Are you sure you want to drop the course "${courseCode}"?`);
+          if (!confirmation) {
+              console.log("Course drop canceled by user.");
+              return; // Exit if the user cancels
+          }
+  
+        console.log(`Attempting to drop course: ${courseCode} for faculty ID: ${facultyId}`);
+  
+        try {
+            // Reset the registered_by field in the database
+            const { error } = await supabase
+                .from("courses")
+                .update({ registered_by: null })
+                .eq("course_code", courseCode)
+                .eq("registered_by", facultyId); // Ensure only the correct faculty can drop
+  
+            if (error) {
+                console.error(`Error dropping course ${courseCode}:`, error.message);
+                alert(`Failed to drop course: ${courseCode}`);
+                return;
+            }
+  
+            showNotification("Course has been successfully dropped!");
+            console.log(`Course ${courseCode} dropped successfully.`);
+        } catch (error) {
+            console.error("Unexpected error during course drop:", error.message);
+            alert("An unexpected error occurred. Please try again.");
+        }
+    }
+  });
 
 function goToStudentPortal() {
     window.location.href = 'student.html';
