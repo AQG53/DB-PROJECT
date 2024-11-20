@@ -158,13 +158,13 @@
             window.location.href = 'admin_course.html';
             break;
           case 'fee-management':
-            alert("Fee management is not implemented yet.");
+            window.location.href = 'admin_fees.html';
             break;
           case 'GPA-management':
-            alert("GPA management is not implemented yet.");
+            window.location.href = 'admin_gpa.html';
             break;
           case 'attendance-management':
-            alert("Attendance management is not implemented yet.");
+            window.location.href = 'adminattendance.html';
             break;
           case 'notification-management':
             alert("Notification management is not implemented yet.");
