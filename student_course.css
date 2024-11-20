@@ -288,3 +288,12 @@ body {
   color: #00509e; /* Highlighted text */
 }
 
+/* Highlight core courses in light green */
+/* .core-course {
+    background-color: lightgreen;
+} */
+
+/* Highlight registered courses in light pink */
+/* .registered-course {
+    background-color: lightpink;
+} */

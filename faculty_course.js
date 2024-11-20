@@ -170,8 +170,6 @@ document.getElementById("submitSelection").addEventListener("click", function ()
     // Collect selected courses
     checkboxes.forEach((checkbox) => {
       const row = checkbox.closest("tr");
-      console.log(row.style.backgroundColor);
-      console.log("lol");
       if(row.style.backgroundColor === "lightgreen" || row.style.backgroundColor === 'white'){
         selectedCourses.push(checkbox.value);
       }

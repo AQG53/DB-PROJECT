@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Course Registration</title>
     <link rel="stylesheet" href="student_course.css">
 </head>
+
 <body>
     <div class="logo-container">
         <img src="FASTNU-logo.png" alt="University Logo">
@@ -28,15 +30,17 @@
     </div>
     <div class="note-container">
         <p>
-            <strong>Note:</strong> Courses highlighted in <span style="color: green; font-weight: bold;">green</span> belong to your department and cannot be dropped. 
-            You are required to select at least <strong>1 course</strong> from your department and can register for a maximum of <strong>3 courses</strong>. 
+            <strong>Note:</strong> Courses highlighted in <span style="color: green; font-weight: bold;">green</span>
+            belong to your department and cannot be dropped.
+            You are required to select at least <strong>1 course</strong> from your department and can register for a
+            maximum of <strong>3 courses</strong>.
             Please choose carefully.
         </p>
     </div>
 
     <div class="form-container">
-            
-            <div class="form-box">
+
+        <div class="form-box">
             <h2 class="box-heading">Select Courses to Register</h2>
             <table id="courseSelectionTable">
                 <thead>
@@ -44,6 +48,7 @@
                         <th>Course Name</th>
                         <th>Course Code</th>
                         <th>Credit Hours</th>
+                        <th>Type</th>
                         <th>Prerequisites</th>
                         <th>Select</th>
                         <th>Drop</th>
@@ -51,19 +56,26 @@
                 </thead>
                 <tbody id="courseSelectionTable">
                     <!-- Skeleton rows to display while loading -->
-                    <tr class="skeleton-row"><td colspan="4"></td></tr>
-                    <tr class="skeleton-row"><td colspan="4"></td></tr>
-                    <tr class="skeleton-row"><td colspan="4"></td></tr>
-                  </tbody>
-                
+                    <tr class="skeleton-row">
+                        <td colspan="4"></td>
+                    </tr>
+                    <tr class="skeleton-row">
+                        <td colspan="4"></td>
+                    </tr>
+                    <tr class="skeleton-row">
+                        <td colspan="4"></td>
+                    </tr>
+                </tbody>
+
             </table>
-            <div id="errorMessage" class="notification error-message" style="display: none;">Select at least one course!</div>
+            <div id="errorMessage" class="notification error-message" style="display: none;">Select at least one course!
+            </div>
             <div class="register-button-container">
                 <button id="submitSelection">Submit Selection</button>
             </div>
         </div>
-        
-    
+
+
     </div>
     <div class="back-button-container">
         <button id="backToPortal" onclick="goToStudentPortal()">Back to Student Portal</button>
@@ -71,4 +83,5 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script src="student_course.js"></script>
 </body>
+
 </html>
