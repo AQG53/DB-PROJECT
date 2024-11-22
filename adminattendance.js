@@ -164,6 +164,10 @@ function showNotification(message) {
         }
 
         button.onclick = async () => {
+            const confirmDelete = confirm(
+                `Are you sure you want to update attendance record of ${studentId} for ${date}?`
+            );
+            if (!confirmDelete) return;
             // Update the status in the database
             try {
                 const { error } = await supabase
@@ -197,6 +201,10 @@ function showNotification(message) {
   
   // Delete Attendance
   async function deleteAttendance(studentId, courseId, date) {
+    const confirmDelete = confirm(
+        `Are you sure you want to delete attendance record of ${studentId} for ${date}?`
+    );
+    if (!confirmDelete) return;
     try {
       const { error } = await supabase
           .from('attendance')
