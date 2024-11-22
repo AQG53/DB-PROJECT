@@ -1,3 +1,4 @@
+
 // Sample data (replace with backend integration)
 const feeStructures = {
     1: 50000,
