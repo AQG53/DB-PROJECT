@@ -23,11 +23,7 @@ body {
     height: auto; /* Maintain aspect ratio */
   }
 .attendance-container {
-<<<<<<< Updated upstream
-    background-color: #eaf4fc; /* Soft blue container */
-=======
     background-color: #eaf4fc;
->>>>>>> Stashed changes
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -100,35 +96,6 @@ h2 {
 
 .popup-footer {
     text-align: center;
-<<<<<<< Updated upstream
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    max-height: 80vh;
-    overflow-y: auto;
-}
-
-/* Attendance Table */
-#attendanceTable {
-    width: 100%;
-    margin-top: 20px;
-    border-collapse: collapse;
-}
-
-#attendanceTable thead {
-    background-color: #007acc;
-    color: white;
-}
-
-#attendanceTable th, #attendanceTable td {
-    padding: 10px;
-    border: 1px solid #b3d7f4;
-    text-align: center;
-}
-
-#attendanceTable tbody {
-    max-height: 300px;
-    overflow-y: auto;
-    display: block;
-=======
     margin-top: 15px;
 }
 
@@ -173,7 +140,6 @@ h2 {
     font-size: 14px;
     color: rgb(0, 0, 0);
     font-weight: bold;
->>>>>>> Stashed changes
 }
 
 #attendanceTable thead, #attendanceTable tbody tr {
@@ -221,16 +187,6 @@ button:active {
 }
 
 #backToPortal:hover {
-<<<<<<< Updated upstream
-    background-color: #003366;
-    transform: translateY(-2px);
-}
-
-#backToPortal:active {
-    background-color: #006bbf;
-    transform: translateY(0);
-}
-=======
     background-color: #00695c;
 }
 
@@ -259,4 +215,3 @@ table tr:nth-child(even) {
 table tr:hover {
     background-color: #f1f1f1;
 }
->>>>>>> Stashed changes
