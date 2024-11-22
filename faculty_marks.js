@@ -2,6 +2,26 @@ const SUPABASE_URL = 'https://ynwjgmkbbyepuausjcdw.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlud2pnbWtiYnllcHVhdXNqY2R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE1MDcwMjcsImV4cCI6MjA0NzA4MzAyN30.RBCkr5OCoY7vqxOc_ZFSRf4DNdTPPx8rvAlRUDpesrY';
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+function showNotification(message) {
+    const notification = document.getElementById('notification');
+    const notificationMessage = document.getElementById('notificationMessage');
+  
+    // Set message and show the notification
+    notificationMessage.textContent = message;
+    notification.classList.add('show');
+  
+    // Hide notification after 5 seconds
+    setTimeout(() => {
+        closeNotification();
+    }, 3000);
+  }
+  
+  // Function to close notification
+  function closeNotification() {
+    const notification = document.getElementById('notification');
+    notification.classList.remove('show'); // Hide notification smoothly
+  }
+
 let selectedCourse = null; // Declare as global
 document.addEventListener('DOMContentLoaded', async function () {
     const facultyId = localStorage.getItem("facultyId"); 
@@ -94,9 +114,9 @@ document.addEventListener('DOMContentLoaded', async function () {
             <td>${student.roll_number}</td>
             <td><input type="number" name="quiz" min="0" max="5" value="${existingMarks.quiz || ''}" placeholder="-"></td>
             <td><input type="number" name="assignment" min="0" max="5" value="${existingMarks.assignment || ''}" placeholder="-"></td>
-            <td><input type="number" name="project" min="0" max="10" value="${existingMarks.project || ''}" placeholder="-"></td>
             <td><input type="number" name="mid1" min="0" max="15" value="${existingMarks.mid1 || ''}" placeholder="-"></td>
             <td><input type="number" name="mid2" min="0" max="15" value="${existingMarks.mid2 || ''}" placeholder="-"></td>
+            <td><input type="number" name="project" min="0" max="10" value="${existingMarks.project || ''}" placeholder="-"></td>
             <td><input type="number" name="final" min="0" max="50" value="${existingMarks.final || ''}" placeholder="-"></td>
         `;
         tbody.appendChild(row);
@@ -142,10 +162,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             return;
         }
     
-        successMessage.style.display = 'block';
-        setTimeout(() => {
-            successMessage.style.display = 'none';
-        }, 3000);
+        showNotification('Marks Updated Successfully!');
 
         displayStats();
     });
