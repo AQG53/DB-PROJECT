@@ -171,12 +171,6 @@ body {
     z-index: 1000;
   }
   
-  .notification.show {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-  }
-  
   .notification {
     position: fixed;
     top: 20px;

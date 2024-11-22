@@ -9,7 +9,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: #f0f8ff; /* Light blue background */
+    background-color: #f0f8ff;; /* Light blue background */
   }
   
   .logo-container {
@@ -27,7 +27,6 @@ body {
   .form-container {
     max-width: 700px;
     margin: 40px auto;
-    padding: 20px;
   }
   
   h1 {
@@ -177,3 +176,209 @@ body {
     transform: translateY(0);
   }
   
+  .notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    padding: 15px;
+    background-color: #4CAF50;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: none; /* Hidden by default */
+    opacity: 0; /* Start with 0 opacity for transition */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition */
+    transform: translateY(-20px); /* Start slightly above */
+    z-index: 1000;
+  }
+  
+  .notification .progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background-color: #fff;
+    width: 100%;
+    animation: progress 3s linear forwards; /* 5-second progress animation */
+  }
+  
+  @keyframes progress {
+    from { width: 100%; }
+    to { width: 0; }
+  }
+  
+/* Styling for the Plus Button with Image */
+#addAttendance {
+  display: inline-block;
+  width: 30px; /* Adjust size */
+  height: 30px;
+  background: url('plus.png') no-repeat center;
+  background-size: contain; /* Ensure the image fits within the button */
+  border: none;
+  cursor: pointer;
+  margin-right: 10px; /* Add some space after the button */
+}
+
+#addAttendance:hover {
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Elevate shadow on hover */
+}
+
+
+#addAttendance:active {
+  transform: scale(0.95); /* Slight shrink on click */
+}
+
+/* Styling for the Save Button with Disk Icon */
+#saveAttendance {
+  display: inline-block;
+  width: 30px; /* Adjust size */
+  height: 30px;
+  background: url('save.png') no-repeat center;
+  background-size: contain; /* Ensure the image fits within the button */
+  border: none;
+  cursor: pointer;
+  margin-right: 10px; /* Add some space after the button */
+}
+
+#saveAttendance:hover {
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Elevate shadow on hover */
+}
+
+#saveAttendance:active {
+  transform: scale(0.95); /* Slight shrink on click */
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Align buttons to the left */
+  margin-top: 20px;
+  padding-left: 10px; /* Add padding for spacing */
+}
+
+/* Add spacing between Select Course and Select Month */
+.form-group + .form-group {
+  margin-top: 10px; /* Adjust the gap size as needed */
+}
+
+.faculty-info-box {
+  max-width: 670px;
+  padding: 20px;
+  margin: 40px auto;
+  background: #eaf7f4; /* Distinctive background color */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.faculty-info-box h2 {
+  color: #00509e;
+  margin-bottom: 10px;
+}
+
+.faculty-info-box p {
+  font-size: 16px;
+  margin: 5px 0;
+  color: #003366;
+}
+
+#attendanceTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+#attendanceTable th,
+#attendanceTable td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #b3d7f4;
+}
+
+#attendanceTable th {
+  background-color: #007acc;
+  color: #fff;
+}
+
+#attendanceTable td {
+  background-color: #f6fbff;
+}
+
+#attendanceTable td:nth-child(odd) {
+  background-color: #eaf4fc;
+}
+
+.status-button {
+  width: 30px;
+  height: 30px;
+  margin: 2px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #c73434;
+  transition: background-color 0.3s ease;
+}
+
+.status-button:hover {
+  background-color: #dcdcdc;
+}
+
+.status-button.highlighted {
+  background-color: #00ff55;
+  color: white;
+}
+
+/* Modal Styling */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Transparent black background */
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-open .content-wrapper {
+  filter: blur(5px); /* Apply blur only to the rest of the content */
+  pointer-events: none;
+}
+
+.modal-content {
+  position: relative;
+  z-index: 1010; /* Ensure modal content is above blurred background */
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+body.modal-open {
+  overflow: hidden; /* Prevent scrolling */
+}
+
+/* Buttons */
+button {
+    margin: 10px 5px;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#savePopupRecord {
+    background-color: #007bff;
+    color: white;
+}
+
+#closePopup {
+    background-color: #d9534f;
+    color: white;
+}
+
+

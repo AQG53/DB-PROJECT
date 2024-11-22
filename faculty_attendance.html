@@ -12,6 +12,14 @@
         <img src="FASTNU-logo.png" alt="University Logo">
     </div>
 
+    <div class="faculty-info-box form-box">
+        <h2>Faculty Information</h2>
+        <p><strong>Name:</strong> <span id="facultyName"></span></p>
+        <p><strong>Department:</strong> <span id="facultyDepartment"></span></p>
+        <p><strong>Date:</strong> <span id="currentDate"></span></p>
+        <p><strong>Current Month:</strong> <span id="currentMonth"></span></p>
+    </div>
+    
     <!-- Attendance Entry Section -->
     <div class="form-container">
         <h1>Manage Attendance</h1>
@@ -19,12 +27,6 @@
         
         <div class="form-box">
             <h2>Enter Attendance for Students</h2>
-
-            <!-- Attendance Date Input -->
-            <div class="form-group">
-                <label for="attendanceDate">Attendance Date</label>
-                <input type="date" id="attendanceDate">
-            </div>
 
             <!-- Select Course Dropdown -->
             <div class="form-group">
@@ -36,25 +38,31 @@
 
             <!-- Select Section Dropdown -->
             <div class="form-group">
-                <label for="sectionSelect">Section</label>
-                <select id="sectionSelect" disabled>
-                    <option value="" disabled selected>Select a Section</option>
+                <label for="monthSelect">Select Month</label>
+                <select id="monthSelect">
+                    <option value="" disabled selected>Select a Month</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
                 </select>
             </div>
 
-            <!-- Student Attendance Table -->
+
+            <div class="button-container">
+                <!-- Plus Button -->
+                <button id="addAttendance" title="Add Attendance"></button>
+            
+                <!-- Save Button -->
+                <button id="saveAttendance" title="Save Attendance"></button>
+            </div>            
+            
+
             <table id="attendanceTable" style="display: none;">
-                <thead>
-                    <tr>
-                        <th>Student Name</th>
-                        <th>Student ID</th>
-                        <th>Attendance (P/A)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Dynamic Rows will be added here -->
-                </tbody>
+                <!-- The table will be dynamically generated here -->
             </table>
+            
 
             <!-- Save Button -->
             <div class="save-button-container">
@@ -68,11 +76,50 @@
         </div>
     </div>
 
+    <!-- Popup Modal -->
+<div id="addRecordPopup" class="modal">
+    <div class="modal-content">
+        <h2>Add Attendance Record</h2>
+        <form id="addRecordForm">
+            <div>
+                <label for="popupMonthSelect">Month:</label>
+                <select id="popupMonthSelect" required>
+                    <option value="" disabled selected>Select Month</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+            </div>
+            <div>
+                <label for="popupDate">Date:</label>
+                <input type="date" id="popupDate" required />
+            </div>
+            <div>
+                <label for="popupDefaultValue">Default Value:</label>
+                <select id="popupDefaultValue" required>
+                    <option value="" disabled selected>Select Default Value</option>
+                    <option value="P">Present (P)</option>
+                    <option value="A">Absent (A)</option>
+                    <option value="L">Late (L)</option>
+                </select>
+            </div>
+            <button type="button" id="savePopupRecord">Save</button>
+            <button type="button" id="closePopup">Close</button>
+        </form>
+    </div>
+</div>
+<div id="notification" class="notification">
+    <span id="notificationMessage"></span>
+    <div class="progress-bar"></div>
+  </div>
+
     <!-- Back Button -->
     <div class="back-button-container">
         <button id="backToPortal" onclick="goToFacultyPortal()">Back to Faculty Portal</button>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script src="faculty_attendance.js"></script>
 </body>
 </html>

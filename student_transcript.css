@@ -1,88 +1,126 @@
-/* Basic styling for the transcript page */
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    background-image: url('background.jpg');
+    background: url("background.jpg") no-repeat center center fixed;
     background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    color: #003366;
+    margin:0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    height: 100vh;
 }
-
-/* Container for the entire transcript page */
+.logo-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    padding: 20px 0; /* Add spacing around the logo */
+  }
+  
+  .logo-container img {
+    max-width: 320px; /* Set max width of the logo */
+    height: auto; /* Maintain aspect ratio */
+  }
+/* Transcript Container */
 .transcript-container {
-    width: 80%;
-    max-width: 900px;
-    background-color: #fff;
+    background-color: #eaf4fc; /* Soft blue container */
     padding: 20px;
-    margin-top: 60px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 70%;
     text-align: center;
+    margin: auto;
 }
 
-/* Heading for the page */
+/* Page Heading */
 h1 {
-    color: #333;
+    color: #003366;
+    margin-bottom: 20px;
 }
 
-/* Scrollable table container */
+/* Table Wrapper */
 .table-wrapper {
-    max-height: 500px;  /* Set the max height of the table */
-    overflow-y: auto;  /* Enable vertical scroll when content exceeds the height */
+    max-height: 500px;
+    overflow-y: auto;
     margin-top: 20px;
-    border: 1px solid #ddd;  /* Optional: adds a border around the scrollable area */
-    border-radius: 8px;  /* Optional: rounds the corners */
+    border: 1px solid #b3d7f4; /* Light blue border */
+    border-radius: 8px;
 }
 
-/* Styling for the transcript table */
+/* Transcript Table */
 #transcriptTable {
     width: 100%;
     border-collapse: collapse;
 }
 
-/* Styling for table headers and data cells */
-#transcriptTable th, #transcriptTable td {
+/* Table Headers */
+#transcriptTable th {
+    background-color: #007acc; /* Dark blue */
+    color: white;
     padding: 12px;
-    border: 1px solid #ddd;
+    text-align: center;
+    border: 1px solid #b3d7f4;
+}
+
+/* Table Data Cells */
+#transcriptTable td {
+    padding: 10px;
+    border: 1px solid #b3d7f4;
     text-align: center;
 }
 
-/* Header row styling */
-#transcriptTable thead {
-    background-color: #2196f3;
-    color: white;
-}
-
-/* Styling for semester header rows */
+/* Semester Headers */
 .semester-header {
-    background-color: #e3ff7c;
-    color: #333;
+    background-color: #003366; /* Soft blue */
+    color: #f8f9f9;
     font-weight: bold;
     text-align: left;
     padding-left: 10px;
 }
 
-/* Back to Student Portal button */
-.back-button-container {
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007acc;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  button:hover {
+    background-color: #00509e;
+  }
+  
+  button:active {
+    background-color: #003366;
+    transform: translateY(1px);
+  }
+  
+  /* Back Button */
+  .back-button-container {
     position: fixed;
     bottom: 20px;
     right: 20px;
-}
-
-#backToPortal {
-    background-color: #004d40; 
+  }
+  
+  #backToPortal {
+    background-color: #00509e;
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-}
-
-#backToPortal:hover {
-    background-color: #00695c;
-}
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  #backToPortal:hover {
+    background-color: #003366;
+    transform: translateY(-2px);
+  }
+  
+  #backToPortal:active {
+    background-color: #006bbf;
+    transform: translateY(0);
+  }
