@@ -23,7 +23,11 @@ body {
     height: auto; /* Maintain aspect ratio */
   }
 .attendance-container {
+<<<<<<< Updated upstream
     background-color: #eaf4fc; /* Soft blue container */
+=======
+    background-color: #eaf4fc;
+>>>>>>> Stashed changes
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -64,25 +68,39 @@ h2 {
     background-color: #00509e;
 }
 
-/* Popup Window Styles */
-.attendance-popup {
-    display: none;
+.popup {
+    display: none; /* Hide by default */
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center both horizontally and vertically */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 1000;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.popup-container {
+    background-color: white;
+    width: 70%; /* Increase width for a larger popup */
+    max-width: 800px; /* Set max width to prevent it from being too large */
+    border-radius: 10px;
+    overflow: hidden; /* Ensure content stays within the bounds */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    padding: 20px;
 }
 
 .popup-content {
-    background-color: #fafafa;
     padding: 20px;
-    border-radius: 8px;
-    width: 60%;
+    max-height: 70vh; /* Allow vertical scrolling for long content */
+    overflow-y: auto; /* Enable vertical scroll if needed */
+}
+
+.popup-footer {
     text-align: center;
+<<<<<<< Updated upstream
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     max-height: 80vh;
     overflow-y: auto;
@@ -110,6 +128,52 @@ h2 {
     max-height: 300px;
     overflow-y: auto;
     display: block;
+=======
+    margin-top: 15px;
+}
+
+.close-popup {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.close-popup:hover {
+    background-color: #c9302c;
+}
+
+/* Sliding Bar Styling */
+.sliding-bar-container {
+    margin: 20px 0;
+    position: relative;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 8px;
+    height: 20px;
+    overflow: hidden;
+}
+
+.sliding-bar {
+    height: 100%;
+    border-radius: 8px;
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.sliding-bar-container p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    font-size: 14px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+>>>>>>> Stashed changes
 }
 
 #attendanceTable thead, #attendanceTable tbody tr {
@@ -157,6 +221,7 @@ button:active {
 }
 
 #backToPortal:hover {
+<<<<<<< Updated upstream
     background-color: #003366;
     transform: translateY(-2px);
 }
@@ -165,3 +230,33 @@ button:active {
     background-color: #006bbf;
     transform: translateY(0);
 }
+=======
+    background-color: #00695c;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th,
+table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+>>>>>>> Stashed changes
