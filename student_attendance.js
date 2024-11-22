@@ -70,7 +70,9 @@ document.addEventListener('DOMContentLoaded', async function () {
                     .from('attendance')
                     .select('date, status')
                     .eq('student_id', studentId)
-                    .eq('course_id', selectedCourse);
+                    .eq('course_id', selectedCourse)
+                    .order('month', { ascending: true }) // Sort by month first
+                    .order('day', { ascending: true });
 
                 if (error) {
                     console.error('Error fetching attendance records:', error);
