@@ -198,23 +198,64 @@
                 <tbody>
                     <!-- Dynamic Rows will be added here -->
                 </tbody>
+                <div block id="statsBlock" style="display: none;">
+                <tfoot>
+                    <tr style="background-color: #d9eaf7; height: 15px;">
+                        <td colspan="8"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Maximum</td>
+                        <td id="maxQuiz"></td>
+                        <td id="maxAssignment"></td>
+                        <td id="maxMid1"></td>
+                        <td id="maxMid2"></td>
+                        <td id="maxProject"></td>
+                        <td id="maxFinal"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Minimum</td>
+                        <td id="minQuiz"></td>
+                        <td id="minAssignment"></td>
+                        <td id="minMid1"></td>
+                        <td id="minMid2"></td>
+                        <td id="minProject"></td>
+                        <td id="minFinal"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Average</td>
+                        <td id="avgQuiz"></td>
+                        <td id="avgAssignment"></td>
+                        <td id="avgMid1"></td>
+                        <td id="avgMid2"></td>
+                        <td id="avgProject"></td>
+                        <td id="avgFinal"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Std Dev</td>
+                        <td id="stdQuiz"></td>
+                        <td id="stdAssignment"></td>
+                        <td id="stdMid1"></td>
+                        <td id="stdMid2"></td>
+                        <td id="stdProject"></td>
+                        <td id="stdFinal"></td>
+                    </tr>
+                </tfoot>
+            </div>
             </table>
 
             <!-- Save Button -->
             <button id="saveMarks" style="display: none;">Save</button>
-
-            <!-- Success Message -->
-            <div id="successMessage" class="success-message" style="display: none;">
-                Student Marks Updated Successfully!
-            </div>
         </div>
     </div>
-
+    <div id="notification" class="notification">
+        <span id="notificationMessage"></span>
+        <div class="progress-bar"></div>
+      </div>
     <!-- Back Button -->
     <div class="back-button-container">
         <button id="backToPortal" onclick="goToFacultyPortal()">Back to Faculty Portal</button>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script src="faculty_marks.js"></script>
 </body>
 </html>
