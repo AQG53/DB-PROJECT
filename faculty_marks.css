@@ -11,7 +11,40 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f0f8ff; /* Light blue background */
   }
-  
+  /* Metric Containers - Max, Min, Avg, Std Dev */
+tfoot td {
+  text-align: center;
+  font-weight: bold;
+  padding: 8px;
+  background-color: #eaf4fc;
+  color: #003366;
+  border: 1px solid #b3d7f4;
+  border-radius: 5px;
+}
+
+/* Highlight important rows */
+tfoot tr:nth-child(2) td, /* Max row */
+tfoot tr:nth-child(3) td, /* Min row */
+tfoot tr:nth-child(4) td, /* Avg row */
+tfoot tr:nth-child(5) td  /* Std Dev row */ {
+  background-color: #f6fbff;
+  color: #00509e;
+}
+
+/* Add spacing between groups for better readability */
+tfoot tr + tr {
+  margin-top: 5px;
+}
+
+/* Metric Titles (e.g., "Maximum", "Average") */
+tfoot td:first-child,
+tfoot td:nth-child(2) {
+  text-align: left;
+  background-color: #d9eaf7;
+  font-weight: bold;
+  color: #007acc;
+}
+
   .logo-container {
     display: flex;
     justify-content: center; /* Center horizontally */
