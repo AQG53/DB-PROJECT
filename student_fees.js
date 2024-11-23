@@ -8,7 +8,9 @@ if (!studentId) {
 }
 const CREDIT_HOUR_FEE = 10750;
 const tableBody = document.querySelector('tbody');
-
+let admissionFee=0 ;
+let feeAmount=0 ;
+let totalfees=0;
 async function calculateAndInsertFee() {
     try {
         // Fetch existing fee record
@@ -64,7 +66,7 @@ async function calculateNewFee() {
         
         console.log(totalCreditHours);
 
-        const feeAmount = totalCreditHours * CREDIT_HOUR_FEE;
+        feeAmount = totalCreditHours * CREDIT_HOUR_FEE;
         console.log(feeAmount);
 
         // Get student details
@@ -79,14 +81,22 @@ async function calculateNewFee() {
         const generatedOn = new Date(studentData.created_at);
         const dueDate = new Date(generatedOn);
         dueDate.setDate(generatedOn.getDate() + 45);
-
+        if (studentData.semester === 1) {
+            admissionFee = 30000; // Add admission fee for first semester
+            totalfees= feeAmount + admissionFee;
+        }
+        else {
+            totalfees=feeAmount;
+        }
+        console.log("first",feeAmount);
+         
         // Insert new fee record
         const { data: insertedData, error: insertError } = await supabase
             .from('fees')
             .insert([
                 {
                     roll_number: studentId,
-                    amount: feeAmount,
+                    amount: totalfees,
                     generatedOn: generatedOn,
                     dueOn: dueDate,
                     status: 'Pending',
@@ -97,15 +107,20 @@ async function calculateNewFee() {
 
         return {
             roll_number: studentId,
-            amount: feeAmount,
+            amount: totalfees,
             generatedOn: generatedOn.toISOString(),
             dueOn: dueDate.toISOString(),
             status: 'Pending',
+            feeAmount,
+            admissionFee,
+            totalfees
         };
     } catch (error) {
         console.error('Error calculating new fee:', error.message);
     }
-}
+}  
+console.log("second",feeAmount);
+console.log("second add",admissionFee);
 
 function displayFeeData(feeDataArray) {
     tableBody.innerHTML = '';
@@ -149,12 +164,15 @@ async function downloadChallan(index) {
             .single();
 
         if (studentError) throw studentError;
+        generatedOn= new Date(fee.generatedOn);
+        dueOn=new Date(fee.dueOn);
 
         downloadUpdatedChallan(
-            fee.amount,
+            admissionFee,
+            fee.amount, // Total fee amount
             studentData,
-            new Date(fee.generatedOn),
-            new Date(fee.dueOn),
+            generatedOn,
+            dueOn,
             fee.status
         );
     } catch (error) {
@@ -162,13 +180,14 @@ async function downloadChallan(index) {
     }
 }
 
-function downloadUpdatedChallan(amount, studentDetails, generatedOn, dueDate, status) {
+function downloadUpdatedChallan(admissionFee, totalfees, studentDetails, generatedOn, dueDate, status) {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
     doc.setFontSize(18);
     doc.text('FEE CHALLAN', 105, 20, null, null, 'center');
 
+    // Add student details
     doc.autoTable({
         startY: 40,
         head: [['Student Details', 'Value']],
@@ -181,19 +200,27 @@ function downloadUpdatedChallan(amount, studentDetails, generatedOn, dueDate, st
         theme: 'grid',
     });
 
+    // Add fee details
+    const feeDetails = admissionFee > 0
+        ? [
+              [`Rs.${totalfees}`, `Rs.${admissionFee}`,generatedOn.toDateString(), dueDate.toDateString(), status],
+          ]
+        : [
+              [`Rs.${totalfees}`, generatedOn.toDateString(), dueDate.toDateString(), status],
+          ];
+
+    const feeHeadings = admissionFee > 0
+        ? ['Total Fee','Admission Fee', 'Generated On', 'Due Date', 'Status']
+        : ['Total Fee', 'Generated On', 'Due Date', 'Status'];
+
     doc.autoTable({
         startY: doc.lastAutoTable.finalY + 10,
-        head: [['Amount', 'Generated On', 'Due Date', 'Status']],
-        body: [
-            [
-                `Rs.${amount}`,
-                generatedOn.toLocaleDateString(),
-                dueDate.toLocaleDateString(),
-                status,
-            ],
-        ],
+        head: [feeHeadings],
+        body: feeDetails,
         theme: 'grid',
     });
+
+    // Add bank details
     doc.autoTable({
         startY: doc.lastAutoTable.finalY + 10,
         head: [['Bank Details', 'Value']],
@@ -206,9 +233,9 @@ function downloadUpdatedChallan(amount, studentDetails, generatedOn, dueDate, st
         ],
         theme: 'grid',
     });
+
     doc.save(`Fee_Challan_${studentId}.pdf`);
 }
-
 // Trigger fee calculation on page load
 calculateAndInsertFee();
 
