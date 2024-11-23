@@ -8,9 +8,6 @@
 </head>
 <body>
   <div class="form-container">
-        <div class="logo-container">
-            <img src="FASTNU-logo.png" alt="University Logo">
-          </div>
     <h1>Manage Attendance</h1>
     <div class="form-box">
       <h2>Search Student</h2>
@@ -19,7 +16,7 @@
           <label for="rollNumber">Roll Number</label>
           <input type="text" id="rollNumber" name="rollNumber" placeholder="Enter Roll Number" required>
         </div>
-        <button type="button" onclick="searchStudent()">Search</button>
+        <button id = "searchbutton" type="button" onclick="searchStudent()">Search</button>
       </form>
     </div>
 
@@ -46,12 +43,16 @@
           <!-- Attendance records will be dynamically added here -->
         </tbody>
       </table>
-      <button type="button" onclick="saveAttendance()">Save Attendance</button>
     </div>
   </div>
   <div class="back-button-container">
     <button id="backToPortal" onclick="goBack()">Back to Admin Portal</button>
   </div>
+  <div id="notification" class="notification">
+    <span id="notificationMessage"></span>
+    <div class="progress-bar"></div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script src="adminattendance.js"></script>
 </body>
 </html>

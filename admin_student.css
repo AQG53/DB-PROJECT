@@ -1,15 +1,19 @@
+/* General Styles */
 body {
   background: url("background.jpg") no-repeat center center fixed;
   background-size: cover;
   font-family: Arial, sans-serif;
-  color: #004d40;
+  color: #003366; /* Dark blue text color */
+  margin: 0;
+  padding: 0;
 }
 
+/* Form Container */
 .form-container {
   max-width: 800px;
   margin: 40px auto;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.9);
+  background-color: #eaf4fc; /* Light blue background */
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
@@ -22,19 +26,19 @@ body {
 
 h1 {
   text-align: center;
-  color: #00796b;
+  color: #003366; /* Medium blue */
 }
 
 h2 {
-  color: #004d40;
-  border-bottom: 2px solid #00796b;
+  color: #003366; /* Dark blue */
+  border-bottom: 2px solid #00509e; /* Medium blue border */
   padding-bottom: 5px;
   margin-bottom: 10px;
 }
 
 .form-box {
   padding: 20px;
-  background: #e0f7fa;
+  background: #f7fbff; /* Very light blue */
   border-radius: 10px;
 }
 
@@ -45,7 +49,7 @@ h2 {
 
 label {
   font-weight: bold;
-  color: #00796b;
+  color: #00509e; /* Medium blue */
 }
 
 input,
@@ -55,9 +59,9 @@ textarea {
   max-width: 100%;
   padding: 10px;
   margin-top: 5px;
-  border: 1px solid #b2dfdb;
+  border: 1px solid #8cb3dd; /* Light blue border */
   border-radius: 5px;
-  background: #f1f8e9;
+  background: #dceaf9; /* Very pale blue background */
   box-sizing: border-box;
 }
 
@@ -88,26 +92,26 @@ textarea {
 }
 
 #generatePassword {
-  padding: 5px 10px; /* Smaller padding */
+  padding: 5px 10px;
   font-size: 14px;
-  background-color: #00796b;
+  background-color: #00509e; /* Medium blue */
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   margin-top: 10px;
   display: inline-block;
-  width: 100%; /* Make button same width as other inputs */
+  width: 100%;
 }
 
 #generatePassword:hover {
-  background-color: #004d40;
+  background-color: #003366; /* Dark blue */
 }
 
 button {
   width: 100%;
   padding: 12px;
-  background-color: #00796b;
+  background-color: #00509e; /* Medium blue */
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -116,7 +120,7 @@ button {
 }
 
 button:hover {
-  background-color: #004d40;
+  background-color: #003366; /* Dark blue */
 }
 
 .notification {
@@ -125,22 +129,22 @@ button:hover {
   right: 20px;
   width: 300px;
   padding: 15px;
-  background-color: #4CAF50;
+  background-color: #4a90e2; /* Light blue notification background */
   color: #fff;
   font-weight: bold;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  display: none; /* Hidden by default */
-  opacity: 0; /* Start with 0 opacity for transition */
-  transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition */
-  transform: translateY(-20px); /* Start slightly above */
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: translateY(-20px);
   z-index: 1000;
 }
 
 .notification.show {
   display: block;
   opacity: 1;
-  transform: translateY(0); /* Slide down smoothly */
+  transform: translateY(0);
 }
 
 .notification .progress-bar {
@@ -150,15 +154,19 @@ button:hover {
   height: 4px;
   background-color: #fff;
   width: 100%;
-  animation: progress 5s linear forwards; /* 5-second progress animation */
+  animation: progress 5s linear forwards;
 }
 
 @keyframes progress {
   from { width: 100%; }
   to { width: 0; }
 }
-
-/* Styles for the back button */
+footer {
+  text-align: center;
+  margin-top: 20px;
+  color: #003366;
+}
+/* Back Button */
 .back-button-container {
   position: fixed;
   bottom: 20px;
@@ -166,22 +174,22 @@ button:hover {
 }
 
 #backToPortal {
-  background-color: #00796b; /* Teal theme color */
+  background-color: #00509e; /* Medium blue */
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
-  transition: background-color 0.3s, transform 0.2s; /* Smooth hover effects */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 #backToPortal:hover {
-  background-color: #004d40; /* Darker teal on hover */
-  transform: translateY(-2px); /* Slight lift effect */
+  background-color: #003366; /* Dark blue */
+  transform: translateY(-2px);
 }
 
 #backToPortal:active {
-  background-color: #00695c; /* Slightly lighter teal for active state */
-  transform: translateY(0); /* Reset lift on click */
+  background-color: #004085; /* Slightly lighter blue */
+  transform: translateY(0);
 }

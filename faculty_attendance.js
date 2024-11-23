@@ -2,6 +2,9 @@ const SUPABASE_URL = 'https://ynwjgmkbbyepuausjcdw.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlud2pnbWtiYnllcHVhdXNqY2R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE1MDcwMjcsImV4cCI6MjA0NzA4MzAyN30.RBCkr5OCoY7vqxOc_ZFSRf4DNdTPPx8rvAlRUDpesrY';
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+let selected_CourseID = null; // Store the selected course
+let selected_Month = null; // Store the selected month
+let check = 0;
 function showNotification(message) {
     const notification = document.getElementById('notification');
     const notificationMessage = document.getElementById('notificationMessage');
@@ -40,6 +43,21 @@ function showNotification(message) {
   function capitalize(str) {
     if (!str) return ""; // Handle null or undefined values
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
+async function refreshTable() {
+    if (!selected_CourseID || !selected_Month) {
+        showNotification('Please select a course and month to refresh the table.');
+        return;
+    }
+
+    try {
+        // Trigger the monthSelect's change event to refresh the table
+        document.getElementById("monthSelect").dispatchEvent(new Event("change"));
+    } catch (error) {
+        console.error("Error refreshing table:", error);
+        showNotification("Failed to refresh the table.");
+    }
 }
 
 document.addEventListener('DOMContentLoaded', async function () {
@@ -119,12 +137,13 @@ document.addEventListener('DOMContentLoaded', async function () {
     const monthSelect = document.getElementById('monthSelect');
     const attendanceTable = document.getElementById('attendanceTable');
     const attendanceTableBody = attendanceTable.querySelector('tbody');
-
+    selected_CourseID=courseSelect.value;
     monthSelect.addEventListener('change', async function () {
         // Get the selected month and course
+        check = 0;
         const selectedMonth = parseInt(monthSelect.value);
         const selectedCourse = courseSelect.value;
-
+        selected_Month=selectedMonth;
         console.log(selectedCourse, selectedMonth);
 
         // Clear the table body
@@ -188,6 +207,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     month: 'short',
                     day: 'numeric',
                 });
+                th.setAttribute('data-date', date);
                 headerRow.appendChild(th);
             });
             tableHead.appendChild(headerRow);
@@ -272,8 +292,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                             return;
                         }
                     }
-            
-                    showNotification1('Attendance records updated successfully!');
+                    await refreshTable();
+                    showNotification('Attendance records updated successfully!');
                 } catch (error) {
                     console.error('Error saving attendance records:', error);
                     showNotification('An error occurred while updating attendance records.');
@@ -392,13 +412,96 @@ document.addEventListener('DOMContentLoaded', async function () {
             return;
         }
 
-        showNotification1('Attendance records added successfully!');
+        showNotification('Attendance records added successfully!');
         addRecordPopup.style.display = 'none';
         document.body.classList.remove('modal-open');
+        document.getElementById("monthSelect").dispatchEvent(new Event("change"));
         } catch (error) {
             console.error('Error saving attendance records:', error);
             showNotification('An error occurred while saving the attendance records.');
         }
+    });
+
+    document.getElementById("deleteAttendance").addEventListener("click", function () {
+        const selectedCourse = courseSelect.value;
+        const selectedMonth = parseInt(monthSelect.value);
+        if(check==1) {
+            return;
+        }
+        if (!selectedCourse) {
+            showNotification('Please select a course before adding a new attendance record.');
+            return; // Prevent the popup from opening
+        }
+        else if (isNaN(selectedMonth)) {
+            showNotification('Please select a month before adding a new attendance record.');
+            return;
+        }
+        check = 1;
+        const tableHead = document.querySelector("#attendanceTable thead");
+        const headerRow = tableHead.querySelector("tr");
+        const crossRow = document.createElement("tr"); // Create a new row for cross icons
+    
+        // Clear any existing cross icons
+        while (tableHead.childElementCount > 1) {
+            tableHead.removeChild(tableHead.lastChild);
+        }
+    
+        // Add an empty cell to align with "Student Name"
+        const emptyCell = document.createElement("th");
+        crossRow.appendChild(emptyCell);
+    
+        // Add cross icons to each date column
+        Array.from(headerRow.children).slice(1).forEach(header => {
+            const crossCell = document.createElement("th");
+    
+            const crossIcon = document.createElement("span");
+            crossIcon.textContent = "✖"; // Cross icon
+            crossIcon.classList.add("delete-cross");
+            crossIcon.style.cursor = "pointer";
+            crossIcon.style.color = "red";
+    
+            // Add event listener to delete attendance for the date
+            crossIcon.addEventListener("click", async () => {
+                const dateText = header.getAttribute("data-date");
+
+                if (!dateText) {
+                    alert("Error: Date not found for this column.");
+                    return;
+                }
+
+                const confirmDelete = confirm(
+                    `Are you sure you want to delete all attendance records for ${header.textContent}?`
+                );
+                if (!confirmDelete) return;
+    
+                try {
+                    // Delete records for the specific date
+                    const { error } = await supabase
+                        .from("attendance")
+                        .delete()
+                        .eq("course_id", document.getElementById("courseSelect").value)
+                        .eq("date", dateText);
+    
+                    if (error) {
+                        console.error("Error deleting attendance records:", error);
+                        alert("Failed to delete attendance records.");
+                        return;
+                    }
+    
+                    showNotification(`Attendance records for ${dateText} deleted successfully!`);
+                    // Refresh the table
+                    document.getElementById("monthSelect").dispatchEvent(new Event("change"));
+                } catch (err) {
+                    console.error("Error during deletion:", err);
+                    alert("An error occurred. Please try again.");
+                }
+            });
+    
+            crossCell.appendChild(crossIcon);
+            crossRow.appendChild(crossCell);
+        });
+    
+        tableHead.prepend(crossRow); // Add the cross icon row above the existing headers
     });
 });
 
