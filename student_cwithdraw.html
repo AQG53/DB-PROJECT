@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Withdrawal</title>
     <link rel="stylesheet" href="student_cwithdraw.css"> <!-- Linking the external CSS file -->
 </head>
+
 <body>
-      <!-- Logo Section -->
-      <div class="logo-container">
+    <!-- Logo Section -->
+    <div class="logo-container">
         <img src="FASTNU-logo.png" alt="University Logo">
     </div>
     <div class="withdraw-container">
@@ -23,42 +25,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Statistics</td>
-                    <td>CS107</td>
-                    <td>3</td>
-                    <td><input type="checkbox" name="course" value="CS107"></td>
-                </tr>
-                <tr>
-                    <td>Numerical Computing</td>
-                    <td>MT106</td>
-                    <td>3</td>
-                    <td><input type="checkbox" name="course" value="MT106"></td>
-                </tr>
-                <tr>
-                    <td>Introduction to Programming</td>
-                    <td>CS101</td>
-                    <td>3</td>
-                    <td><input type="checkbox" name="course" value="CS101"></td>
-                </tr>
-                <tr>
-                    <td>Calculus II</td>
-                    <td>MATH202</td>
-                    <td>4</td>
-                    <td><input type="checkbox" name="course" value="MATH202"></td>
-                </tr>
-                <tr>
-                    <td>Physics III</td>
-                    <td>PHYS301</td>
-                    <td>3</td>
-                    <td><input type="checkbox" name="course" value="PHYS301"></td>
-                </tr>
+
                 <!-- Add more courses as needed -->
             </tbody>
         </table>
-
-        <!-- Error Message for unselected courses -->
-        <div id="errorMessage" class="error-message" style="display: none;">Select at least one course to withdraw!</div>
 
         <div class="withdraw-button-container">
             <button id="withdrawCourses">Withdraw Selected Courses</button>
@@ -68,10 +38,51 @@
         <div id="withdrawalMessage"></div>
     </div>
 
+    <!-- Popup Modal -->
+    <div id="withdrawPopup" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" id="closePopup">&times;</span>
+            <h3>Course Withdrawal Confirmation</h3>
+            <p class="note"><strong>Note:</strong> Once withdrawn, this action cannot be undone.</p>
+
+            <label for="withdrawReason"><strong>Reason for Withdrawal:</strong></label>
+            <select id="withdrawReason" required>
+                <option value="">Select a Reason</option>
+                <option value="Health Issue">Health Issue</option>
+                <option value="Academic Performance">Academic Performance</option>
+                <option value="Financial Issues">Financial Issues</option>
+            </select>
+            <p class="hint">Courses can be withdrawn only for the above-listed reasons.</p>
+
+            <label for="withdrawComments"><strong>Additional Comments:</strong></label>
+            <textarea id="withdrawComments" rows="5" placeholder="Write your comments here..." required></textarea>
+            <p class="hint">Provide any additional information related to your withdrawal.</p>
+
+            <div class="form-group">
+                <label for="password"><strong>Enter Your Password:</strong></label>
+                <div class="input-container">
+                    <input type="password" id="password" required>
+                    <span class="toggle-password">
+                        <img src="hide.png" id="togglePasswordIcon" onclick="togglePasswordVisibility()" alt="Toggle Password">
+                    </span>
+                </div>
+                <p class="hint">This step is for security purposes.</p>
+            </div>
+            
+
+            <button id="confirmWithdraw">Withdraw</button>
+        </div>
+    </div>
+
+    <div id="notification" class="notification">
+        <span id="notificationMessage"></span>
+        <div class="progress-bar"></div>
+    </div>
     <div class="back-button-container">
         <button id="backToPortal" onclick="goToStudentPortal()">Back to Student Portal</button>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script src="student_cwithdraw.js"></script>
 </body>
+
 </html>

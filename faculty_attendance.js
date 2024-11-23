@@ -260,10 +260,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             const saveButton = document.getElementById('saveAttendance');
 
             saveButton.addEventListener('click', async function () {
-                if (Object.keys(updates).length === 0) {
-                    showNotification('No changes were made.');
-                    return; // Stop further execution
-                }
                 const updatePayload = [];
                 for (const rollNumber in updates) {
                     for (const date in updates[rollNumber]) {

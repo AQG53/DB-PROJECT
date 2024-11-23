@@ -134,6 +134,19 @@ document.addEventListener("DOMContentLoaded", async function () {
     const courseTableBody = document.querySelector("#courseSelectionTable tbody");
     
     try {
+
+        const { data: withdrawnCourses, error: withdrawnError } = await supabase
+            .from("audit_student_withdraw")
+            .select("course_id")
+            .eq("student_id", studentId);
+
+        if (withdrawnError) {
+            console.error("Error fetching withdrawn courses:", withdrawnError.message);
+            return;
+        }
+
+        const withdrawnCourseIds = withdrawnCourses.map(course => course.course_id);
+
         // Fetch student data
         const { data: studentData, error: studentError } = await supabase
             .from("students")
@@ -186,8 +199,10 @@ document.addEventListener("DOMContentLoaded", async function () {
         courseTableBody.innerHTML = ""; // Clear any skeleton loading rows
         coursesData.forEach(course => {
             const isRegistered = registeredCourseIds.includes(course.course_code);
+            const isWithdrawn = withdrawnCourseIds.includes(course.course_code);
 
             const row = document.createElement("tr");
+            
             if (course.type==="Core") {
                 row.style.backgroundColor="lightgreen";
             }
@@ -209,7 +224,8 @@ document.addEventListener("DOMContentLoaded", async function () {
                         type="checkbox" 
                         name="selectCourse" 
                         value=" ${course.course_code}"
-                        ${isRegistered ? "checked disabled" : ""} 
+                        ${isRegistered ? "checked disabled" : ""}
+                        ${isWithdrawn ? "checked disabled" : ""}> 
                 </td>
                 <td>
                     ${isRegistered ? `
@@ -219,6 +235,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                         Drop
                         </button>`
                     : ""}
+                    ${isWithdrawn ? `<span style="color: red; font-weight: bold;">Withdrawn</span>` : ""}
                 </td>
             `;
             courseTableBody.appendChild(row);

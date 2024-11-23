@@ -27,10 +27,15 @@ h1 {
   max-width: 350px;
 }
 
+.form-group {
+  position: relative; /* Ensure relative positioning for absolute child elements */
+  margin-bottom: 10px;
+}
+
 
 h2 {
-  color: #00509e;
-  border-bottom: 2px solid #007acc;
+  color: #003366;
+  border-bottom: 2px solid #00509e;
   padding-bottom: 5px;
   margin-bottom: 10px;
 }
@@ -86,7 +91,7 @@ textarea:focus {
 button {
   width: 100%;
   padding: 12px;
-  background-color: #007acc;
+  background-color: #00509e;
   color: #ffffff;
   border: none;
   border-radius: 5px;
@@ -97,7 +102,7 @@ button {
 }
 
 button:hover {
-  background-color: #00509e;
+  background-color: #003366;
 }
 
 button:active {
@@ -106,12 +111,20 @@ button:active {
 }
 
 #generatePassword {
-  background-color: #007acc;
-  margin-bottom: 10px;
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #00509e; /* Medium blue */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  display: inline-block;
+  width: 100%;
 }
 
 #generatePassword:hover {
-  background-color: #00509e;
+  background-color: #003366; /* Dark blue */
 }
 footer {
   text-align: center;

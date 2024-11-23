@@ -26,8 +26,9 @@ function generateRandomPassword() {
   document.getElementById('password').value = password; // Set the generated password
 }
 
-async function getNextRollNumber(batchInitial) {
-  const currentYear = new Date().getFullYear().toString().slice(-2); // Last two digits of the year
+async function getNextRollNumber(batchInitial, batchYear) {
+  const currentYear = batchYear.toString().slice(-2); // Last two digits of the year
+  console.log(currentYear);
   // Fetch the most recent roll number
   const { data, error } = await supabase
       .from('students')
@@ -102,7 +103,7 @@ document.getElementById('studentRegistrationForm').addEventListener('submit', as
   const password = document.getElementById('password').value;
 
   const batchInitial = campus[0].toUpperCase();
-  const rollNumber = await getNextRollNumber(batchInitial);
+  const rollNumber = await getNextRollNumber(batchInitial, batchYear);
 
   console.log("Generated roll number:", rollNumber);
 
@@ -114,7 +115,7 @@ document.getElementById('studentRegistrationForm').addEventListener('submit', as
       gender,
       blood_group: bloodGroup,
       cnic,
-      phone: '${countryCode}${phone}',
+      phone: `${countryCode}${phone}`,
       email,
       address,
       campus,
