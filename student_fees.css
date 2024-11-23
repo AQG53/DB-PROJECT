@@ -1,70 +1,92 @@
 body {
     font-family: Arial, sans-serif;
-    background-image: url('background.jpg'); /* Adjust image path */
+    background-color: #f0f8ff; /* Light Blue Background */
+    background-image: url('background.jpg'); /* Ensure the image path is correct */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    flex-direction: column; /* Stack logo and container vertically */
+    align-items: center; /* Center horizontally */
     margin: 0;
+    height: 100vh;
+}
+/* Logo Section */
+.logo-container {
+    margin-bottom: 20px; /* Space between logo and container */
 }
 
+.logo-container img {
+    max-width: 300px; /* Adjust size for the logo */
+    height: auto; /* Maintain aspect ratio */
+}
+/* Fees Container */
 .fees-container {
-    background-color: #f0f8ff;;
-    padding: 25px;
-    border-radius: 15px;
+    background-color: #eaf4fc; /* Softer Blue */
+    border: 1px solid #b3d7f4;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    width: 80%;
+    border-radius: 15px;
+    padding: 25px;
+    width: 90%;
     max-width: 800px;
-    margin: 20px;
     text-align: center;
 }
 
-h2 {
-    color: #333;
+.fees-container h2 {
+    color: #003366; /* Dark Blue */
     font-size: 28px;
     margin-bottom: 20px;
     font-weight: 600;
 }
 
+/* Table Styling */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
-th, td {
-    padding: 15px;
-    text-align: left;
-    border: 1px solid #ddd;
-    font-size: 16px;
+table th, table td {
+    text-align: center;
+    padding: 12px;
+    border: 1px solid #b3d7f4;
 }
 
-th {
-    background-color: #2196f3;
+table th {
+    background-color: #007acc; /* Blue Header */
     color: white;
+    font-size: 16px;
+    font-weight: 600;
 }
 
-td {
-    background-color: #fafafa;
+table td {
+    font-size: 14px;
+    color: #003366; /* Dark Text */
+    background-color: #ffffff; /* White Cell */
 }
 
+table tr:nth-child(even) {
+    background-color: #f0f8ff; /* Light Blue Rows */
+}
+
+/* Buttons */
 .download-btn {
-    background-color:#3a6677;
+    background-color: #007acc; /* Blue Button */
     color: white;
     padding: 8px 15px;
     border: none;
     border-radius: 5px;
+    font-size: 14px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .download-btn:hover {
-    background-color: #1976d2;
+    background-color: #00509e; /* Darker Blue */
 }
 
+/* Back Button */
 .back-button-container {
     position: fixed;
     bottom: 20px;
@@ -73,7 +95,7 @@ td {
 }
 
 #backToPortal {
-    background-color: #004d40;
+    background-color: #00509e; /* Dark Blue */
     color: white;
     padding: 10px 20px;
     border: none;
@@ -82,5 +104,11 @@ td {
 }
 
 #backToPortal:hover {
-    background-color: #00695c;
+    background-color: #003366; /* Deeper Blue */
+}
+
+/* Optional Styling Enhancements */
+select:hover, input[type="text"]:hover {
+    border-color: #007acc; /* Light Blue Border on Hover */
+    transition: border-color 0.3s ease-in-out;
 }

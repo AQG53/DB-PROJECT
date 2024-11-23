@@ -1,20 +1,31 @@
-/* Basic styling for the layout */
 body {
     font-family: Arial, sans-serif;
+    background-color: #f0f8ff; /* Light Blue Background */
     background-image: url('background.jpg'); /* Ensure the image path is correct */
     background-size: cover;
-    background-position: center center;
+    background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    flex-direction: column; /* Stack logo and container vertically */
+    align-items: center; /* Center horizontally */
     margin: 0;
+    height: 100vh;
 }
 
+/* Logo Section */
+.logo-container {
+    margin-bottom: 20px; /* Space between logo and container */
+}
+
+.logo-container img {
+    max-width: 300px; /* Adjust size for the logo */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Main Container */
 .request-container {
-    background-color: #e3ff7c;
+    background-color: #eaf4fc; /* Softer Blue */
     padding: 25px;
     border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -24,19 +35,20 @@ body {
 }
 
 h2 {
-    color: #333;
+    color: #003366;
     font-size: 28px;
     margin-bottom: 20px;
     font-weight: 600;
 }
 
-/* Styling for the form elements */
+/* Form Elements */
 label {
     font-size: 16px;
     margin-top: 10px;
     display: block;
     text-align: left;
     margin-left: 60px;
+    color: #003366;
 }
 
 select, input[type="text"] {
@@ -44,17 +56,18 @@ select, input[type="text"] {
     font-size: 14px;
     width: 80%;
     margin-top: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid #b3d7f4;
     border-radius: 5px;
+    background-color: #ffffff;
 }
 
-/* Button Styling */
+/* Buttons */
 .request-button-container {
     margin-top: 20px;
 }
 
 #sendRequest {
-    background-color: #2196f3;
+    background-color: #007acc; /* Blue Button */
     color: white;
     padding: 12px 25px;
     border: none;
@@ -65,28 +78,66 @@ select, input[type="text"] {
 }
 
 #sendRequest:hover {
-    background-color: #1976d2;
+    background-color: #00509e; /* Darker Blue */
 }
 
 #errorMessage {
     font-size: 16px;
-    color: rgb(190, 10, 10);
+    color: #c00;
     font-weight: bold;
     text-align: center;
     margin-top: 20px;
     display: none;
 }
 
-/* Success Message Styling */
+/* Success Message */
 #requestMessage {
     margin-top: 20px;
-    color: green;
+    color: #007acc; /* Blue */
     font-weight: bold;
     font-size: 18px;
     text-align: center;
 }
 
-/* Back Button Styling */
+/* Buttons */
+.request-button-container {
+    margin-top: 20px;
+}
+
+#sendRequest {
+    background-color: #007acc; /* Blue Button */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#sendRequest:hover {
+    background-color: #00509e; /* Darker Blue */
+}
+
+#errorMessage {
+    font-size: 16px;
+    color: #c00;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+    display: none;
+}
+
+/* Success Message */
+#requestMessage {
+    margin-top: 20px;
+    color: #007acc; /* Blue */
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+}
+
+/* Back Button */
 .back-button-container {
     position: fixed;
     bottom: 20px;
@@ -95,7 +146,7 @@ select, input[type="text"] {
 }
 
 #backToPortal {
-    background-color: #004d40;
+    background-color: #00509e; /* Dark Blue */
     color: white;
     padding: 10px 20px;
     border: none;
@@ -104,5 +155,11 @@ select, input[type="text"] {
 }
 
 #backToPortal:hover {
-    background-color: #00695c;
+    background-color: #003366; /* Deeper Blue */
+}
+
+/* Optional Styling Enhancements */
+select:hover, input[type="text"]:hover {
+    border-color: #007acc; /* Light Blue Border on Hover */
+    transition: border-color 0.3s ease-in-out;
 }
