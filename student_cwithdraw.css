@@ -244,7 +244,7 @@ select:hover, input[type="text"]:hover {
     opacity: 0;
     transition: opacity 0.5s ease, transform 0.5s ease;
     transform: translateY(-20px);
-    z-index: 1000;
+    z-index: 10000;
   }
   
   .notification.show {
@@ -267,3 +267,48 @@ select:hover, input[type="text"]:hover {
     from { width: 100%; }
     to { width: 0; }
   }
+
+  .form-group {
+    position: relative; /* Relative positioning to allow absolute positioning of the toggle icon */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 55%; /* Vertically align with the input */
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.toggle-password img {
+    width: 20px;
+    height: 20px;
+    opacity: 0.7;
+}
+
+.toggle-password img:hover {
+    opacity: 1;
+}
+
+input[type="password"],
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-family: Arial, sans-serif; /* Ensure consistent font */
+    line-height: 1.4;
+}
+
+input[type="password"]:focus,
+input[type="text"]:focus {
+    border-color: #007acc;
+    outline: none; /* Remove the default focus outline */
+    box-shadow: 0 0 5px rgba(0, 122, 204, 0.5); /* Add a subtle focus shadow */
+}
+
+
+

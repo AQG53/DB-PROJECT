@@ -15,6 +15,21 @@ function showNotification(message) {
         closeNotification();
     }, 3000);
   }
+
+  function showNotification1(message) {
+    const notification = document.getElementById('notification');
+    const notificationMessage = document.getElementById('notificationMessage');
+  
+    // Set message and show the notification
+    notificationMessage.textContent = message;
+    notification.classList.add('show');
+  
+    // Hide notification after 5 seconds
+    setTimeout(() => {
+        closeNotification();
+        location.reload();
+    }, 3000);
+  }
   
   // Function to close notification
   function closeNotification() {
@@ -22,8 +37,26 @@ function showNotification(message) {
     notification.classList.remove('show'); // Hide notification smoothly
   }
 
+  function togglePasswordVisibility() {
+    const passwordInput = document.getElementById('password');
+    const toggleIcon = document.getElementById('togglePasswordIcon');
+  
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text'; // Show password
+        toggleIcon.src = 'view.png'; // Change icon to "hide" icon
+    } else {
+        passwordInput.type = 'password'; // Hide password
+        toggleIcon.src = 'hide.png'; // Change icon to "view" icon
+    }
+  }
+
 document.addEventListener('DOMContentLoaded', async function () {
     const studentId = localStorage.getItem('studentId');
+    if (!studentId) {
+        alert("Student ID not found. Please log in again.");
+        window.location.href = "student.html";
+        return;
+    }
     try {
         const { data, error } = await supabase
             .from('student_registration')
@@ -49,7 +82,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     <td>${registration.course_id}</td>
                     <td>${registration.courses.name}</td>
                     <td>${registration.courses.credit_hours}</td>
-                    <td><input type="checkbox" name="course" value="${registration.courses.course_code}"></td>
+                    <td><input type="checkbox" name="course" value="${registration.course_id}"></td>
                 `;
                 tableBody.appendChild(row);
             });
@@ -87,14 +120,16 @@ document.getElementById('withdrawCourses').addEventListener('click', () => {
     document.getElementById('confirmWithdraw').addEventListener('click', async () => {
         const reason = document.getElementById('withdrawReason').value;
         const password = document.getElementById('password').value;
+        const student_id = localStorage.getItem('studentId')
+        console.log(student_id, password);
 
         if (!reason) {
-            alert('Please select a reason for withdrawal.');
+            showNotification('Please select a reason for withdrawal.');
             return;
         }
 
         if (!password) {
-            alert('Please enter your password.');
+            showNotification('Please enter your password.');
             return;
         }
 
@@ -105,45 +140,65 @@ document.getElementById('withdrawCourses').addEventListener('click', () => {
                 const { data: studentData, error: validationError } = await supabase
                     .from('students')
                     .select('password')
-                    .eq('id', localStorage.getItem('studentId'))
+                    .eq('roll_number', student_id)
                     .single();
 
                 if (validationError || studentData.password !== password) {
-                    throw new Error('Invalid password. Please try again.');
+                    showNotification("Invalid Password!");
+                    return;
                 }
+                console.log(courseId, student_id);
 
                 // Delete attendance records
-                await supabase
+                const { data: attendanceData, error: attendanceError } = await supabase
                     .from('attendance')
                     .delete()
-                    .match({ student_id: localStorage.getItem('studentId'), course_id: courseId });
+                    .match({ student_id, course_id: courseId });
+                    
+                    if (attendanceError) {
+                        console.error("Attendance deletion failed!", attendanceError.message);
+                        return;
+                    }
 
                 // Delete grades records
-                await supabase
-                    .from('grades')
+                const { data: gradesData, error: gradesError } = await supabase
+                    .from('marks')
                     .delete()
-                    .match({ student_id: localStorage.getItem('studentId'), course_id: courseId });
+                    .match({ roll_number: student_id, course_code: courseId });
+
+                    if (gradesError) {
+                        console.error("marks deletion failed!", gradesError.message);
+                        return;
+                    }
 
                 // Log to the audit table
-                await supabase
-                    .from('audit_student_registration')
+                const { data: auditData, error: auditError } = await supabase
+                    .from('audit_student_withdraw')
                     .insert([
                         {
-                            student_id: localStorage.getItem('studentId'),
+                            student_id,
                             course_id: courseId,
                             reason: reason,
                         },
                     ]);
 
+                    if (auditError) {
+                        console.error("Audit insert failed!", auditError.message);
+                        return;
+                    }
+
                 // Delete student registration
-                await supabase
+                const { data: studentregisData, error: studentregisError } = await supabase
                     .from('student_registration')
                     .delete()
-                    .match({ student_id: localStorage.getItem('studentId'), course_id: courseId });
-            }
+                    .match({ student_id, course_id: courseId });
 
-            alert('Withdrawal successful!');
-            window.location.reload();
+                    if (studentregisError) {
+                        console.error("Student registration deletion failed!", studentregisError.message);
+                        return;
+                    }
+            }
+            showNotification1('Withdrawal successful!');
         } catch (error) {
             alert(`An error occurred: ${error.message}`);
         }

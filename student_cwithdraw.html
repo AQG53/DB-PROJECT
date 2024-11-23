@@ -58,9 +58,17 @@
             <textarea id="withdrawComments" rows="5" placeholder="Write your comments here..." required></textarea>
             <p class="hint">Provide any additional information related to your withdrawal.</p>
 
-            <label for="password"><strong>Enter Your Password:</strong></label>
-            <input type="password" id="password" required>
-            <p class="hint">This step is for security purposes.</p>
+            <div class="form-group">
+                <label for="password"><strong>Enter Your Password:</strong></label>
+                <div class="input-container">
+                    <input type="password" id="password" required>
+                    <span class="toggle-password">
+                        <img src="hide.png" id="togglePasswordIcon" onclick="togglePasswordVisibility()" alt="Toggle Password">
+                    </span>
+                </div>
+                <p class="hint">This step is for security purposes.</p>
+            </div>
+            
 
             <button id="confirmWithdraw">Withdraw</button>
         </div>
