@@ -212,9 +212,6 @@ document.addEventListener("DOMContentLoaded", async function () {
             if (isRegistered) {
                 row.style.backgroundColor="lightpink";
             }
-            if (isWithdrawn) {
-                row.style.backgroundColor = "lightpink"; // Highlight in red
-            }
 
             row.innerHTML = `
                 <td>${course.name}</td>
@@ -228,7 +225,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                         name="selectCourse" 
                         value=" ${course.course_code}"
                         ${isRegistered ? "checked disabled" : ""}
-                        ${isWithdrawn ? "disabled" : ""}> 
+                        ${isWithdrawn ? "checked disabled" : ""}> 
                 </td>
                 <td>
                     ${isRegistered ? `
