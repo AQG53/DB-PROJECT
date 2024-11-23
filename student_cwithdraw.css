@@ -50,14 +50,14 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 15px;
-    text-align: center; /* Center-align table content */
+    text-align: center;
 }
 
 th, td {
     padding: 15px;
-    border: 1px solid #ddd;
     font-size: 16px;
-    text-align: center; /* Center-align table cells */
+    text-align: center; 
+    border-bottom: 1px solid #007acc;
 }
 
 th {
@@ -135,3 +135,135 @@ select:hover, input[type="text"]:hover {
     border-color: #007acc; /* Light Blue Border on Hover */
     transition: border-color 0.3s ease-in-out;
 }
+
+/* Modal container */
+.modal {
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Black background with transparency */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal content */
+.modal-content {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 500px; /* Reduced max-width */
+    width: 90%;
+    text-align: left;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h3 {
+    text-align: center;
+    margin-bottom: 15px; /* Reduced margin */
+    font-size: 22px; /* Slightly smaller heading */
+}
+
+.modal-content .note {
+    color: red;
+    font-size: 14px; /* Slightly smaller font size */
+    text-align: center;
+    margin-bottom: 15px; /* Reduced spacing */
+}
+
+.modal-content label {
+    display: block;
+    margin-bottom: 6px; /* Reduced spacing for labels */
+    font-weight: bold;
+}
+
+.modal-content select,
+.modal-content textarea,
+.modal-content input[type="password"] {
+    width: 100%;
+    padding: 10px; /* Reduced padding */
+    margin-bottom: 12px; /* Reduced margin between elements */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.modal-content textarea {
+    resize: none;
+}
+
+.modal-content .hint {
+    font-size: 13px; /* Slightly smaller for subtlety */
+    color: #555;
+    margin-top: -8px; /* Bring hint closer to the input above */
+    margin-bottom: 12px; /* Adjust spacing from the next input */
+    line-height: 1.4;
+}
+
+.modal-content button {
+    display: block;
+    background-color: #0073e6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 18px; /* Reduced button size */
+    font-size: 14px; /* Smaller font size */
+    cursor: pointer;
+    margin: 0 auto;
+    transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+    background-color: #005bb5;
+}
+
+/* Close button */
+.close {
+    float: right;
+    font-size: 20px; /* Slightly smaller close button */
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    padding: 15px;
+    background-color: #4CAF50;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 8px;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateY(-20px);
+    z-index: 1000;
+  }
+  
+  .notification.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .notification .progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background-color: #fff;
+    width: 100%;
+    animation: progress 3s linear forwards; /* 5-second progress animation */
+  }
+  
+  @keyframes progress {
+    from { width: 100%; }
+    to { width: 0; }
+  }
