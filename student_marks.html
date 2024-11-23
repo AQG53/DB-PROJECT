@@ -13,18 +13,9 @@
     </div>
     <div class="marks-container">
         <h2>Marks</h2>
-
-        <!-- Example Course Boxes -->
         <div class="course-boxes">
-            <div class="course-box" data-course="Introduction to Programming">Introduction to Programming</div>
-            <div class="course-box" data-course="Calculus II">Calculus II</div>
-            <div class="course-box" data-course="Physics III">Physics III</div>
-            <div class="course-box" data-course="Statistics">Statistics</div>
-            <div class="course-box" data-course="Numerical Computing">Numerical Computing</div>
-            <div class="course-box" data-course="Database Lab">Database Lab</div>
-            <!-- Add more course boxes as needed -->
+            <div class="loading-indicator">Loading courses...</div>
         </div>
-
         <!-- Marks Popup Window -->
         <div id="marksPopup" class="marks-popup">
             <div class="popup-content">
@@ -73,7 +64,7 @@
                 <button id="closePopup">Close</button>
             </div>
         </div>
-         <!-- Back to Student Portal Button -->
+        
     </div>
 
      <!-- Button to Download PDF -->
@@ -85,6 +76,7 @@
         <button id="backToPortal" onclick="goToStudentPortal()">Back to Student Portal</button>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script src="student_marks.js"></script>
 </body>
 </html>
