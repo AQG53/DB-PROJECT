@@ -29,12 +29,13 @@ h1 {
 
 .form-group {
   position: relative; /* Ensure relative positioning for absolute child elements */
+  margin-bottom: 10px;
 }
 
 
 h2 {
-  color: #00509e;
-  border-bottom: 2px solid #007acc;
+  color: #003366;
+  border-bottom: 2px solid #00509e;
   padding-bottom: 5px;
   margin-bottom: 10px;
 }
@@ -90,7 +91,7 @@ textarea:focus {
 button {
   width: 100%;
   padding: 12px;
-  background-color: #007acc;
+  background-color: #00509e;
   color: #ffffff;
   border: none;
   border-radius: 5px;
@@ -101,7 +102,7 @@ button {
 }
 
 button:hover {
-  background-color: #00509e;
+  background-color: #003366;
 }
 
 button:active {
@@ -112,7 +113,7 @@ button:active {
 #generatePassword {
   padding: 5px 10px;
   font-size: 14px;
-  background-color: #007acc; /* Medium blue */
+  background-color: #00509e; /* Medium blue */
   color: white;
   border: none;
   border-radius: 5px;
