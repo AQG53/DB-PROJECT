@@ -25,12 +25,6 @@
             <option value="" disabled selected>Select a Course</option>
         </select>
 
-        <!-- Select Section Dropdown -->
-        <label for="sectionSelect">Section</label>
-        <select id="sectionSelect" disabled>
-            <option value="" disabled selected>Select a Section</option>
-        </select>
-
         <!-- Student Grades Table -->
         <table id="gradesTable" style="display: none;">
             <thead>
@@ -44,21 +38,22 @@
                 <!-- Dynamic Rows will be added here -->
             </tbody>
         </table>
-
+        <div id="notification" style="display: none;"></div>
+        <button id="upgradeGrades" style="display:none;">Upgrade Grades</button>
         <!-- Save Button -->
         <button id="saveGrades" style="display: none;">Save</button>
-
         <!-- Success Message -->
         <div id="successMessage" class="notification success-message">
             Student Grades Updated Successfully!
         </div>
     </div>
-
     <!-- Back to Portal Button -->
     <div class="back-button-container">
         <button id="backToPortal" onclick="goToFacultyPortal()">Back to Faculty Portal</button>
     </div>
+    <div id="notification" class="notification" style="display: none;"></div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script src="faculty_grades.js"></script>
 </body>
 </html>

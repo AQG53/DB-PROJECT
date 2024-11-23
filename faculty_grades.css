@@ -20,6 +20,39 @@ body {
     max-width: 320px;
     height: auto;
 }
+.notification.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    padding: 15px;
+    background-color: #4CAF50;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: none; /* Hidden by default */
+    opacity: 0; /* Start with 0 opacity for transition */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition */
+    transform: translateY(-20px); /* Start slightly above */
+    z-index: 1000;
+  }
+  
+  .notification .progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background-color:#4CAF50;
+    width: 100%;
+    animation: progress 3s linear forwards; /* 5-second progress animation */
+  }
 
 /* Main Heading */
 .main-heading {
@@ -146,20 +179,4 @@ button:active {
 #backToPortal:active {
     background-color: #006bbf;
     transform: translateY(0);
-}
-
-/* Notification Styling */
-.notification {
-    display: none;
-    padding: 15px;
-    background-color: #007acc;
-    color: #ffffff;
-    font-weight: bold;
-    border-radius: 5px;
-    text-align: center;
-    margin-top: 20px;
-}
-
-.notification.show {
-    display: block;
 }
