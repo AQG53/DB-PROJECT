@@ -281,7 +281,7 @@ document.getElementById("submitSelection").addEventListener("click", async funct
         return;
     }`g`
 
-    if ((registeredCH + selectedCH) > 7) {
+    if ((registeredCH + selectedCH) > 10) {
         showNotification1("You are exceeding your total credit hour limit!");
         return;
     }
