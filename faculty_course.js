@@ -191,7 +191,7 @@ document.getElementById("submitSelection").addEventListener("click", function ()
       showNotification1(`Maximum courses already registered!`);
       return;
     }
-    if(total>3)
+    if(total>7)
     {
       showNotification1(`Too many courses selected!`);
       return;

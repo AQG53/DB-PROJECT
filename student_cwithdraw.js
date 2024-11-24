@@ -119,6 +119,7 @@ document.getElementById('withdrawCourses').addEventListener('click', () => {
     // Handle withdrawal confirmation
     document.getElementById('confirmWithdraw').addEventListener('click', async () => {
         const reason = document.getElementById('withdrawReason').value;
+        const comment = document.getElementById('withdrawComments').value;
         const password = document.getElementById('password').value;
         const student_id = localStorage.getItem('studentId')
         console.log(student_id, password);
@@ -153,6 +154,7 @@ document.getElementById('withdrawCourses').addEventListener('click', () => {
                         param_student_id: student_id,
                         param_course_id: courseId,
                         param_reason: reason,
+                        param_comment: comment,
                     });
 
                 if (withdrawalError) {

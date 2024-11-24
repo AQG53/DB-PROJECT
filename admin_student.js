@@ -66,7 +66,7 @@ function showNotification(message) {
     // Hide notification after 5 seconds
     setTimeout(() => {
         closeNotification();
-    }, 5000);
+    }, 3000);
 }
 
 // Function to close notification
@@ -101,7 +101,6 @@ document.getElementById('studentRegistrationForm').addEventListener('submit', as
   const department = document.getElementById('department').value;
   const batchYear = parseInt(document.getElementById('batchYear').value, 10);
   const enrollmentDate = document.getElementById('enrollmentDate').value;
-  const status = document.getElementById('status').value;
   const nationality = document.getElementById('nationality').value;
   const country = document.getElementById('country').value;
   const city = document.getElementById('city').value;
@@ -128,7 +127,6 @@ document.getElementById('studentRegistrationForm').addEventListener('submit', as
       department,
       batch_year: batchYear,
       enrollment_date: enrollmentDate,
-      status,
       nationality,
       country,
       city,
