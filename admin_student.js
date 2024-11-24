@@ -75,13 +75,19 @@ function closeNotification() {
     notification.classList.remove('show'); // Hide notification smoothly
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('dob').setAttribute('max', today);
+    document.getElementById('enrollmentDate').setAttribute('max', today);
+});
+
 
 document.getElementById('studentRegistrationForm').addEventListener('submit', async (event) => {
   event.preventDefault(); // Prevent page refresh
   console.log("Form submitted");
 
-  const firstName = document.getElementById('firstName').value;
-  const lastName = document.getElementById('lastName').value;
+  const firstName = document.getElementById('firstName').value.trim().toLowerCase();
+  const lastName = document.getElementById('lastName').value.trim().toLowerCase();
   const dob = document.getElementById('dob').value;
   const gender = document.getElementById('gender').value;
   const bloodGroup = document.getElementById('blood-group').value;
@@ -96,7 +102,6 @@ document.getElementById('studentRegistrationForm').addEventListener('submit', as
   const batchYear = parseInt(document.getElementById('batchYear').value, 10);
   const enrollmentDate = document.getElementById('enrollmentDate').value;
   const status = document.getElementById('status').value;
-  const section = document.getElementById('section').value;
   const nationality = document.getElementById('nationality').value;
   const country = document.getElementById('country').value;
   const city = document.getElementById('city').value;
@@ -124,7 +129,6 @@ document.getElementById('studentRegistrationForm').addEventListener('submit', as
       batch_year: batchYear,
       enrollment_date: enrollmentDate,
       status,
-      section,
       nationality,
       country,
       city,

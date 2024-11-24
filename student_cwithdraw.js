@@ -131,13 +131,12 @@ document.getElementById('withdrawCourses').addEventListener('click', () => {
         if (!password) {
             showNotification('Please enter your password.');
             return;
+            
         }
 
         // Proceed with withdrawal logic
         try {
-            for (const courseId of selectedCourses) {
-                // Validate password (add a Supabase function or backend API call to validate)
-                const { data: studentData, error: validationError } = await supabase
+            const { data: studentData, error: validationError } = await supabase
                     .from('students')
                     .select('password')
                     .eq('roll_number', student_id)
@@ -147,61 +146,28 @@ document.getElementById('withdrawCourses').addEventListener('click', () => {
                     showNotification("Invalid Password!");
                     return;
                 }
-                console.log(courseId, student_id);
 
-                // Delete attendance records
-                const { data: attendanceData, error: attendanceError } = await supabase
-                    .from('attendance')
-                    .delete()
-                    .match({ student_id, course_id: courseId });
-                    
-                    if (attendanceError) {
-                        console.error("Attendance deletion failed!", attendanceError.message);
-                        return;
-                    }
+                for (const courseId of selectedCourses) {
+                    console.log(courseId, student_id);
+                    const { error: withdrawalError } = await supabase.rpc('withdraw_student_course', {
+                        param_student_id: student_id,
+                        param_course_id: courseId,
+                        param_reason: reason,
+                    });
 
-                // Delete grades records
-                const { data: gradesData, error: gradesError } = await supabase
-                    .from('marks')
-                    .delete()
-                    .match({ roll_number: student_id, course_code: courseId });
-
-                    if (gradesError) {
-                        console.error("marks deletion failed!", gradesError.message);
-                        return;
-                    }
-
-                // Log to the audit table
-                const { data: auditData, error: auditError } = await supabase
-                    .from('audit_student_withdraw')
-                    .insert([
-                        {
-                            student_id,
-                            course_id: courseId,
-                            reason: reason,
-                        },
-                    ]);
-
-                    if (auditError) {
-                        console.error("Audit insert failed!", auditError.message);
-                        return;
-                    }
-
-                // Delete student registration
-                const { data: studentregisData, error: studentregisError } = await supabase
-                    .from('student_registration')
-                    .delete()
-                    .match({ student_id, course_id: courseId });
-
-                    if (studentregisError) {
-                        console.error("Student registration deletion failed!", studentregisError.message);
-                        return;
-                    }
+                if (withdrawalError) {
+                    console.error(`Error withdrawing course ${courseId}:`, withdrawalError.message);
+                    showNotification(`Failed to withdraw course ${courseId}`);
+                    return;
+                }
             }
-            showNotification1('Withdrawal successful!');
+
+            showNotification1('Courses withdrawn successfully!');
         } catch (error) {
-            alert(`An error occurred: ${error.message}`);
+            console.error('Unexpected error during withdrawal:', error.message);
+            showNotification('An unexpected error occurred. Please try again.');
         }
+     
     });
 });
 

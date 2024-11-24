@@ -2,6 +2,12 @@ const SUPABASE_URL = 'https://ynwjgmkbbyepuausjcdw.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlud2pnbWtiYnllcHVhdXNqY2R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE1MDcwMjcsImV4cCI6MjA0NzA4MzAyN30.RBCkr5OCoY7vqxOc_ZFSRf4DNdTPPx8rvAlRUDpesrY';
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+function capitalize(str) {
+    if (!str) return ""; // Handle null or undefined values
+    str.trim();
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
 document.addEventListener('DOMContentLoaded', async function () {
     const facultyId = localStorage.getItem("facultyId");
     const courseSelect = document.getElementById('courseSelect');
@@ -100,9 +106,9 @@ document.addEventListener('DOMContentLoaded', async function () {
             console.log(existingMarks); 
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td>${student.first_name} ${student.last_name || ''}</td>
-                <td>${student.roll_number}</td>
-                <td><input type="text" name="grade" value="${grade}" /></td>
+            <td>${capitalize(student.first_name)} ${capitalize(student.last_name)}</td>
+            <td>${student.roll_number}</td>
+            <td><input type="text" name="grade" value="${grade}" /></td>
             `;
             tbody.appendChild(row);
             }
