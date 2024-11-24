@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Manage Fees - Admin Portal</title>
   <link rel="stylesheet" href="admin_fees.css">
 </head>
+
 <body>
   <div class="logo-container">
     <img src="FASTNU-logo.png" alt="University Logo">
@@ -20,7 +22,7 @@
     <form id="paymentRecordsForm">
       <div class="form-group">
         <label for="rollNumber">Roll Number <span class="asterisk">*</span></label>
-        <input type="text" id="rollNumber" name="rollNumber" placeholder="Enter Roll Number" required>     
+        <input type="text" id="rollNumber" name="rollNumber" placeholder="Enter Roll Number" required>
       </div>
       <button type="button" onclick="viewPaymentRecords()">View Payment Records</button>
     </form>
@@ -38,15 +40,13 @@
             <th>Generated On</th>
             <th>Due On</th>
             <th>Payment Status</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody id="paymentTable">
           <!-- Payment records will be dynamically added here -->
         </tbody>
       </table>
-      <div id="customNotification" class="notification" style="display: none;">
-        <p id="notificationMessage"></p>
-      </div>
     </div>
     <div id="inserted" style="display: none;">
       <p>Record inserted successfully. Enter the student roll number to view the record.</p>
@@ -70,18 +70,25 @@
       <h3>Edit Fee Details</h3>
       <label for="editAmount">Total Fees: </label>
       <input type="number" id="editAmount" required><br><br>
-      
+
       <label for="editDueDate">Due Date: </label>
       <input type="date" id="editDueDate" required><br><br>
-    
+
       <button id="saveFeeDetails">Save Changes</button>
-    </div>    
+    </div>
   </div>
 
   <div class="back-button-container">
     <button id="backToPortal" onclick="goBack()">Back to Admin Portal</button>
   </div>
+
+  <div id="notification" class="notification">
+        <span id="notificationMessage"></span>
+        <div class="progress-bar"></div>
+      </div>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script src="admin_fees.js"></script>
 </body>
+
 </html>

@@ -327,7 +327,7 @@ const courseData = {
     // Hide notification after 5 seconds
     setTimeout(() => {
         closeNotification();
-    }, 5000);
+    }, 3000);
   }
   
   // Function to close notification

@@ -23,20 +23,6 @@ body {
     max-width: 320px; /* Set max width of the logo */
     height: auto; /* Maintain aspect ratio */
   }
-  .notification {
-    background-color: #4caf50;
-    color: white;
-    padding: 15px;
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 9999;
-    border-radius: 5px;
-    font-size: 16px;
-    opacity: 0.9;
-    transition: opacity 0.5s ease-in-out;
-  }
-  
   
   .form-container {
     max-width: 500px;
@@ -59,15 +45,15 @@ body {
   
   /* Box Container Styles */
   .form-box {
-    width: 150%; /* Adjust the width relative to the parent */
-    max-width: 800px; /* Set a maximum width */
+    width: 80%; /* Reduce width to center content better */
+    max-width: 800px;
+    margin: 20px auto; /* Center horizontally using auto margins */
     padding: 30px;
-    margin-left: 250px;
-    margin-bottom: 30px; /* Add space between each box */
     background: #eaf4fc;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+}
+
   .fee-search-container {
     margin: 20px;
 }
@@ -101,15 +87,43 @@ body {
 }
 
 #paymentDetails table {
-    width: 105%;
-    border-collapse: collapse;
-    margin-top: 30px;
+  table-layout: fixed; /* Enables fixed table layout */
+  width: 100%; /* Ensures the table fits the container */
 }
 
-#paymentDetails th, #paymentDetails td {
+#paymentDetails th,
+#paymentDetails td {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 10px;
     text-align: center;
+    position: relative;
+}
+
+#paymentDetails table td button {
+  display: block; /* Make the button a block element */
+  width: 100%; /* Full width of the cell */
+  height: 100%; /* Match the cell's height */
+  margin: 0; /* Remove margins */
+  padding: 10px; /* Consistent button padding */
+  box-sizing: border-box; /* Includes padding in width calculation */
+  border: none; /* No extra borders */
+  cursor: pointer; /* Ensures the pointer cursor works everywhere */
+  text-align: center; /* Centers text inside the button */
+}
+
+
+#paymentDetails td button {
+  background-color: #007acc;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#paymentDetails td button:hover {
+  background-color: #00509e;
 }
 
 #paymentDetails th {
@@ -217,27 +231,41 @@ body {
     border: 1px solid #b3d7f4;
   }
   
-  /* Notification */
-  .notification {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 300px;
-    padding: 15px;
-    background-color: #00509e;
-    color: #fff;
-    font-weight: bold;
-    border-radius: 8px;
-    display: none;
-    opacity: 0;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    transform: translateY(-20px);
-    z-index: 1000;
-  }
-  
   .notification.show {
     display: block;
     opacity: 1;
     transform: translateY(0);
   }
   
+  .notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    padding: 15px;
+    background-color: #4CAF50;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: none; /* Hidden by default */
+    opacity: 0; /* Start with 0 opacity for transition */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition */
+    transform: translateY(-20px); /* Start slightly above */
+    z-index: 1000;
+  }
+  
+  .notification .progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background-color: #fff;
+    width: 100%;
+    animation: progress 3s linear forwards; /* 5-second progress animation */
+  }
+  
+  @keyframes progress {
+    from { width: 100%; }
+    to { width: 0; }
+  }

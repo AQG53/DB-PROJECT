@@ -1,6 +1,12 @@
 const SUPABASE_URL = 'https://ynwjgmkbbyepuausjcdw.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlud2pnbWtiYnllcHVhdXNqY2R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE1MDcwMjcsImV4cCI6MjA0NzA4MzAyN30.RBCkr5OCoY7vqxOc_ZFSRf4DNdTPPx8rvAlRUDpesrY';
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+function capitalize(str) {
+  if (!str) return ""; // Handle null or undefined values
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
 async function viewPaymentRecords() {
   const rollNumber = document.getElementById("rollNumber").value.trim();
 CREDIT_HOUR_FEE=10750;
@@ -19,6 +25,7 @@ CREDIT_HOUR_FEE=10750;
       invalidStudentMessage.style.display = "none";
     }, 10000); // 10 seconds
   }
+
   function showNewFeeRecordMessage() {
     const newFeeRecordMessage = document.getElementById("newFeeRecord");
     newFeeRecordMessage.style.display = "block"; // Show the message
@@ -53,7 +60,7 @@ CREDIT_HOUR_FEE=10750;
     .single();
 
   if (studentError || !studentData) {
-    showInvalidStudentMessage();
+    showNotification("No student found with that roll number!");
     document.getElementById("paymentDetails").style.display = "none";
     document.getElementById("newFeeRecord").style.display = "none";
     return;
@@ -62,40 +69,6 @@ CREDIT_HOUR_FEE=10750;
   // Show new fee record option
   showNewFeeRecordMessage();
    document.getElementById("paymentDetails").style.display = "none";
-}
-async function displayPaymentRecords(rollNumber, records) {
-  const { data: studentData, error: studentError } = await supabase
-    .from('students')
-    .select('first_name, last_name')
-    .eq('roll_number', rollNumber)
-    .single();
-
-  if (studentError || !studentData) {
-    console.error("Error fetching student details:", studentError);
-    alert("Error fetching student details.");
-    return;
-  }
-
-  document.getElementById("paymentDetails").style.display = "block";
-  document.getElementById("paymentRollNumber").textContent = rollNumber;
-  document.getElementById("paymentStudentName").textContent = `${studentData.first_name} ${studentData.last_name}`;
-
-  const paymentTable = document.getElementById("paymentTable");
-  paymentTable.innerHTML = ""; // Clear previous records
-
-  records.forEach(record => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-      <td>${record.roll_number}</td>
-      <td>Rs.${record.amount}</td>
-      <td>Rs.${record.amount_paid || 0}</td>
-      <td>Rs.${record.amount - (record.amount_paid || 0)}</td>
-      <td>${new Date(record.generatedOn).toLocaleDateString()}</td>
-      <td>${new Date(record.dueOn).toLocaleDateString()}</td>
-      <td>${record.status}</td>
-    `;
-    paymentTable.appendChild(row);
-  });
 }
 
 function editFeeDetails(feeId, currentAmount, currentDueDate) {
@@ -107,6 +80,7 @@ function editFeeDetails(feeId, currentAmount, currentDueDate) {
 
   document.getElementById("editAmount").value = currentAmount;
   document.getElementById("editDueDate").value = currentDueDate;
+  console.log(currentAmount, currentDueDate);
 
   const saveButton = document.getElementById("saveFeeDetails");
   saveButton.onclick = async () => {
@@ -114,26 +88,34 @@ function editFeeDetails(feeId, currentAmount, currentDueDate) {
     const newDueDate = document.getElementById("editDueDate").value;
 
     if (newAmount !== currentAmount || newDueDate !== currentDueDate) {
-      try {
-        const { data, error } = await supabase
-          .from('fees')
-          .update({ amount: newAmount, dueOn: newDueDate })
-          .eq('id', feeId);
+        try {
+            const { data, error } = await supabase
+                .from('fees')
+                .update({ amount: newAmount, dueOn: newDueDate })
+                .eq('id', feeId)
+                .select(); // Ensure to retrieve updated data
 
-        if (error) {
-          console.error("Error updating fee details:", error);
-          alert("Failed to update fee details.");
-        } else {
-          alert(`Fee details updated for roll number: ${data[0].roll_number}`);
-          document.getElementById("editFeeSection").style.display = "none";
-          viewPaymentRecords(); // Refresh the records
-        }
-      } catch (err) {
-        console.error("Error saving fee details:", err.message);
+            if (error) {
+                console.error("Error updating fee details:", error);
+                alert("Failed to update fee details.");
+                return;
+            }
+
+            if (!data || data.length === 0) {
+                console.error("No record updated. Please check the fee ID.");
+                alert("No record updated. Please check the fee ID.");
+                return;
+            }
+
+            showNotification('Fee details updated successfully!');
+            document.getElementById("editFeeSection").style.display = "none";
+            viewPaymentRecords(); // Refresh the records
+          } catch (err) {
+              console.error("Error saving fee details:", err.message);
+          }
+      } else {
+          alert("No changes made to the fee details.");
       }
-    } else {
-      alert("No changes made to the fee details.");
-    }
   };
 }
 
@@ -147,15 +129,14 @@ async function displayPaymentRecords(rollNumber, records) {
 
   if (studentError || !studentData) {
     console.error("Error fetching student details:", studentError);
-    alert("Error fetching student details.");
+    showNotification("Error fetching student details.");
     return;
   }
 
-  const fullName = `${studentData.first_name} ${studentData.last_name}`;
+  const fullName = `${capitalize(studentData.first_name)} ${capitalize(studentData.last_name)}`;
   document.getElementById("paymentDetails").style.display = "block";
   document.getElementById("paymentRollNumber").textContent = rollNumber;
   document.getElementById("paymentStudentName").textContent = `Name: ${fullName}`;
-
 
   const paymentTable = document.getElementById("paymentTable");
   paymentTable.innerHTML = ""; // Clear previous records
@@ -212,11 +193,7 @@ async function calculateNewFee(studentId, semester) {
 
           if (registrationData.length === 0) {
             document.getElementById("noCoursesMessage");
-            noCoursesMessage.style.display = "block";
-            setTimeout(() => {
-              noCoursesMessage.style.display = "none";
-            }, 3000);
-
+            showNotification("No course found for this student!");
             resetForm(); // Reset the form
             return; // Exit the function early
           }
@@ -291,18 +268,6 @@ async function calculateNewFee(studentId, semester) {
   }
 
 }
-function showNotification(message) {
-  const notification = document.getElementById("customNotification");
-  const notificationMessage = document.getElementById("notificationMessage");
-  
-  notificationMessage.textContent = message;
-  notification.style.display = "block"; // Show notification
-  // Hide the notification after 3 seconds
-  setTimeout(() => {
-    notification.style.display = "none";
-  }, 3000);
-}
-
 
 function resetForm() {
   document.getElementById("paymentDetails").style.display = "none";
@@ -313,4 +278,24 @@ function resetForm() {
 
 function goBack() {
   window.location.href = "admin.html";
+}
+
+function showNotification(message) {
+  const notification = document.getElementById('notification');
+  const notificationMessage = document.getElementById('notificationMessage');
+
+  // Set message and show the notification
+  notificationMessage.textContent = message;
+  notification.classList.add('show');
+
+  // Hide notification after 5 seconds
+  setTimeout(() => {
+      closeNotification();
+  }, 3000);
+}
+
+// Function to close notification
+function closeNotification() {
+  const notification = document.getElementById('notification');
+  notification.classList.remove('show'); // Hide notification smoothly
 }
