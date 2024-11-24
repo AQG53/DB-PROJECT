@@ -212,6 +212,9 @@ document.addEventListener("DOMContentLoaded", async function () {
             if (isRegistered) {
                 row.style.backgroundColor="lightpink";
             }
+            if(isWithdrawn) {
+                row.style.backgroundColor="lightpink";
+            }
 
             row.innerHTML = `
                 <td>${course.name}</td>
@@ -267,18 +270,18 @@ document.getElementById("submitSelection").addEventListener("click", async funct
 
     // Get total credit hours for already registered courses
     const registeredCH = await calculateRegisteredCHCount(studentId);
-    console.log("Total Registered CH = ", registeredCH);
+    console.log("Total Registered CH = ", registeredCH+selectedCH);
     if (selectedCH === 0) {
         showNotification1("You must select at least one course!");
         return;
     }
 
-    if (selectedCH > 5) {
+    if (selectedCH > 7) {
         showNotification1("You are selecting too many courses!");
         return;
     }`g`
 
-    if ((registeredCH + selectedCH) > 5) {
+    if ((registeredCH + selectedCH) > 7) {
         showNotification1("You are exceeding your total credit hour limit!");
         return;
     }

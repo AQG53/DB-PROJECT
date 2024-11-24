@@ -52,11 +52,14 @@ h1 {
 
 /* Table Headers */
 #transcriptTable th {
-    background-color: #007acc; /* Dark blue */
-    color: white;
-    padding: 12px;
-    text-align: center;
-    border: 1px solid #b3d7f4;
+  background-color: #007acc; /* Dark blue */
+  color: white;
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #b3d7f4;
+  position: sticky;
+  top: 0; /* Freeze the header row */
+  z-index: 1; /* Ensure the header is above other content */
 }
 
 /* Table Data Cells */
