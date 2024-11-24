@@ -178,16 +178,24 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 function showNotification(message) {
     const notification = document.getElementById('notification');
-    notification.style.display = 'block'; 
-    notification.textContent = message;
-    notification.classList.add('show'); // Trigger notification display with animation
-    
-    // Hide the notification after 3 seconds
+    const notificationMessage = document.getElementById('notificationMessage');
+
+    // Set message and show the notification
+    notificationMessage.textContent = message;
+    notification.classList.add('show');
+
+    // Hide notification after 5 seconds
     setTimeout(() => {
-        notification.classList.remove('show'); // Fade out animation
-        notification.style.display = 'none'; // Completely hide after animation
+        closeNotification();
     }, 3000);
 }
+
+// Function to close notification
+function closeNotification() {
+    const notification = document.getElementById('notification');
+    notification.classList.remove('show'); // Hide notification smoothly
+}
+
 
 // Utility functions
 function calculateTotal(marks) {

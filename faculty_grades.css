@@ -20,28 +20,28 @@ body {
     max-width: 320px;
     height: auto;
 }
-.notification.show {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-  }
-  
-  .notification {
+
+.notification {
     position: fixed;
     top: 20px;
     right: 20px;
     width: 300px;
     padding: 15px;
     background-color: #4CAF50;
-    color: #fff;
+    color: white;
     font-weight: bold;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    display: none; /* Hidden by default */
-    opacity: 0; /* Start with 0 opacity for transition */
-    transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition */
-    transform: translateY(-20px); /* Start slightly above */
-    z-index: 1000;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateY(-20px);
+  }
+  
+  .notification.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
   }
   
   .notification .progress-bar {
@@ -49,9 +49,18 @@ body {
     bottom: 0;
     left: 0;
     height: 4px;
-    background-color:#4CAF50;
+    background-color: white;
     width: 100%;
-    animation: progress 3s linear forwards; /* 5-second progress animation */
+    animation: progress 5s linear forwards;
+  }
+  
+  @keyframes progress {
+    from {
+      width: 100%;
+    }
+    to {
+      width: 0;
+    }
   }
 
 /* Main Heading */
