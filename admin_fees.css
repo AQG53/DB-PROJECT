@@ -23,10 +23,24 @@ body {
     max-width: 320px; /* Set max width of the logo */
     height: auto; /* Maintain aspect ratio */
   }
+  .notification {
+    background-color: #4caf50;
+    color: white;
+    padding: 15px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    border-radius: 5px;
+    font-size: 16px;
+    opacity: 0.9;
+    transition: opacity 0.5s ease-in-out;
+  }
+  
   
   .form-container {
-    max-width: 700px;
-    margin: 40px auto;
+    max-width: 500px;
+    margin: 10px auto;
     padding: 20px;
   }
   
@@ -39,19 +53,68 @@ body {
   h2 {
     color: #00509e;
     border-bottom: 2px solid #007acc;
-    padding-bottom: 5px;
-    margin-bottom: 20px;
+    padding-bottom: 10px;
+    margin-bottom: 5px;
   }
   
   /* Box Container Styles */
   .form-box {
-    padding: 20px;
+    width: 150%; /* Adjust the width relative to the parent */
+    max-width: 800px; /* Set a maximum width */
+    padding: 30px;
+    margin-left: 250px;
     margin-bottom: 30px; /* Add space between each box */
     background: #eaf4fc;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
-  
+  .fee-search-container {
+    margin: 20px;
+}
+
+.fee-search-container input {
+    margin-right: 10px;
+}
+
+#paymentDetails {
+    margin-top: 40px;
+}
+
+.edit-btn {
+  background-color: #007acc; /* Green background */
+  color: white; /* White text */
+  border: none; /* Remove borders */
+  padding: 10px 15px; /* Add padding */
+  border-radius: 5px; /* Rounded corners */
+  margin-right: 150px;
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 14px; /* Adjust font size */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.edit-btn:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+.edit-btn:active {
+  background-color: #39843d; /* Even darker green when clicked */
+}
+
+#paymentDetails table {
+    width: 105%;
+    border-collapse: collapse;
+    margin-top: 30px;
+}
+
+#paymentDetails th, #paymentDetails td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+#paymentDetails th {
+    background-color:#00509e;
+}
   /* Form Input Styles */
   label {
     font-weight: bold;
@@ -79,11 +142,12 @@ body {
   }
   
   button {
-    width: 100%;
+    width: 30%;
     padding: 12px;
     background-color: #007acc;
     color: #fff;
     border: none;
+    margin-left: 290px;
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
