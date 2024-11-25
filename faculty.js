@@ -26,21 +26,20 @@ loginButton.addEventListener('click', async function() {
             // Show custom error message if credentials do not match
             errorMessage.style.display = 'block';
         } else {
-            // Successful login
             sessionStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('facultyId', data.id); // Optionally store student ID
-
-            // Hide login form, show student dashboard, and toggle button
+            localStorage.setItem('facultyId', data.id);
+            populateFacultyDashboard(data);
+            
             document.getElementById('loginForm').style.display = 'none';
             document.getElementById('facultyDashboard').style.display = 'block';
-            document.getElementById('toggleSidebar').style.display = 'block';
-            errorMessage.style.display = 'none';
 
-            // Show welcome text
-            setTimeout(() => {
-                const welcomeText = document.getElementById('welcomeText');
-                welcomeText.style.visibility = 'visible';
-            }, 500);
+            const sidebar = document.querySelector('.sidebar');
+            const toggleButton = document.getElementById('toggleSidebar');
+            sidebar.classList.add('show'); // Open the sidebar
+            toggleButton.classList.toggle('move-right');
+            toggleButton.style.display = 'block'; 
+            errorMessage.style.display = 'none';
+            
         }
     } catch (err) {
         console.error('Error logging in:', err);
@@ -48,28 +47,73 @@ loginButton.addEventListener('click', async function() {
     }
 });
 
-window.addEventListener('load', () => {
-    const isLoggedIn = sessionStorage.getItem('isLoggedIn');
-    if (isLoggedIn === 'true') {
-        // Ensure the dashboard and sidebar are shown after a refresh
-        document.getElementById('loginForm').style.display = 'none';
-        document.getElementById('facultyDashboard').style.display = 'block';
-        document.getElementById('toggleSidebar').style.display = 'block';
+window.addEventListener('load', async () => {
+    const isLoggedIn = sessionStorage.getItem('isLoggedIn'); // Check login state
+    const facultyId = localStorage.getItem('facultyId'); // Get stored faculty ID
+    const preloader = document.getElementById('preloader'); // Preloader element
 
-        // Start letter-by-letter animation after page load
-        const welcomeText = document.getElementById('welcomeText');
-        setTimeout(() => {
-            welcomeText.style.visibility = 'visible'; // Show welcome text
-            welcomeText.classList.add('typing-finished'); // Finish the typing animation
-        }, 500); // Delay of 500ms after login state is validated
+    if (isLoggedIn && facultyId) {
+        try {
+            // Fetch faculty data based on stored faculty ID
+            const { data, error } = await supabase
+                .from('faculty')
+                .select('*')
+                .eq('id', facultyId)
+                .single();
+
+            if (!error && data) {
+                // Populate the dashboard with faculty data
+                populateFacultyDashboard(data);
+
+                // Show the dashboard
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('facultyDashboard').style.display = 'block';
+                const sidebar = document.querySelector('.sidebar');
+                const toggleButton = document.getElementById('toggleSidebar');
+                sidebar.classList.add('show'); // Open the sidebar
+                toggleButton.classList.toggle('move-right');
+                toggleButton.style.display = 'block';
+            } else {
+                // If data fetch fails, show the login form
+                document.getElementById('facultyDashboard').style.display = 'none';
+                document.getElementById('loginForm').style.display = 'block';
+            }
+        } catch (err) {
+            console.error('Error fetching faculty data on reload:', err);
+        }
     } else {
-        // If not logged in, show the login form and hide the dashboard
+        // Redirect to login form if not logged in
         document.getElementById('facultyDashboard').style.display = 'none';
         document.getElementById('loginForm').style.display = 'block';
-        document.getElementById('toggleSidebar').style.display = 'none';
-        document.querySelector('.sidebar').style.display = 'block';
     }
+
+    // Hide the preloader after loading
+    preloader.style.display = 'none';
 });
+
+
+function populateFacultyDashboard(data) {
+    // Format and Display Welcome Message
+    const firstName = data.first_name.charAt(0).toUpperCase() + data.first_name.slice(1).toLowerCase();
+    const lastName = data.last_name.charAt(0).toUpperCase() + data.last_name.slice(1).toLowerCase();
+    const fullName = `${data.title} ${firstName} ${lastName}`;
+    document.getElementById('welcomeMessage').textContent = `Welcome! ${fullName}`;
+
+    // Populate Personal Information
+    document.getElementById('fullName').textContent = fullName;
+    document.getElementById('email').textContent = data.email;
+    document.getElementById('phone').textContent = data.phone;
+
+    // Populate Professional Information
+    document.getElementById('department').textContent = data.department;
+    document.getElementById('specialization').textContent = data.specialization;
+    document.getElementById('designation').textContent = data.designation;
+    document.getElementById('role').textContent = data.role;
+
+    // Populate Employment Details
+    document.getElementById('employmentType').textContent = data.employment_type;
+}
+
 
 // Sidebar toggle button functionality
 document.getElementById('toggleSidebar').addEventListener('click', function() {
@@ -106,6 +150,9 @@ form.addEventListener('keydown', function(event) {
 // Logout function
 function logout() {
     sessionStorage.removeItem('isLoggedIn'); // Clear login state
+    localStorage.removeItem('facultyId'); // Clear faculty ID
+    const sidebar = document.querySelector('.sidebar');
+    sidebar.classList.remove('show'); // Close the sidebar
     document.getElementById('facultyDashboard').style.display = 'none';
     document.getElementById('loginForm').style.display = 'block';
     document.getElementById('toggleSidebar').style.display = 'none';

@@ -72,8 +72,11 @@ loginButton.addEventListener('click', async function() {
             // Hide login form, show student dashboard, and toggle button
             document.getElementById('loginForm').style.display = 'none';
             document.getElementById('studentDashboard').style.display = 'block';
-            document.querySelector('.sidebar').style.display = 'block';
-            document.getElementById('toggleSidebar').style.display = 'block';
+            const sidebar = document.querySelector('.sidebar');
+            const toggleButton = document.getElementById('toggleSidebar');
+            sidebar.classList.add('show'); // Open the sidebar
+            toggleButton.classList.toggle('move-right');
+            toggleButton.style.display = 'block'; 
             errorMessage.style.display = 'none';
         }
     } catch (err) {
@@ -103,8 +106,11 @@ window.addEventListener('load', async () => {
                 // Show the dashboard
                 document.getElementById('loginForm').style.display = 'none';
                 document.getElementById('studentDashboard').style.display = 'block';
-                document.querySelector('.sidebar').style.display = 'block';
-                document.getElementById('toggleSidebar').style.display = 'block';
+                const sidebar = document.querySelector('.sidebar');
+                const toggleButton = document.getElementById('toggleSidebar');
+                sidebar.classList.add('show'); // Open the sidebar
+                toggleButton.classList.toggle('move-right');
+                toggleButton.style.display = 'block';
             } else {
                 // If data fetch fails, redirect to login page
                 document.getElementById('loginForm').style.display = 'block';
@@ -126,7 +132,7 @@ window.addEventListener('load', async () => {
 function populateDashboard(data) {
     const firstName = data.first_name.charAt(0).toUpperCase() + data.first_name.slice(1).toLowerCase();
     const lastName = data.last_name.charAt(0).toUpperCase() + data.last_name.slice(1).toLowerCase();
-    document.getElementById('welcomeMessage').textContent = `Hello Mr. ${firstName} ${lastName}`;
+    document.getElementById('welcomeMessage').textContent = `Welcome! Mr. ${firstName} ${lastName}`;
 
     // Populate University Information
     document.getElementById('rollNumber').textContent = data.roll_number;
@@ -177,6 +183,9 @@ function navigateTo(section) {
 // Logout function
 function logout() {
     sessionStorage.removeItem('isLoggedIn'); // Clear login state
+    localStorage.removeItem('studentId'); // Clear faculty ID
+    const sidebar = document.querySelector('.sidebar');
+    sidebar.classList.remove('show'); // Close the sidebar
     document.getElementById('studentDashboard').style.display = 'none';
     document.getElementById('loginForm').style.display = 'block';
     document.getElementById('toggleSidebar').style.display = 'none';

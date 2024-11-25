@@ -169,9 +169,6 @@
           case 'attendance-management':
             window.location.href = 'adminattendance.html';
             break;
-          case 'notification-management':
-            alert("Notification management is not implemented yet.");
-            break;
           default:
             alert("Page not found.");
         }

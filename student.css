@@ -153,7 +153,7 @@ label {
 
 /* Main Content */
 .main-content {
-    margin-left: 270px; /* Space for the sidebar */
+    margin-left: 200px; /* Space for the sidebar */
     padding: 20px;
     flex-grow: 1;
 }
@@ -352,4 +352,11 @@ header .logout-button:hover {
     100% {
         transform: rotate(360deg);
     }
+}
+
+.info-box hr {
+    border: none; /* Remove default border */
+    border-top: 2px solid #234b86; /* Add custom border color */
+    margin: 10px 0; /* Add spacing above and below the line */
+    width: 100%; /* Stretch across the box */
 }

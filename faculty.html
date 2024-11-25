@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="faculty.css">
 </head>
 <body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
 
     <!-- Sidebar Toggle Button (Top Left) -->
     <button id="toggleSidebar" class="toggle-btn">☰</button>
@@ -33,17 +37,43 @@
             <div class="menu-item" onclick="navigateTo('marks-management')">Enter Marks</div>
             <div class="menu-item" onclick="navigateTo('attendance-management')">Update Attendance</div>
             <div class="menu-item" onclick="navigateTo('grades-management')">Upload Grade</div>
-            <div class="menu-item" onclick="navigateTo('notification-management')">Notify Assignment</div>
             <div class="menu-item logout-button" onclick="logout()">Logout</div>
         </div>
 
         <!-- Main Content -->
         <div class="main-content">
-            <h1 id="welcomeText" class="animated-text" style="visibility: hidden;">Welcome to the Faculty Portal</h1>
-            
-            <!-- faculty Picture in the Center -->
-            <div class="faculty-image-container">
-                <img src="faculty_login.png" alt="faculty Picture" class="faculty-image">
+            <!-- Blue Strip -->
+            <div id="welcomeStrip" class="welcome-strip">
+                <p id="welcomeMessage">Welcome! (First Name, Last Name)</p>
+            </div>
+    
+            <!-- Information Boxes -->
+            <div id="infoBoxes" class="info-boxes">
+                <!-- Personal Information -->
+                <div class="info-box">
+                    <h3>Personal Information</h3>
+                    <hr>
+                    <p><strong>Full Name:</strong> <span id="fullName"></span></p>
+                    <p><strong>Email:</strong> <span id="email"></span></p>
+                    <p><strong>Phone:</strong> <span id="phone"></span></p>
+                </div>
+    
+                <!-- Professional Information -->
+                <div class="info-box">
+                    <h3>Professional Information</h3>
+                    <hr>
+                    <p><strong>Department:</strong> <span id="department"></span></p>
+                    <p><strong>Specialization:</strong> <span id="specialization"></span></p>
+                    <p><strong>Designation:</strong> <span id="designation"></span></p>
+                    <p><strong>Role:</strong> <span id="role"></span></p>
+                </div>
+    
+                <!-- Employment Details -->
+                <div class="info-box">
+                    <h3>Employment Details</h3>
+                    <hr>
+                    <p><strong>Employment Type:</strong> <span id="employmentType"></span></p>
+                </div>
             </div>
         </div>
     </div>
