@@ -34,11 +34,16 @@ body {
     cursor: pointer;
     z-index: 100;
     border-radius: 4px;
-    display: none; /* Initially hidden */
+    transition: left 0.3s ease; /* Smooth movement for the button */
+    display: none;
 }
 
 .toggle-btn:hover {
     background-color: #005bb5;
+}
+
+.toggle-btn.move-right {
+    left: 270px; /* Matches the width of the expanded sidebar */
 }
 
 /* Admin Login Styling */
@@ -112,10 +117,12 @@ label {
     padding: 20px;
     position: fixed;
     height: 100vh;
-    top: 50px; /* Increased top margin to avoid overlap with the toggle button */
+    top: 0; /* Ensure it spans the full height of the viewport */
     left: -250px;
+    overflow-y: auto; /* Enable scrolling for overflowing content */
     transition: left 0.3s ease;
     z-index: 99;
+    display: block;
 }
 
 .sidebar.show {
@@ -248,4 +255,101 @@ header .logout-button:hover {
 .parent-container {
     display: block; /* Ensure it is not flex */
     text-align: left; /* Align the text and content left */
+}
+
+/* Blue Strip */
+/* Ensure the blue strip is visible and positioned at the top */
+.welcome-strip {
+    background-color: #234b86;
+    color: white;
+    padding: 10px 15px;
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: calc(100% - 270px); /* Adjust width based on the sidebar */
+    margin-left: 270px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Information Boxes */
+/* Information Boxes Layout */
+.info-boxes {
+    display: flex;
+    grid-template-columns: 1fr; /* Single-column layout for narrower screens */
+    max-width: 900px; /* Limit overall width */
+    margin: 90px; /* Center content horizontally */
+    gap: 20px;
+    padding: 20px;
+    margin-top: 400px;
+    flex-direction: column; /* Stack the boxes vertically */
+    align-items: center;
+}
+
+/* Individual Box Styling */
+.info-box {
+    background-color: #f9f9f9;
+    color: #04204b;
+    padding: 20px 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #234b86;
+    width: 250%; /* Set box width to 70% of the page */
+    max-width: 950px; /* Ensure boxes don’t get too wide */
+    margin: 3 auto; /* Center align the box */
+}
+
+/* Box Headings */
+.info-box h3 {
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: #005bb5;
+}
+
+/* Box Text */
+.info-box p {
+    justify-content: space-between; /* Align text into two columns */
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+/* Style labels inside the box */
+.info-box span {
+    font-weight: bold;
+}
+/* Prevent Sidebar Overlap */
+
+/* Preloader Styling */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #234b86; /* Matches your theme */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#preloader .spinner {
+    border: 6px solid #f3f3f3; /* Light grey */
+    border-top: 6px solid #005bb5; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

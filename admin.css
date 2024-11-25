@@ -34,11 +34,16 @@ body {
     cursor: pointer;
     z-index: 100;
     border-radius: 4px;
-    display: none; /* Initially hidden */
+    transition: left 0.3s ease; /* Smooth movement for the button */
+    display: none;
 }
 
 .toggle-btn:hover {
     background-color: #005bb5;
+}
+
+.toggle-btn.move-right {
+    left: 270px; /* Matches the width of the expanded sidebar */
 }
 
 /* Admin Login Styling */
@@ -112,12 +117,13 @@ label {
     padding: 20px;
     position: fixed;
     height: 100vh;
-    top: 50px; /* Increased top margin to avoid overlap with the toggle button */
+    top: 0; /* Ensure it spans the full height of the viewport */
     left: -250px;
+    overflow-y: auto; /* Enable scrolling for overflowing content */
     transition: left 0.3s ease;
     z-index: 99;
-    display: none;
 }
+
 
 .sidebar.show {
     display: block;

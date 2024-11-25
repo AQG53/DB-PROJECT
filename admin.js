@@ -107,7 +107,10 @@
 
     // Sidebar toggle button functionality
     toggleSidebarButton.addEventListener('click', function() {
+        const toggleButton = document.getElementById('toggleSidebar');
+
         sidebar.classList.toggle('show');
+        toggleButton.classList.toggle('move-right');
     });
 
     // Persist login state on page load

@@ -67,14 +67,18 @@ window.addEventListener('load', () => {
         document.getElementById('facultyDashboard').style.display = 'none';
         document.getElementById('loginForm').style.display = 'block';
         document.getElementById('toggleSidebar').style.display = 'none';
+        document.querySelector('.sidebar').style.display = 'block';
     }
 });
 
 // Sidebar toggle button functionality
 document.getElementById('toggleSidebar').addEventListener('click', function() {
     const sidebar = document.querySelector('.sidebar');
+    const toggleButton = document.getElementById('toggleSidebar');
+
     sidebar.classList.toggle('show');
-});
+    toggleButton.classList.toggle('move-right'); // Move the button to the right
+})
 
 // Placeholder function for navigation
 function navigateTo(section) {
