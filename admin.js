@@ -125,7 +125,11 @@
         if (isLoggedIn === 'true') {
             document.getElementById('loginForm').style.display = 'none';
             document.getElementById('adminDashboard').style.display = 'block';
-            toggleSidebarButton.style.display = 'block';
+            const sidebar = document.querySelector('.sidebar');
+            const toggleButton = document.getElementById('toggleSidebar');
+            sidebar.classList.add('show'); // Open the sidebar
+            toggleButton.classList.toggle('move-right');
+            toggleButton.style.display = 'block';
         }
         preloader.style.display='none';
     });
