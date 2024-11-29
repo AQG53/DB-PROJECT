@@ -29,7 +29,12 @@ async function loadCoursesAndMarks() {
 
         // Get course names for the registered courses
         const courseIds = registrationData.map(row => row.course_id);
-
+        if (registrationData.length === 0) {
+            loadingIndicator.style.display = 'none';
+            document.getElementById("noCoursesMessage");
+            noCoursesMessage.style.display = "block"; // Make the message visible
+            return; // Exit the function early
+          }
         const { data: coursesData, error: courseError } = await supabase
             .from('courses')
             .select('course_code, name')
