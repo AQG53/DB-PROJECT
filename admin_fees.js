@@ -2,10 +2,58 @@ const SUPABASE_URL = 'https://ynwjgmkbbyepuausjcdw.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlud2pnbWtiYnllcHVhdXNqY2R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE1MDcwMjcsImV4cCI6MjA0NzA4MzAyN30.RBCkr5OCoY7vqxOc_ZFSRf4DNdTPPx8rvAlRUDpesrY';
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+const preloader = document.getElementById('preloader');
+preloader.style.display = 'none';
+
+function formatRollNumber(input) {
+  let value = input.value.toUpperCase(); // Convert input to uppercase for alphabet
+  let formattedValue = '';
+
+  // Enforce the input pattern step-by-step
+  for (let i = 0; i < value.length; i++) {
+      const char = value[i];
+
+      if (i === 0 || i === 1) {
+          // First two characters: Numbers only
+          if (/\d/.test(char)) {
+              formattedValue += char;
+          } else {
+              break; // Stop processing if invalid
+          }
+      } else if (i === 2) {
+          // Third character: Alphabet only
+          if (/[A-Z]/.test(char)) {
+              formattedValue += char;
+              formattedValue += '-';
+          } else {
+              break; // Stop processing if invalid
+          }
+      } else if (i > 3 && i < 8) {
+          // Last four characters: Numbers only
+          if (/\d/.test(char)) {
+              formattedValue += char;
+          } else {
+              break; // Stop processing if invalid
+          }
+      }
+  }
+
+  // Limit to the correct length and set the formatted value
+  input.value = formattedValue.slice(0, 8);
+}
+
 function capitalize(str) {
   if (!str) return ""; // Handle null or undefined values
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
+
+document.addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    // Simulate a click on the #fetch-courses button when Enter is pressed
+    viewPaymentRecords();
+  }
+});
 
 async function viewPaymentRecords() {
   const rollNumber = document.getElementById("rollNumber").value.trim();
@@ -25,7 +73,6 @@ CREDIT_HOUR_FEE=10750;
       invalidStudentMessage.style.display = "none";
     }, 10000); // 10 seconds
   }
-
   function showNewFeeRecordMessage() {
     const newFeeRecordMessage = document.getElementById("newFeeRecord");
     newFeeRecordMessage.style.display = "block"; // Show the message
@@ -72,8 +119,6 @@ CREDIT_HOUR_FEE=10750;
 }
 
 function editFeeDetails(feeId, currentAmount, currentDueDate) {
-  const confirmation = confirm("Do you want to edit the fee details?");
-  if (!confirmation) return;
 
   const editSection = document.getElementById("editFeeSection");
   editSection.style.display = "block";
@@ -84,6 +129,7 @@ function editFeeDetails(feeId, currentAmount, currentDueDate) {
 
   const saveButton = document.getElementById("saveFeeDetails");
   saveButton.onclick = async () => {
+    preloader.style.display = 'flex';
     const newAmount = document.getElementById("editAmount").value;
     const newDueDate = document.getElementById("editDueDate").value;
 
@@ -96,12 +142,14 @@ function editFeeDetails(feeId, currentAmount, currentDueDate) {
                 .select(); // Ensure to retrieve updated data
 
             if (error) {
+              preloader.style.display = 'none';
                 console.error("Error updating fee details:", error);
                 alert("Failed to update fee details.");
                 return;
             }
 
             if (!data || data.length === 0) {
+              preloader.style.display = 'none';
                 console.error("No record updated. Please check the fee ID.");
                 alert("No record updated. Please check the fee ID.");
                 return;
@@ -111,9 +159,11 @@ function editFeeDetails(feeId, currentAmount, currentDueDate) {
             document.getElementById("editFeeSection").style.display = "none";
             viewPaymentRecords(); // Refresh the records
           } catch (err) {
+            preloader.style.display = 'none';
               console.error("Error saving fee details:", err.message);
           }
       } else {
+        preloader.style.display = 'none';
           alert("No changes made to the fee details.");
       }
   };
@@ -121,6 +171,7 @@ function editFeeDetails(feeId, currentAmount, currentDueDate) {
 
 
 async function displayPaymentRecords(rollNumber, records) {
+  preloader.style.display = 'flex';
   const { data: studentData, error: studentError } = await supabase
     .from('students')
     .select('first_name, last_name')
@@ -128,6 +179,7 @@ async function displayPaymentRecords(rollNumber, records) {
     .single();
 
   if (studentError || !studentData) {
+    preloader.style.display = 'none';
     console.error("Error fetching student details:", studentError);
     showNotification("Error fetching student details.");
     return;
@@ -156,6 +208,7 @@ async function displayPaymentRecords(rollNumber, records) {
       </td>
     `;
     paymentTable.appendChild(row);
+    preloader.style.display = 'none';
   });
 }
 
@@ -184,6 +237,7 @@ async function calculateAndInsertFee() {
   }
 }
 async function calculateNewFee(studentId, semester) {
+  preloader.style.display = 'flex';
   try {
       // Fetch registered courses
       const { data: registrationData, error: regError } = await supabase
@@ -192,12 +246,13 @@ async function calculateNewFee(studentId, semester) {
           .eq("student_id", studentId);
 
           if (registrationData.length === 0) {
+            preloader.style.display = 'none';
             document.getElementById("noCoursesMessage");
             showNotification("No course found for this student!");
             resetForm(); // Reset the form
             return; // Exit the function early
           }
-      if (regError) throw regError;
+      if (regError) {preloader.style.display = 'none'; throw regError};
       const courseIds = registrationData.map((row) => row.course_id);
 
       // Fetch credit hours for courses
@@ -206,7 +261,11 @@ async function calculateNewFee(studentId, semester) {
           .select("credit_hours")
           .in("course_code", courseIds);
 
-      if (coursesError) throw coursesError;
+      if (coursesError){
+        preloader.style.display = 'none';
+        throw coursesError;
+      } 
+
 
       const totalCreditHours = coursesData.reduce((sum, course) => {
           const [lectureHours, practicalHours] = course.credit_hours
@@ -220,7 +279,7 @@ async function calculateNewFee(studentId, semester) {
           .eq("roll_number", studentId)
           .single(); // Fetch a single record
 
-      if (studentError) throw studentError;
+      if (studentError) {preloader.style.display = 'none'; throw studentError};
 
       const semester = studentData.semester;
       const feeAmount = totalCreditHours * CREDIT_HOUR_FEE;
@@ -244,17 +303,19 @@ async function calculateNewFee(studentId, semester) {
               },
           ]);
 
-      if (insertError) throw insertError;
+      if (insertError) {preloader.style.display = 'none'; throw insertError};
       const { data: feeRecords, error: feeError } = await supabase
           .from('fees')
           .select('*')
           .eq('roll_number', studentId);
 
       if (feeError) {
+        preloader.style.display = 'none';
           console.error(feeError);
           alert("Error fetching fee records.");
           return;
       }
+      preloader.style.display = 'none';
       showNotification("New fees record has been added successfully!");
       return {
           roll_number: studentId,
@@ -264,6 +325,7 @@ async function calculateNewFee(studentId, semester) {
           status: "Pending",
       };
   } catch (error) {
+    preloader.style.display = 'none';
       console.error("Error calculating new fee:", error.message);
   }
 

@@ -9,6 +9,9 @@
 </head>
 
 <body>
+  <div id="preloader">
+    <div class="spinner"></div>
+  </div>
   <div class="logo-container">
     <img src="FASTNU-logo.png" alt="University Logo">
   </div>
@@ -22,7 +25,7 @@
     <form id="paymentRecordsForm">
       <div class="form-group">
         <label for="rollNumber">Roll Number <span class="asterisk">*</span></label>
-        <input type="text" id="rollNumber" name="rollNumber" placeholder="Enter Roll Number" required>
+        <input type="text" id="rollNumber" name="rollNumber" placeholder="XXT-XXXX" maxlength="8" oninput="formatRollNumber(this)" required>
       </div>
       <button type="button" onclick="viewPaymentRecords()">View Payment Records</button>
     </form>

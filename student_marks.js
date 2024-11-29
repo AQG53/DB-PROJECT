@@ -63,6 +63,7 @@ async function loadCoursesAndMarks() {
     } catch (error) {
         console.error('Error loading courses or marks:', error.message);
     }
+    preloader.style.display = 'none';
 }
 
 // Function to show marks in a popup

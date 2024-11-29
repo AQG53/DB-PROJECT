@@ -2,6 +2,8 @@ const SUPABASE_URL = 'https://ynwjgmkbbyepuausjcdw.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlud2pnbWtiYnllcHVhdXNqY2R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE1MDcwMjcsImV4cCI6MjA0NzA4MzAyN30.RBCkr5OCoY7vqxOc_ZFSRf4DNdTPPx8rvAlRUDpesrY';
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+const preloader = document.getElementById('preloader');
+
 function togglePasswordVisibility() {
   const passwordInput = document.getElementById('password');
   const toggleIcon = document.getElementById('togglePasswordIcon');
@@ -45,8 +47,11 @@ function closeNotification() {
   notification.classList.remove('show'); // Hide notification smoothly
 }
 
+preloader.style.display = 'none';
+
 document.getElementById('facultyRegistrationForm').addEventListener('submit', async (event) => {
   event.preventDefault();
+  preloader.style.display='flex';
   console.log("Form submitted");
   const title = document.getElementById('title').value;
   const firstName = document.getElementById('firstName').value.trim();
@@ -110,7 +115,7 @@ document.getElementById('facultyRegistrationForm').addEventListener('submit', as
         password,
       }),
     });
-
+    preloader.style.display='none';
     console.log('Faculty registered successfully:', data);
     showNotification(`Faculty registered successfully!`);
     document.getElementById('facultyRegistrationForm').reset();

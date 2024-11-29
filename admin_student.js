@@ -3,6 +3,9 @@ const SUPABASE_URL = 'https://ynwjgmkbbyepuausjcdw.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlud2pnbWtiYnllcHVhdXNqY2R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE1MDcwMjcsImV4cCI6MjA0NzA4MzAyN30.RBCkr5OCoY7vqxOc_ZFSRf4DNdTPPx8rvAlRUDpesrY';
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+const preloader = document.getElementById('preloader');
+preloader.style.display = 'none';
+
 function togglePasswordVisibility() {
     const passwordInput = document.getElementById('password');
     const toggleIcon = document.getElementById('togglePasswordIcon');
@@ -85,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
 document.getElementById('studentRegistrationForm').addEventListener('submit', async (event) => {
   event.preventDefault(); // Prevent page refresh
   console.log("Form submitted");
-
+  preloader.style.display = 'flex';
   const firstName = document.getElementById('firstName').value.trim().toLowerCase();
   const lastName = document.getElementById('lastName').value.trim().toLowerCase();
   const dob = document.getElementById('dob').value;
@@ -136,6 +139,7 @@ document.getElementById('studentRegistrationForm').addEventListener('submit', as
   try {
       const { data, error } = await supabase.from('students').insert([studentData]);
       if (error) {
+        preloader.style.display = 'flex';
           console.error('Supabase insertion error:', error.message);
           alert('Error: ' + error.message);
           return;
@@ -151,11 +155,12 @@ document.getElementById('studentRegistrationForm').addEventListener('submit', as
             password,
         }),
     });
-
+    preloader.style.display = 'flex';
       console.log('Student registered successfully:', data);
       showNotification(`Student registered successfully! Roll Number: ${rollNumber}`);
       document.getElementById('studentRegistrationForm').reset();
   } catch (err) {
+    preloader.style.display = 'flex';
       console.error("Unexpected error:", err);
       alert("An unexpected error occurred.");
   }

@@ -394,11 +394,16 @@ const courseData = {
     }
   });
 
+  const preloader = document.getElementById('preloader');
+    preloader.style.display = 'none';
+
   document.getElementById('courseRegistrationForm').addEventListener('submit', async (event) => {
     event.preventDefault();
     const type = document.getElementById('typeSelect').value;
     const department_name = document.getElementById('departmentSelect').value;
     const semester = document.getElementById('semesterSelect').value;
+    const preloader = document.getElementById('preloader');
+    preloader.style.display = 'flex';
     const { code, name, creditHours, prerequisites } = selectedCourseDetails;
     console.log(department_name, semester, code, name, creditHours, prerequisites);
     try {
@@ -429,9 +434,9 @@ const courseData = {
         return;
       }
 
-  
-      console.log('Course registered successfully:', data);
-      showNotification(`Course registered successfully!`);
+      preloader.style.display = 'none';
+      console.log('Course registered successfully:');
+      showNotification('Course registered successfully!');
       document.getElementById('courseRegistrationForm').reset();
     } catch (err) {
       console.error("Unexpected error:", err);

@@ -2,6 +2,8 @@ const SUPABASE_URL = 'https://ynwjgmkbbyepuausjcdw.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlud2pnbWtiYnllcHVhdXNqY2R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE1MDcwMjcsImV4cCI6MjA0NzA4MzAyN30.RBCkr5OCoY7vqxOc_ZFSRf4DNdTPPx8rvAlRUDpesrY';
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+const preloader = document.getElementById('preloader');
+
 function showNotification(message) {
   const notification = document.getElementById('notification');
   const notificationMessage = document.getElementById('notificationMessage');
@@ -152,6 +154,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             facultyDepartmentElement.textContent = "Error loading data";
             registeredCoursesCountElement.textContent = "Error loading data";
         }
+        preloader.style.display = 'none';
 });
 
 function capitalize(str) {
@@ -191,7 +194,7 @@ document.getElementById("submitSelection").addEventListener("click", function ()
       showNotification1(`Maximum courses already registered!`);
       return;
     }
-    if(total>7)
+    if(total>3)
     {
       showNotification1(`Too many courses selected!`);
       return;

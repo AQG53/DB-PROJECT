@@ -2,6 +2,9 @@ const SUPABASE_URL = 'https://ynwjgmkbbyepuausjcdw.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlud2pnbWtiYnllcHVhdXNqY2R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE1MDcwMjcsImV4cCI6MjA0NzA4MzAyN30.RBCkr5OCoY7vqxOc_ZFSRf4DNdTPPx8rvAlRUDpesrY';
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+const preloader = document.getElementById('preloader');
+preloader.style.display = 'none';
+
 function showNotification(message) {
     const notification = document.getElementById('notification');
     const notificationMessage = document.getElementById('notificationMessage');
@@ -51,8 +54,10 @@ function showNotification(message) {
   }
 
 document.addEventListener('DOMContentLoaded', async function () {
+    preloader.style.display = 'flex';
     const studentId = localStorage.getItem('studentId');
     if (!studentId) {
+        preloader.style.display = 'none';
         alert("Student ID not found. Please log in again.");
         window.location.href = "student.html";
         return;
@@ -67,6 +72,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             .eq('student_id', studentId);
 
         if (error) {
+            preloader.style.display = 'none';
             console.error('Error fetching courses:', error.message);
             return;
         }
@@ -94,8 +100,10 @@ document.addEventListener('DOMContentLoaded', async function () {
             tableBody.appendChild(row);
         }
     } catch (err) {
+        preloader.style.display = 'none';
         console.error('Unexpected error:', err);
     }
+    preloader.style.display = 'none';
 });
 
 document.getElementById('withdrawCourses').addEventListener('click', () => {
@@ -134,7 +142,7 @@ document.getElementById('withdrawCourses').addEventListener('click', () => {
             return;
             
         }
-
+        
         // Proceed with withdrawal logic
         try {
             const { data: studentData, error: validationError } = await supabase
@@ -147,7 +155,6 @@ document.getElementById('withdrawCourses').addEventListener('click', () => {
                     showNotification("Invalid Password!");
                     return;
                 }
-
                 for (const courseId of selectedCourses) {
                     console.log(courseId, student_id);
                     const { error: withdrawalError } = await supabase.rpc('withdraw_student_course', {
@@ -163,7 +170,6 @@ document.getElementById('withdrawCourses').addEventListener('click', () => {
                     return;
                 }
             }
-
             showNotification1('Courses withdrawn successfully!');
         } catch (error) {
             console.error('Unexpected error during withdrawal:', error.message);

@@ -2,6 +2,9 @@ const SUPABASE_URL = 'https://ynwjgmkbbyepuausjcdw.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlud2pnbWtiYnllcHVhdXNqY2R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE1MDcwMjcsImV4cCI6MjA0NzA4MzAyN30.RBCkr5OCoY7vqxOc_ZFSRf4DNdTPPx8rvAlRUDpesrY';
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+const preloader = document.getElementById('preloader');
+
+
 function showNotification(message) {
     const notification = document.getElementById('notification');
     const notificationMessage = document.getElementById('notificationMessage');
@@ -121,10 +124,35 @@ async function calculateSelectedCHCount(courseId) {
     }
 }
 
+async function caculateSelectElective(courseId) {
+    try {
+        const { data: selectedCourse, error: selectedError } = await supabase
+            .from("courses")
+            .select("type")
+            .eq("course_code", courseId)
+            .single();
+
+        if (selectedError) {
+            console.error("Error fetching credit hours:", selectedError.message);
+            return 0;
+        }
+
+        if(selectedCourse.type === 'Elective')
+            return 1;
+        else
+            return 0;
+
+    } catch(error) {
+        console.error("Unexpected error while calculating selected elective course:", error.message);
+        return 0;
+    }
+}
+
 
 document.addEventListener("DOMContentLoaded", async function () {
     const studentId = localStorage.getItem("studentId");
     if (!studentId) {
+        preloader.style.display = 'none';
         alert("Student ID not found. Please log in again.");
         window.location.href = "student.html";
         return;
@@ -141,6 +169,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             .eq("student_id", studentId);
 
         if (withdrawnError) {
+            preloader.style.display = 'none';
             console.error("Error fetching withdrawn courses:", withdrawnError.message);
             return;
         }
@@ -155,6 +184,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             .single();
 
         if (studentError || !studentData) {
+            preloader.style.display = 'none';
             console.error("Error fetching student data:", studentError?.message);
             alert("Error loading student data. Please try again.");
             return;
@@ -177,6 +207,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             .eq("semester", studentData.semester);
 
         if (coursesError || !coursesData) {
+            preloader.style.display = 'none';
             console.error("Error fetching courses:", coursesError?.message);
             alert("Error loading courses. Please try again.");
             return;
@@ -188,6 +219,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             .eq("student_id", studentId);
         
         if (registeredError) {
+            preloader.style.display = 'none';
             console.error("Error fetching registered courses:", registeredError.message);
             alert("Error loading registered courses. Please try again.");
             return;
@@ -244,17 +276,21 @@ document.addEventListener("DOMContentLoaded", async function () {
             courseTableBody.appendChild(row);
         });
     } catch (error) {
+        preloader.style.display = 'none';
         console.error("Unexpected error:", error.message);
         alert("An unexpected error occurred. Please try again.");
     }
+    preloader.style.display = 'none';
 });
 
 document.getElementById("submitSelection").addEventListener("click", async function () {
+    
     const studentId = localStorage.getItem("studentId");
     const checkboxes = document.querySelectorAll('input[name="selectCourse"]:checked');
 
     let selectedCourses = [];
     let selectedCH = 0;
+    let selected_elec = 0;
 
     // Calculate total credit hours for selected courses
     for (const checkbox of checkboxes) {
@@ -265,23 +301,35 @@ document.getElementById("submitSelection").addEventListener("click", async funct
             selectedCourses.push(courseId);
             const ch = await calculateSelectedCHCount(courseId); // Await the asynchronous function
             selectedCH += ch;
+            const value= await caculateSelectElective(courseId);
+            selected_elec +=value;
         }
     }
 
     // Get total credit hours for already registered courses
     const registeredCH = await calculateRegisteredCHCount(studentId);
     console.log("Total Registered CH = ", registeredCH+selectedCH);
+    console.log("Total Selected Elective Courses = ", selected_elec);
     if (selectedCH === 0) {
+        preloader.style.display = 'none';
         showNotification1("You must select at least one course!");
         return;
     }
 
-    if (selectedCH > 7) {
+    if(selected_elec>1) {
+        preloader.style.display = 'none';
+        showNotification1("You can only register for 1 elective course!");
+        return;
+    }
+
+    if (selectedCH > 17) {
+        preloader.style.display = 'none';
         showNotification1("You are selecting too many courses!");
         return;
-    }`g`
+    }
 
-    if ((registeredCH + selectedCH) > 10) {
+    if ((registeredCH + selectedCH) > 17) {
+        preloader.style.display = 'none';
         showNotification1("You are exceeding your total credit hour limit!");
         return;
     }
@@ -290,7 +338,6 @@ document.getElementById("submitSelection").addEventListener("click", async funct
     if (!confirmation) {
         return; // Exit if the user cancels
     }
-
     try {
         for (const courseId of selectedCourses) {
             // Fetch faculty_id for the course
@@ -301,6 +348,7 @@ document.getElementById("submitSelection").addEventListener("click", async funct
                 .single();
 
             if (courseError || !courseData) {
+                preloader.style.display = 'none';
                 console.error("Error fetching course data:", courseError?.message);
                 alert("Error loading course information. Please try again.");
                 return;
@@ -316,14 +364,15 @@ document.getElementById("submitSelection").addEventListener("click", async funct
                 });
 
             if (insertError) {
+                preloader.style.display = 'none';
                 console.error("Error during registration:", insertError.message);
                 alert(`Failed to register for course ${courseId}. Please try again.`);
                 return;
             }
         }
-
         showNotification("Courses registered successfully!");
     } catch (error) {
+        preloader.style.display = 'none';
         console.error("Unexpected error during registration:", error.message);
         alert("An unexpected error occurred. Please try again.");
     }
@@ -340,28 +389,28 @@ document.addEventListener("click", async function (event) {
             console.error("Missing course code or student ID.");
             return;
         }
+
         const confirmation = confirm(`Are you sure you want to drop the course "${courseCode}"?`);
           if (!confirmation) {
               console.log("Course drop canceled by user.");
               return; // Exit if the user cancels
           }
-  
-        console.log(`Attempting to drop course: ${courseCode} for faculty ID: ${studentId}`);
+        console.log(`Attempting to drop course: ${courseCode} for student ID: ${studentId}`);
   
         try {
             // Reset the registered_by field in the database
-            const { error } = await supabase
-                .from("student_registration")
-                .delete()
-                .eq("student_id", studentId)
-                .eq("course_id", courseCode);
-  
-            if (error) {
-                console.error(`Error dropping course ${courseCode}:`, error.message);
-                alert(`Failed to drop course: ${courseCode}`);
+            const { error: dropError } = await supabase.rpc('drop_course_and_set_flag', {
+                param_student_id: studentId,
+                param_course_id: courseCode,
+                is_drop: 'Drop',
+            });
+    
+            if (dropError) {
+                preloader.style.display = 'none';
+                console.error("Error dropping course:", dropError.message);
                 return;
             }
-  
+
             showNotification("Course has been successfully dropped!");
             console.log(`Course ${courseCode} dropped successfully.`);
         } catch (error) {

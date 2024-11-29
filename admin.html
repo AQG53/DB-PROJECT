@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="admin.css">
 </head>
 <body>
-
+    <div id="preloader">
+        <div class="spinner"></div>
+      </div>
     <!-- Sidebar Toggle Button (Top Left) -->
     <button id="toggleSidebar" class="toggle-btn">☰</button>
 
@@ -45,7 +47,6 @@
             <div class="menu-item" onclick="navigateTo('faculty-management')">Manage Faculty</div>
             <div class="menu-item" onclick="navigateTo('course-management')">Manage Courses</div>
             <div class="menu-item" onclick="navigateTo('fee-management')">Manage Fees</div>
-            <div class="menu-item" onclick="navigateTo('GPA-management')">Manage GPA</div>
             <div class="menu-item" onclick="navigateTo('attendance-management')">Manage Attendance</div>
             <div class="menu-item logout-button" onclick="logout()">Logout</div>
         </div>

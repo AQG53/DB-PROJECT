@@ -2,6 +2,9 @@ const SUPABASE_URL = 'https://ynwjgmkbbyepuausjcdw.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlud2pnbWtiYnllcHVhdXNqY2R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE1MDcwMjcsImV4cCI6MjA0NzA4MzAyN30.RBCkr5OCoY7vqxOc_ZFSRf4DNdTPPx8rvAlRUDpesrY';
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+const preloader = document.getElementById('preloader');
+preloader.style.display = 'none';
+
 function showNotification(message) {
     const notification = document.getElementById('notification');
     const notificationMessage = document.getElementById('notificationMessage');
@@ -61,6 +64,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     // Handle course selection
     courseSelect.addEventListener('change', async function () {
+        preloader.style.display = 'flex';
         selectedCourse = courseSelect.value;
         console.log(selectedCourse)
         marksTable.style.display = 'table';
@@ -167,6 +171,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         displayStats();
     });
     async function displayStats() {
+        
         try {
             // Fetch marks data from the 'marks' table
             const { data: marks, error } = await supabase
@@ -179,6 +184,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                 return;
             }
             if (!marks || marks.length === 0) {
+                preloader.style.display = 'none';
+                showNotification('No marks data found.');
                 console.log("No marks data found.");
                 document.getElementById("maxQuiz").textContent = "0";
                 document.getElementById("minQuiz").textContent = "0";
@@ -264,8 +271,10 @@ document.addEventListener('DOMContentLoaded', async function () {
             document.getElementById('stdFinal').textContent = stats.final.std.toFixed(2);
     
         } catch (error) {
+            preloader.style.display = 'none';
             console.error('Error in fetching or processing marks data:', error);
         }
+        preloader.style.display = 'none';
     }
 });
 

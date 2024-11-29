@@ -2,7 +2,11 @@ const SUPABASE_URL = 'https://ynwjgmkbbyepuausjcdw.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlud2pnbWtiYnllcHVhdXNqY2R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE1MDcwMjcsImV4cCI6MjA0NzA4MzAyN30.RBCkr5OCoY7vqxOc_ZFSRf4DNdTPPx8rvAlRUDpesrY';
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const studentId = localStorage.getItem('studentId');
+const preloader = document.getElementById('preloader');
+
+
 if (!studentId) {
+    preloader.style.display = 'none';
     alert('Student is not logged in.');
     window.location.href = 'login.html';
 }
@@ -19,7 +23,7 @@ async function calculateAndInsertFee() {
             .select('*')
             .eq('roll_number', studentId);
 
-        if (feeError) throw feeError;
+        if (feeError) {preloader.style.display = 'none'; throw feeError};
 
         if (feeData && feeData.length > 0) {
             // Display existing fee records
@@ -146,6 +150,7 @@ function displayFeeData(feeDataArray) {
         `;
         tableBody.insertAdjacentHTML('beforeend', row);
     });
+    preloader.style.display = 'none';
 }
 
 async function downloadChallan(index) {

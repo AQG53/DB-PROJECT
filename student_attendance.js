@@ -1,8 +1,11 @@
 const SUPABASE_URL = 'https://ynwjgmkbbyepuausjcdw.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlud2pnbWtiYnllcHVhdXNqY2R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE1MDcwMjcsImV4cCI6MjA0NzA4MzAyN30.RBCkr5OCoY7vqxOc_ZFSRf4DNdTPPx8rvAlRUDpesrY';
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const preloader = document.getElementById('preloader');
+
 
 document.addEventListener('DOMContentLoaded', async function () {
+    preloader.style.display = 'flex';
     const studentId = localStorage.getItem('studentId'); // Assuming studentId is stored in localStorage after login
     const courseBoxesContainer = document.querySelector('.course-boxes');
     const popup = document.getElementById('attendancePopup');
@@ -10,6 +13,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     const closePopupButton = document.getElementById('closePopup');
 
     if (!studentId) {
+        preloader.style.display = 'none';
         alert('Student is not logged in. Redirecting to login page.');
         window.location.href = 'login.html'; // Redirect to login page if studentId is missing
         return;
@@ -23,11 +27,13 @@ document.addEventListener('DOMContentLoaded', async function () {
             .eq('student_id', studentId);
 
         if (error) {
+            preloader.style.display = 'none';
             console.error('Error fetching registered courses:', error);
             return;
         }
 
         if (courses.length === 0) {
+            preloader.style.display = 'none';
             courseBoxesContainer.innerHTML = '<p>No registered courses found.</p>';
             return;
         }
@@ -43,6 +49,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             .in('course_code', courseIds);
 
         if (courseDetailsError) {
+            preloader.style.display = 'none';
             console.error('Error fetching course details:', courseDetailsError);
             return;
         }
@@ -55,7 +62,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             courseBox.textContent = course.name; // Display course name
             courseBoxesContainer.appendChild(courseBox);
         });
-
+        preloader.style.display = 'none';
         // Add event listener to course boxes
         courseBoxesContainer.addEventListener('click', async function (event) {
             const courseBox = event.target;

@@ -3,7 +3,8 @@
     const SUPABASE_URL = 'https://ynwjgmkbbyepuausjcdw.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlud2pnbWtiYnllcHVhdXNqY2R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE1MDcwMjcsImV4cCI6MjA0NzA4MzAyN30.RBCkr5OCoY7vqxOc_ZFSRf4DNdTPPx8rvAlRUDpesrY';
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
+    const preloader = document.getElementById('preloader');
+    preloader.style.display = 'none';
     // Select necessary elements
     const loginButton = document.getElementById('submitLogin'); // Login button
     const form = document.getElementById('loginForm'); // Login form
@@ -52,6 +53,7 @@
     
     // Login function with Supabase authentication
     loginButton.addEventListener('click', async function() {
+        preloader.style.display = 'flex';
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
 
@@ -64,6 +66,7 @@
 
             if (error) {
                 // Show custom error message if authentication fails
+                preloader.style.display = 'none';
                 errorMessage.textContent = 'Login failed: ' + error.message;
                 errorMessage.style.display = 'block';
                 return;
@@ -77,6 +80,7 @@
                 .single();
 
             if (roleError || !profile || profile.role !== 'admin') {
+                preloader.style.display = 'none';
                 await supabase.auth.signOut();
                 errorMessage.textContent = 'Access denied: Not an admin';
                 errorMessage.style.display = 'block';
@@ -91,7 +95,7 @@
             document.getElementById('adminDashboard').style.display = 'block';
             toggleSidebarButton.style.display = 'block';
             errorMessage.style.display = 'none'; // Hide error message
-
+            preloader.style.display = 'none';
             // Start letter-by-letter animation after login
             setTimeout(() => {
                 const welcomeText = document.getElementById('welcomeText');
@@ -99,6 +103,7 @@
             }, 500);
 
         } catch (error) {
+            preloader.style.display = 'none';
             // Show error message if something went wrong
             errorMessage.textContent = 'An error occurred: ' + error.message;
             errorMessage.style.display = 'block';
@@ -115,12 +120,14 @@
 
     // Persist login state on page load
     window.addEventListener('load', () => {
+        preloader.style.display='flex';
         const isLoggedIn = sessionStorage.getItem('isLoggedIn');
         if (isLoggedIn === 'true') {
             document.getElementById('loginForm').style.display = 'none';
             document.getElementById('adminDashboard').style.display = 'block';
             toggleSidebarButton.style.display = 'block';
         }
+        preloader.style.display='none';
     });
     // Start letter-by-letter animation after login
     setTimeout(() => {
@@ -162,9 +169,6 @@
             break;
           case 'fee-management':
             window.location.href = 'admin_fees.html';
-            break;
-          case 'GPA-management':
-            window.location.href = 'admin_gpa.html';
             break;
           case 'attendance-management':
             window.location.href = 'adminattendance.html';

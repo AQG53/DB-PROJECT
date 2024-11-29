@@ -2,6 +2,8 @@ const SUPABASE_URL = 'https://ynwjgmkbbyepuausjcdw.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlud2pnbWtiYnllcHVhdXNqY2R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE1MDcwMjcsImV4cCI6MjA0NzA4MzAyN30.RBCkr5OCoY7vqxOc_ZFSRf4DNdTPPx8rvAlRUDpesrY';
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+const preloader = document.getElementById('preloader');
+
 let selected_CourseID = null; // Store the selected course
 let selected_Month = null; // Store the selected month
 let check = 0;
@@ -133,7 +135,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     } catch (error) {
         console.error('Error populating course dropdown:', error);
     }
-
+    preloader.style.display = 'none';
     const monthSelect = document.getElementById('monthSelect');
     const attendanceTable = document.getElementById('attendanceTable');
     const attendanceTableBody = attendanceTable.querySelector('tbody');

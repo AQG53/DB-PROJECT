@@ -355,3 +355,42 @@ header .logout-button:hover {
     margin: 10px 0; /* Add spacing above and below the line */
     width: 100%; /* Stretch across the box */
 }
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    padding: 15px;
+    background-color: #4CAF50;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: none; /* Hidden by default */
+    opacity: 0; /* Start with 0 opacity for transition */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition */
+    transform: translateY(-20px); /* Start slightly above */
+    z-index: 1000;
+  }
+  
+  .notification.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0); /* Slide down smoothly */
+  }
+  
+  .notification .progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background-color: #fff;
+    width: 100%;
+    animation: progress 3s linear forwards; /* 5-second progress animation */
+  }
+  
+  @keyframes progress {
+    from { width: 100%; }
+    to { width: 0; }
+  }

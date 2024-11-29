@@ -30,6 +30,32 @@
         <br>
         <button id="submitLogin">Log In</button>
         <div id="errorMessage" class="error-message">Invalid roll number or password!</div>
+        <p><a href="#" id="forgotPasswordLink">Forgot Password?</a></p>
+    </div>
+
+    <div id="passwordRecoveryForm" class="login-container" style="display: none;">
+        <h2>Password Recovery</h2>
+        <label for="recoveryEmail">Enter your registered email:</label>
+        <input type="text" id="recoveryEmail" placeholder="Enter your email">
+        <button id="submitRecovery">Send Password Reset Email</button>
+        <div id="recoveryMessage" class="info-message"></div>
+    </div>
+
+    <div id="otpVerificationForm" class="login-container" style="display: none;">
+        <h2>Enter OTP</h2>
+        <label for="otpInput">Enter the OTP sent to your email:</label>
+        <input type="text" id="otpInput" placeholder="Enter OTP">
+        <button id="submitOTP">Verify OTP</button>
+        <div id="otpMessage" class="info-message"></div>
+    </div>
+
+    <div id="resetPasswordForm" class="login-container" style="display: none;">
+        <h2>Reset Password</h2>
+        <label for="newPassword">Enter your new password:</label>
+        <input type="password" id="newPassword" placeholder="Enter new password">
+        <label for="confirmNewPassword">Confirm your new password:</label>
+        <input type="password" id="confirmNewPassword" placeholder="Confirm new password">
+        <button id="submitNewPassword">Reset Password</button>
     </div>
 
     <!-- student Dashboard (Hidden Initially) -->
@@ -41,7 +67,6 @@
             <div class="menu-item" onclick="location.href='student_marks.html'">Marks</div>
             <div class="menu-item" onclick="navigateTo('attendance-management')">Attendance</div>
             <div class="menu-item" onclick="navigateTo('transcript-management')">Transcript</div>
-            <div class="menu-item" onclick="navigateTo('grade change request')">Grade Change Request</div>
             <div class="menu-item" onclick="navigateTo('fee-management')">Fees</div>
             <div class="menu-item" onclick="navigateTo('coursewithdraw-management')">Course Withdrawal</div>
             <div class="menu-item logout-button" onclick="logout()">Logout</div>
@@ -93,6 +118,10 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div id="notification" class="notification">
+        <span id="notificationMessage"></span>
+        <div class="progress-bar"></div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script src="student.js"></script>

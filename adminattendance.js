@@ -16,10 +16,49 @@ function showNotification(message) {
   }, 3000);
 }
 
+function formatRollNumber(input) {
+    let value = input.value.toUpperCase(); // Convert input to uppercase for alphabet
+    let formattedValue = '';
+
+    // Enforce the input pattern step-by-step
+    for (let i = 0; i < value.length; i++) {
+        const char = value[i];
+
+        if (i === 0 || i === 1) {
+            // First two characters: Numbers only
+            if (/\d/.test(char)) {
+                formattedValue += char;
+            } else {
+                break; // Stop processing if invalid
+            }
+        } else if (i === 2) {
+            // Third character: Alphabet only
+            if (/[A-Z]/.test(char)) {
+                formattedValue += char;
+                formattedValue += '-';
+            } else {
+                break; // Stop processing if invalid
+            }
+        } else if (i > 3 && i < 8) {
+            // Last four characters: Numbers only
+            if (/\d/.test(char)) {
+                formattedValue += char;
+            } else {
+                break; // Stop processing if invalid
+            }
+        }
+    }
+
+    // Limit to the correct length and set the formatted value
+    input.value = formattedValue.slice(0, 8);
+}
+
+const preloader = document.getElementById('preloader');
+preloader.style.display = 'none';
   // Search Student
   async function searchStudent() {
     const rollNumber = document.getElementById("rollNumber").value.trim();
-
+    preloader.style.display = 'flex';
     if (!rollNumber) {
         showNotification("Please enter a roll number.");
         return;
@@ -33,12 +72,14 @@ function showNotification(message) {
           .eq('student_id', rollNumber);
 
       if (error) {
+            preloader.style.display = 'none';
           console.error("Error fetching registered courses:", error);
           showNotification("Unable to fetch registered courses. Please try again.");
           return;
       }
 
       if (!courses || courses.length === 0) {
+        preloader.style.display = 'none';
           showNotification("No student or courses found for this roll number.");
           document.getElementById("registeredCourses").style.display = "none";
           document.getElementById("courseAttendance").style.display = "none";
@@ -60,6 +101,7 @@ function showNotification(message) {
           .in('course_code', courseIds);
 
       if (courseError) {
+        preloader.style.display = 'none';
           console.error("Error fetching course details:", courseError);
           showNotification("Unable to fetch course details. Please try again.");
           return;
@@ -73,8 +115,10 @@ function showNotification(message) {
           courseItem.appendChild(courseButton);
           coursesList.appendChild(courseItem);
       });
+      preloader.style.display = 'none';
 
     } catch (err) {
+        preloader.style.display = 'none';
         console.error("Error during student search:", err);
         showNotification("An unexpected error occurred. Please try again.");
     }
@@ -88,6 +132,7 @@ function showNotification(message) {
   
   // View Attendance
   async function viewAttendance(studentId, courseId, courseName) {
+    preloader.style.display = 'flex';
     document.getElementById("courseAttendance").style.display = "block";
     document.getElementById("courseName").textContent = courseName;
 
@@ -103,6 +148,7 @@ function showNotification(message) {
         if (error) {
             console.error("Error fetching attendance records:", error);
             showNotification("Error fetching attendance records.");
+            preloader.style.display = 'none';
             return;
         }
 
@@ -116,6 +162,7 @@ function showNotification(message) {
             cell.colSpan = 3;
             row.appendChild(cell);
             attendanceTable.appendChild(row);
+            preloader.style.display = 'none';
             return;
         }
 
@@ -143,8 +190,10 @@ function showNotification(message) {
           row.appendChild(actionCell);
 
           attendanceTable.appendChild(row);
+          preloader.style.display = 'none';
       });
   } catch (err) {
+    preloader.style.display = 'none';
       console.error("Error viewing attendance:", err);
       showNotification("An unexpected error occurred. Please try again.");
   }
@@ -164,10 +213,6 @@ function showNotification(message) {
         }
 
         button.onclick = async () => {
-            const confirmDelete = confirm(
-                `Are you sure you want to update attendance record of ${studentId} for ${date}?`
-            );
-            if (!confirmDelete) return;
             // Update the status in the database
             try {
                 const { error } = await supabase

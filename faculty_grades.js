@@ -2,6 +2,9 @@ const SUPABASE_URL = 'https://ynwjgmkbbyepuausjcdw.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlud2pnbWtiYnllcHVhdXNqY2R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE1MDcwMjcsImV4cCI6MjA0NzA4MzAyN30.RBCkr5OCoY7vqxOc_ZFSRf4DNdTPPx8rvAlRUDpesrY';
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+const preloader = document.getElementById('preloader');
+preloader.style.display = 'none';
+
 function capitalize(str) {
     if (!str) return ""; // Handle null or undefined values
     str.trim();
@@ -42,6 +45,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     // Handle course selection
     courseSelect.addEventListener('change', async function () {
+        preloader.style.display = 'flex';
         selectedCourse = courseSelect.value;
         gradesTable.style.display = 'table';
         saveButton.style.display = 'block';
@@ -81,12 +85,13 @@ document.addEventListener('DOMContentLoaded', async function () {
             .eq('course_code', selectedCourse);
 
         if (marksError) {
+            preloader.style.display = 'none';
             console.error('Error fetching marks:', marksError);
             return;
         }
 
         const marksMap = new Map(marks.map(mark => [mark.roll_number, mark]));
-
+        preloader.style.display = 'none';
         // Populate the grades table
         students.forEach(student => {
             const existingMarks = marksMap.get(student.roll_number) || {};
@@ -111,10 +116,12 @@ document.addEventListener('DOMContentLoaded', async function () {
             <td><input type="text" name="grade" value="${grade}" /></td>
             `;
             tbody.appendChild(row);
+            preloader.style.display = 'none';
             }
 
         });
         function isEmpty(obj) {
+            preloader.style.display = 'none';
             return Object.keys(obj).length === 0;
         }
     });

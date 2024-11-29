@@ -7,6 +7,9 @@
   <link rel="stylesheet" href="adminattendance.css">
 </head>
 <body>
+  <div id="preloader">
+    <div class="spinner"></div>
+  </div>
   <div class="form-container">
     <h1>Manage Attendance</h1>
     <div class="form-box">
@@ -14,7 +17,7 @@
       <form id="searchStudentForm">
         <div class="form-group">
           <label for="rollNumber">Roll Number</label>
-          <input type="text" id="rollNumber" name="rollNumber" placeholder="Enter Roll Number" required>
+          <input type="text" id="rollNumber" name="rollNumber" placeholder="XXT-XXXX" maxlength="8" oninput="formatRollNumber(this)" required>
         </div>
         <button id = "searchbutton" type="button" onclick="searchStudent()">Search</button>
       </form>

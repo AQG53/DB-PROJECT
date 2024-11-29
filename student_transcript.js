@@ -2,6 +2,9 @@ const SUPABASE_URL = 'https://ynwjgmkbbyepuausjcdw.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlud2pnbWtiYnllcHVhdXNqY2R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE1MDcwMjcsImV4cCI6MjA0NzA4MzAyN30.RBCkr5OCoY7vqxOc_ZFSRf4DNdTPPx8rvAlRUDpesrY';
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+const preloader = document.getElementById('preloader');
+
+
 function capitalize(str) {
     if (!str) return ""; // Handle null or undefined values
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -45,6 +48,7 @@ function showNotification(message) {
   document.addEventListener('DOMContentLoaded', async () => {
     const studentId = localStorage.getItem('studentId'); // Replace with actual student ID retrieval logic
     if (!studentId) {
+        preloader.style.display = 'none';
         alert('Student ID not found. Please log in again.');
         window.location.href = 'login.html';
         return;
@@ -188,6 +192,7 @@ function showNotification(message) {
             semesterBox.appendChild(courseList);
 
             transcriptContainer.appendChild(semesterBox);
+            preloader.style.display = 'none';
         });
 
         document.getElementById('downloadTranscript').addEventListener('click', async () => {
@@ -211,7 +216,7 @@ function showNotification(message) {
         doc.text('Student Transcript', 105, 15, { align: 'center' });
         doc.setFontSize(12);
         doc.text(`Student ID: ${studentId}`, 15, 30);
-        doc.text(`Full Name: ${student.first_name} ${student.last_name}`, 15, 40);
+        doc.text(`Full Name: ${capitalize(student.first_name)} ${capitalize(student.last_name)}`, 15, 40);
         doc.text(`Phone: ${student.phone}`, 15, 50);
         doc.text(`Date Generated: ${dateGenerated}`, 15, 60);
 
