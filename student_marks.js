@@ -2,11 +2,15 @@ const SUPABASE_URL = 'https://ynwjgmkbbyepuausjcdw.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlud2pnbWtiYnllcHVhdXNqY2R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE1MDcwMjcsImV4cCI6MjA0NzA4MzAyN30.RBCkr5OCoY7vqxOc_ZFSRf4DNdTPPx8rvAlRUDpesrY';
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+const preloader = document.getElementById('preloader');
+
+
 // Fetch logged-in student ID from local storage
 const studentId = localStorage.getItem('studentId');
 console.log(studentId);
 // Ensure studentId exists
 if (!studentId) {
+    preloader.style.display = 'none';
     alert('Student is not logged in.');
     window.location.href = 'login.html'; // Redirect to login if not logged in
 }
