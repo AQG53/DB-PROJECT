@@ -44,9 +44,10 @@ async function calculateNewFee() {
             .select('course_id')
             .eq('student_id', studentId);
             if (registrationData.length === 0) {
-                document.getElementById("noCoursesMessage");
+                const noCoursesMessage = document.getElementById("noCoursesMessage");
+                noCoursesMessage.style.display = "block"; // Make the message visible
                 return; // Exit the function early
-              }
+            }
 
         if (regError) throw regError;
 
