@@ -4,7 +4,6 @@ const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const preloader = document.getElementById('preloader');
 
-
 function capitalize(str) {
     if (!str) return ""; // Handle null or undefined values
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -50,7 +49,7 @@ function showNotification(message) {
     if (!studentId) {
         preloader.style.display = 'none';
         alert('Student ID not found. Please log in again.');
-        window.location.href = 'login.html';
+        window.location.href = 'student.html';
         return;
     }
 
@@ -80,6 +79,12 @@ function showNotification(message) {
 
         if (registrationError || withdrawalError || coursesError || marksError) {
             console.error('Error fetching data:', registrationError, withdrawalError, coursesError, marksError);
+            return;
+        }
+
+        if ((!registrations || registrations.length === 0) && withdrawals.length === 0) {
+            transcriptContainer.innerHTML = '<p>No course registered by the student.</p>';
+            preloader.style.display = 'none';
             return;
         }
 

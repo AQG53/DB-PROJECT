@@ -395,7 +395,7 @@ const courseData = {
   });
 
   const preloader = document.getElementById('preloader');
-    preloader.style.display = 'none';
+  preloader.style.display = 'none';
 
   document.getElementById('courseRegistrationForm').addEventListener('submit', async (event) => {
     event.preventDefault();

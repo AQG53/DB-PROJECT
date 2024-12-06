@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     if (!studentId) {
         preloader.style.display = 'none';
         alert('Student is not logged in. Redirecting to login page.');
-        window.location.href = 'login.html'; // Redirect to login page if studentId is missing
+        window.location.href = 'student.html'; // Redirect to login page if studentId is missing
         return;
     }
 

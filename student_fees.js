@@ -8,7 +8,7 @@ const preloader = document.getElementById('preloader');
 if (!studentId) {
     preloader.style.display = 'none';
     alert('Student is not logged in.');
-    window.location.href = 'login.html';
+    window.location.href = 'student.html';
 }
 const CREDIT_HOUR_FEE = 10750;
 const tableBody = document.querySelector('tbody');
@@ -48,6 +48,7 @@ async function calculateNewFee() {
             .select('course_id')
             .eq('student_id', studentId);
             if (registrationData.length === 0) {
+                preloader.style.display = 'none';
                 const noCoursesMessage = document.getElementById("noCoursesMessage");
                 noCoursesMessage.style.display = "block"; // Make the message visible
                 return; // Exit the function early

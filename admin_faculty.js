@@ -86,7 +86,7 @@ document.getElementById('facultyRegistrationForm').addEventListener('submit', as
         last_name: lastName,
         email,
         department_id, // Use valid department ID
-        department_name, // Optional: Save name for reference
+        department: department_name, // Optional: Save name for reference
         specialization,
         qualification,
         employment_type: employmentType,

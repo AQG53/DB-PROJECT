@@ -139,10 +139,10 @@ document.getElementById('studentRegistrationForm').addEventListener('submit', as
   try {
       const { data, error } = await supabase.from('students').insert([studentData]);
       if (error) {
-        preloader.style.display = 'flex';
-          console.error('Supabase insertion error:', error.message);
-          alert('Error: ' + error.message);
-          return;
+        preloader.style.display = 'none';
+        console.error('Supabase insertion error:', error.message);
+        alert('Error: ' + error.message);
+        return;
       }
       
       // Send email via backend
@@ -155,12 +155,12 @@ document.getElementById('studentRegistrationForm').addEventListener('submit', as
             password,
         }),
     });
-    preloader.style.display = 'flex';
+      preloader.style.display = 'none';
       console.log('Student registered successfully:', data);
       showNotification(`Student registered successfully! Roll Number: ${rollNumber}`);
       document.getElementById('studentRegistrationForm').reset();
   } catch (err) {
-    preloader.style.display = 'flex';
+      preloader.style.display = 'none';
       console.error("Unexpected error:", err);
       alert("An unexpected error occurred.");
   }

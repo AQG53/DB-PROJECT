@@ -12,7 +12,7 @@ console.log(studentId);
 if (!studentId) {
     preloader.style.display = 'none';
     alert('Student is not logged in.');
-    window.location.href = 'login.html'; // Redirect to login if not logged in
+    window.location.href = 'student.html'; // Redirect to login if not logged in
 }
 let courses = []; 
 // Function to load registered courses and marks
@@ -34,6 +34,7 @@ async function loadCoursesAndMarks() {
         // Get course names for the registered courses
         const courseIds = registrationData.map(row => row.course_id);
         if (registrationData.length === 0) {
+            preloader.style.display = 'none';
             loadingIndicator.style.display = 'none';
             document.getElementById("noCoursesMessage");
             noCoursesMessage.style.display = "block"; // Make the message visible

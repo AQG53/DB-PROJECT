@@ -225,6 +225,12 @@ document.addEventListener("DOMContentLoaded", async function () {
             return;
         }
 
+        if (!coursesData || coursesData.length === 0) {
+            courseTableBody.innerHTML = '<p>No course available to register.</p>';
+            preloader.style.display = 'none';
+            return;
+        }
+
         const registeredCourseIds = registeredCourses.map(course => course.course_id);
 
         // Populate course table

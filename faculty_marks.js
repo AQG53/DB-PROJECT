@@ -62,6 +62,15 @@ document.addEventListener('DOMContentLoaded', async function () {
         courseSelect.appendChild(option);
     });
 
+    if (courses.length === 0) {
+        const noCourseOption = document.createElement('option');
+        noCourseOption.value = "";
+        noCourseOption.textContent = "No courses registered.";
+        noCourseOption.disabled = true;
+        noCourseOption.selected = true;
+        courseSelect.appendChild(noCourseOption);
+    }
+
     // Handle course selection
     courseSelect.addEventListener('change', async function () {
         preloader.style.display = 'flex';

@@ -88,6 +88,12 @@ document.addEventListener("DOMContentLoaded", async function () {
             return;
         }
 
+        if (!courses || courses.length === 0) {
+          courseTableBody.innerHTML = '<p>No course available to register.</p>';
+          preloader.style.display = 'none';
+          return;
+      }
+
         const registeredCourses = courses.filter(course => String(course.registered_by) === String(facultyId));
         registeredCoursesCountElement.textContent = registeredCourses.length;
         localStorage.setItem('totalregistered', registeredCourses.length);
